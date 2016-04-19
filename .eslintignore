@@ -1,0 +1,9 @@
+.git
+build/
+coverage/
+node_modules/
+dist/
+bower_components/
+assets/
+src/lib/file-saver.js
+src/lib/blob.js

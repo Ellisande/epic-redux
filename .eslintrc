@@ -1,0 +1,32 @@
+{
+  "ecmaFeatures": {
+    "es6": true,
+    "jsx": true,
+    "modules": true
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "mocha": true,
+    "node": true
+  },
+  "extends": [
+    "gobold",
+    "gobold/es6",
+    "gobold/react"
+  ],
+  "globals": {
+    "$": true,
+    "UIkit": true,
+    "chai": true,
+    "inject": true,
+    "Plaid": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "camelcase": 0
+  }
+}

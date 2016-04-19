@@ -1,0 +1,71 @@
+.home {
+  display: flex;
+  flex-direction: row;
+}
+
+.meeting-list {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 200px;
+  max-width: 300px;
+}
+
+.meeting-summary {
+  display: flex;
+  flex-direction: row;
+}
+
+.meeting-summary > * {
+  flex: 1 0 50px;
+}
+
+.meeting-headings {
+  align-self: center;
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.meeting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.phase-controls {
+  flex: 0 1 100px;
+}
+
+.side-bar {
+  flex: 0 1 100px;
+}
+
+.merge {
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+}
+
+.topic {
+  display: flex;
+  flex-direction: row;
+  flex: 0 1 100px;
+}
+
+.topic-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.action > * {
+  flex: 0 0 30px;
+}
