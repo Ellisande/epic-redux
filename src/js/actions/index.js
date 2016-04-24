@@ -35,4 +35,19 @@ const upVote = (topic, user) => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote};
+const downVote = (topic, user) => {
+  return {
+    type: 'DOWN_VOTE',
+    topic,
+    user
+  };
+};
+
+const setCurrentTopic = (topic) => {
+  return {
+    type: 'SET_CURRENT_TOPIC',
+    topic
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic};

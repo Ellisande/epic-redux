@@ -5,7 +5,7 @@ class TopicVotes extends Component {
     super(props);
   }
   render(){
-    const noVoteMarkup = (<button>-1</button>);
+    const noVoteMarkup = (<button onClick={this.props.downVote}>-1</button>);
     const noVote = this.props.hasMyVote ? noVoteMarkup : undefined;
     const yesVoteMarkup = (<button onClick={this.props.upVote}>+1</button>);
     const yesVote = this.props.remainingVotes > 0 ? yesVoteMarkup : undefined;

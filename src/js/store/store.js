@@ -3,6 +3,11 @@ import {
   combineReducers
 } from 'redux';
 
+const replace = (array, oldItem, newItem) => {
+  const itemIndex = array.indexOf(oldItem);
+  return [...array.slice(0, itemIndex), newItem, ...array.slice(itemIndex + 1, array.length)];
+};
+
 const meetings = (existingMeetings = [], action) => {
   if(action.type === 'CREATE_MEETING'){
     return [...existingMeetings, {name: action.name, participants: 0}];
@@ -24,10 +29,25 @@ const topics = (existingTopics = [], action) => {
     return existingTopics.filter(topic => topic.title !== action.id);
   }
   if(action.type === 'UP_VOTE'){
-    const currentTopic = existingTopics.find(topic => topic.title === action.topic.title);
-    const theRest = existingTopics.filter(topic => topic !== currentTopic);
+    const currentTopic = action.topic;
     const modifiedTopic = Object.assign({}, currentTopic, {votes: [...currentTopic.votes, action.user.name]});
-    return [...theRest, modifiedTopic];
+    return replace(existingTopics, currentTopic, modifiedTopic);
+  }
+  if(action.type === 'DOWN_VOTE'){
+    const currentTopic = action.topic;
+    const modifiedTopic = Object.assign({}, currentTopic, {votes: currentTopic.votes.filter(voter => voter !== action.user.name)});
+    return replace(existingTopics, currentTopic, modifiedTopic);
+  }
+  if(action.type === 'SET_CURRENT_TOPIC'){
+    const oldTopic = existingTopics.find(topic => topic.current);
+    let newTopics = [...existingTopics];
+    if(oldTopic){
+      const modifiedOldTopic = Object.assign({}, oldTopic, {current: false});
+      newTopics = replace(existingTopics, oldTopic, modifiedOldTopic);
+    }
+    const newCurrentTopic = existingTopics.find(topic => topic === action.topic);
+    const modifiedCurrentTopic = Object.assign({}, newCurrentTopic, {current: true});
+    return replace(newTopics, newCurrentTopic, modifiedCurrentTopic);
   }
   return existingTopics;
 };

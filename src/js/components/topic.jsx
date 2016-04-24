@@ -1,30 +1,35 @@
 import React, {Component} from 'react';
-import {removeTopic, upVote} from '../actions';
+import {removeTopic, upVote, downVote} from '../actions';
 import {connect} from 'react-redux';
 import TopicVotes from './topic-vote';
 import _ from 'lodash';
 class Topic extends Component {
   constructor(props){
     super(props);
-    this.remove = this.remove.bind(this, props.dispatch);
-    this.upVote = this.upVote.bind(this, props.dispatch);
+    this.remove = this.remove.bind(this);
+    this.upVote = this.upVote.bind(this);
+    this.downVote = this.downVote.bind(this);
   }
   remove(dispatch, id){
     dispatch(removeTopic(id));
   }
-  upVote(dispatch){
-    dispatch(upVote(this.props.topic, this.props.user));
+  upVote(){
+    this.props.dispatch(upVote(this.props.topic, this.props.user));
+  }
+  downVote(){
+    this.props.dispatch(downVote(this.props.topic, this.props.user));
   }
   render(){
-    // console.log(this.props);
     const hasMyVote = this.props.topic.votes.filter(voter => voter === this.props.me).length;
     const deleteMarkup = (<button className='delete' onClick={this.remove.bind(this, this.props.topic.title)}>X</button>);
     const getDelete = this.props.delete ? deleteMarkup : undefined;
-    const votingMarkup = (<TopicVotes hasMyVote={hasMyVote} remainingVotes={this.props.remainingVotes} upVote={this.upVote} />);
+    const votingMarkup = (<TopicVotes hasMyVote={hasMyVote} remainingVotes={this.props.remainingVotes} upVote={this.upVote} downVote={this.downVote}/>);
     const showVotingButtons = this.props.vote ? votingMarkup : undefined;
-    const showVotingTotal = this.props.vote ? (<div className='vote-total'>{this.props.topic.votes.length}</div>) : undefined;
+    const showVotingTotal = this.props.vote || this.props.showVotes ? (<div className='vote-total'>{this.props.topic.votes.length}</div>) : undefined;
+    const currentClass = this.props.topic.current ? 'current' : '';
+    const showNextTopic = this.props.nextTopic ? (<div className='next'>Next</div>) : undefined;
     return (
-      <div className='topic'>
+      <div className={`topic ${currentClass}`}>
         {showVotingTotal}
         <div className='topic-body'>
           <div className='title'>{this.props.topic.title}</div>
@@ -33,6 +38,8 @@ class Topic extends Component {
         <div className='actions'>
           {getDelete}
           {showVotingButtons}
+          {showNextTopic}
+          {this.props.children}
         </div>
       </div>
     );
