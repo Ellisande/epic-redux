@@ -37,7 +37,7 @@ class Discuss extends Component {
 }
 
 const selector = state => {
-  const sortedTopics = [...state.topics].sort( (l, r) => {console.log(l, r); return r.votes.length - l.votes.length});
+  const sortedTopics = [...state.topics].sort( (l, r) => r.votes.length - l.votes.length);
   const currentTopic = sortedTopics.find(topic => topic.current);
   return {
     topics: sortedTopics,
