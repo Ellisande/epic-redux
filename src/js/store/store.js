@@ -35,7 +35,10 @@ const topics = (existingTopics = [], action) => {
   }
   if(action.type === 'DOWN_VOTE'){
     const currentTopic = action.topic;
-    const modifiedTopic = Object.assign({}, currentTopic, {votes: currentTopic.votes.filter(voter => voter !== action.user.name)});
+    const existingVotes = currentTopic.votes;
+    const removalIndex = existingVotes.indexOf(action.user.name);
+    const newVotesList = [...existingVotes.slice(0, removalIndex), ...existingVotes.slice(removalIndex + 1, existingVotes.length)];
+    const modifiedTopic = Object.assign({}, currentTopic, {votes: newVotesList});
     return replace(existingTopics, currentTopic, modifiedTopic);
   }
   if(action.type === 'SET_CURRENT_TOPIC'){
