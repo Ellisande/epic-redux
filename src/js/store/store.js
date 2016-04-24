@@ -70,7 +70,7 @@ let reducers = combineReducers({
   user: (user = {name: 'Justin'}) => user,
   phase,
   roomName: (roomName = 'default') => roomName,
-  timer: (timer = 0) => timer,
+  timer: (timer = 350000) => timer,
   phaseVotes: (phaseVotes = []) => phaseVotes,
   topics,
   host

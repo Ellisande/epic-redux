@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {changePhase} from '../actions';
 import {connect} from 'react-redux';
+import Timer from './timer';
 
 const phases = ['submit', 'merge', 'vote', 'discuss', 'complete'];
 const getNextPhase = (currentPhase) => {
@@ -26,10 +27,7 @@ class PhaseControls extends Component {
         <div className='next-phase'>
           <button onClick={this.nextPhase}>Next ></button>
         </div>
-        <div className='timer'>
-          <div className='timer-title'>Timer: </div>
-          <div className='time-left'>0:00</div>
-        </div>
+        <Timer />
       </div>);
   }
 }
