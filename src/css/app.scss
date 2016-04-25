@@ -65,7 +65,9 @@ body, .content {
 .light-box {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 300px;
   max-width: 50%;
 }
 
@@ -127,6 +129,10 @@ input.searchMeetings:focus {
 .description-list a {
   text-decoration: none;
   color: inherit;
+}
+
+.description-list a:active {
+  color: $off-white-primary;
 }
 
 .logo {

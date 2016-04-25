@@ -7,7 +7,7 @@ class How extends Component {
   render(){
     return (
       <div className='how'>
-        <div className='how-title'><h2>How it Works</h2></div>
+        <div className='main-subtitle'><h2>How it Works</h2></div>
         <div className='how-steps'>
           <div className='how-step'>1. Post Your Ideas</div>
           <div className='how-step'>2. Removed Duplicates</div>
