@@ -1,18 +1,165 @@
+$box-size: 200px;
+$box-radius: 20px;
+
+//Theme 1
+// $primary-color: rgb(255, 148, 77);
+// $light-primary: rgb(255, 220, 220);
+// $off-white-primary: rgb(255, 230, 230);
+// $secondary-color: rgba(215, 215, 255, 0.65);
+// $lower-box-text: rgba(255, 148, 77, 0.7);
+
+// Theme 2
+// $primary-color: rgb(170, 65, 57);
+// $light-primary: rgb(212, 144, 106);
+// $off-white-primary: rgb(255, 176, 170);
+// $secondary-color: rgba(66, 122, 130, 0.65);
+// $lower-box-text: $primary-color;
+
+//Theme 3
+// $primary-color: rgb(39, 85, 108);
+// $light-primary: rgb(110, 146, 161);
+// $off-white-primary: rgb(160, 206, 221);
+// $secondary-color: rgba(127, 130, 178, 0.85);
+// $lower-box-text: $primary-color;
+
+//Theme 4
+$primary-color: rgb(58, 72, 204);
+$light-primary: rgb(130, 139, 228);
+$off-white-primary: rgb(160, 169, 255);
+$secondary-color: rgba(139, 83, 213, 0.45);
+$lower-box-text: $primary-color;
+
+body, .content {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .home {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  min-height: 600px;
+  padding-bottom: 30px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      $secondary-color,
+      $secondary-color
+    ),
+    url('/img/city-scape.jpg');
+  background-size: cover;
 }
+
+.middle-box {
+  background-image: linear-gradient( 180deg, $primary-color, $primary-color 50%, white 50%, white);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+
+.light-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 50%;
+}
+
+.upper-box {
+  border-radius: $box-radius $box-radius 0px 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(180deg, $secondary-color 1%, $primary-color), $primary-color;;
+  color: $light-primary;
+  height: $box-size;
+}
+
+.lower-box {
+  background-color: white;
+  border-radius: 0px 0px $box-radius $box-radius;
+  padding: 20px;
+  height: ($box-size / 2);
+  color: $primary-color;
+}
+
+input.searchMeetings {
+  border-radius: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 0;
+  box-shadow: -5px -5px 30px 1px $primary-color;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: $primary-color;
+}
+
+input.searchMeetings:focus {
+  outline-style: none;
+}
+
+.title {
+  font-weight: bold;
+  color: $off-white-primary;
+}
+
+.description-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.description-list > * + * {
+  border-left: 1px solid $light-primary;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.description-list a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo {
+  font-size: 5rem;
+  color: $off-white-primary;
+}
+
 
 .meeting-list {
   display: flex;
-  flex-direction: column;
-  flex: 0 1 200px;
-  max-width: 300px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.meeting-list > * + * {
+  padding-left: 5px;
+  margin-left: 5px;
 }
 
 .meeting-summary {
   display: flex;
   flex-direction: row;
+}
+
+.meeting-summary, .meeting-summary a {
+  color: $lower-box-text;
+  text-decoration: none;
+  font-variant: small-caps;
+  text-transform: capitalize;
+}
+
+.meeting-summary a:hover {
+  color: $primary-color;
 }
 
 .meeting-summary > * {
@@ -72,4 +219,43 @@
 
 .current {
   color: blue;
+}
+
+.how, .when {
+  display: flex;
+  flex-direction: column;
+  margin-top: -25px;
+  padding: 0 10px 10px 10px;
+}
+
+.main-subtitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.main-subtitle > * {
+  margin: 0;
+  padding: 0 0 15px 0;
+}
+
+.how-steps {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 100px;
+  justify-content: space-around;
+}
+
+.how-step {
+  padding-bottom: 5px;
+}
+
+.when-copy {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
 }

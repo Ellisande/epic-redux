@@ -1,10 +1,13 @@
 
-import {browserHistory, Router, Route} from 'react-router';
+import {browserHistory, Router, Route, IndexRoute} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import injectTap from 'react-tap-event-plugin';
 import App from './components/app';
 import Meeting from './components/meeting';
+import MeetingList from './components/meetingList';
+import How from './components/how';
+import When from './components/when';
 import store from './store/store';
 import {Provider} from 'react-redux';
 injectTap();
@@ -17,7 +20,12 @@ function render(){
   ReactDOM.render(
     <Provider store={store}>
       <Router history={browserHistory}>
-        <Route path='/' component={App} />
+        <Route path='/' component={App}>
+          <IndexRoute component={MeetingList} />
+          <Route path='how' component={How}/>
+          <Route path='when' component={When}/>
+          <Route path='safety' />
+        </Route>
         <Route path='/meeting/:name' component={Meeting}/>
       </Router>
     </Provider>,

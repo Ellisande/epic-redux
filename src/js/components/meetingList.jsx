@@ -6,17 +6,16 @@ class MeetingList extends Component {
   render(){
     const {meetings} = this.props;
     const meetingItem = (meeting) => {
-      return (<div className='meeting-summary' key={meeting.name}>
+      return (
+      <div className='meeting-summary' key={meeting.name}>
         <Link to={`/meeting/${meeting.name}`}>
-          <span>{meeting.name}: </span><span>{meeting.participants}</span>
+          <span>{meeting.name}</span>&nbsp;<span>({meeting.participants})</span>
         </Link>
       </div>);
     };
     return (
       <div className='meeting-list'>
-        <div className='meeting-headings'>
-          Meetings
-        </div>
+        <div className='meeting-summary'>Meetings</div>
         {meetings.map(meetingItem)}
       </div>
     );

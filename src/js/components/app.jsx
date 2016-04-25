@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import MeetingList from './meetingList';
 import {connect} from 'react-redux';
 import {createMeeting} from '../actions';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link} from 'react-router';
 
 class App extends Component {
   constructor(props){
@@ -16,37 +15,44 @@ class App extends Component {
   createMeeting(dispatch, e){
     e.preventDefault();
     dispatch(createMeeting(this.state.newMeetingName));
-    return browserHistory.push(`/meeting/${this.state.newMeetingName}`);
+    // return browserHistory.push(`/meeting/${this.state.newMeetingName}`);
   }
   updateMeetingName(e){
-    this.setState({
-      newMeetingName: e.target.value
-    });
+    const newMeetingName = e.target.value;
+    const newState = Object.assign({}, this.state, {newMeetingName});
+    return this.setState(newState);
+  }
+  goToMeetings(){
+    return browserHistory.push('/');
   }
   render(){
     return (
-        <div className='home'>
-          <MeetingList />
-          <div className='splash'>
-            <div className='welcome'>
-              Welcome to Note & Vote
-            </div>
-          </div>
-          <div className='steps'>How Does It Work?</div>
-          <div className='when'>When should I use it?</div>
-          <div className='security'>Is it safe?</div>
-          <div className='get-started'>
-            <div className='explanation'>
-              Find a meeting
-            </div>
-            <div className='meeting-search'>
-              <form noValidate action='' onSubmit={this.createMeeting}>
-                <input placeholder='Best Meeting Ever' onChange={this.updateMeetingName}/>
-              </form>
-            </div>
+    <main className='home'>
+      <section className='light-box'>
+        <div className='upper-box'>
+          <div className='icon fa fa-sticky-note-o logo'></div>
+          <div className='title'>Note & Vote</div>
+          <div className='description-list'>
+            <Link to='/how'>How</Link>
+            <Link to='/when'>When</Link>
+            <Link to='/safety'>Safety</Link>
           </div>
         </div>
-    );
+        <div className='middle-box'>
+          <form onSubmit={this.createMeeting}>
+            <input
+              className='searchMeetings'
+              placeholder='Bold Planning'
+              autoFocus
+              onChange={this.updateMeetingName}
+              onFocus={this.goToMeetings}/>
+          </form>
+        </div>
+        <div className='lower-box'>
+          {this.props.children}
+        </div>
+      </section>
+    </main>);
   }
 }
 

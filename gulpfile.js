@@ -54,9 +54,7 @@ gulp.task('default', tasks.concat('serve'), function() {
 // Build Stylesheets.
 gulp.task('css', function() {
   return gulp.src([
-    'node_modules/uikit/dist/css/uikit.min.css',
-    'node_modules/uikit/dist/uikit.almost-flat.min.css',
-    'node_modules/uikit/dist/components/**/*.css',
+    'node_modules/font-awesome/css/font-awesome.min.css',
     'src/css/app.scss'
   ])
   .pipe(sass({
@@ -80,7 +78,7 @@ gulp.task('img', function() {
 
 // Build fonts.
 gulp.task('fonts', function() {
-  return gulp.src('node_modules/uikit/dist/fonts/**/*')
+  return gulp.src('node_modules/font-awesome/fonts/*')
     .pipe(gulp.dest(fontDestination));
 });
 

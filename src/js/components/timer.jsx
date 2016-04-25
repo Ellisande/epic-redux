@@ -17,7 +17,7 @@ class Timer extends Component {
         <div className='timer-title'>Timer: </div>
         <div className='time-left'>
           {minuteString}:{secondsString}
-          <div className='play-button'>&gt;</div>
+          <div className='play-button fa fa-play'></div>
         </div>
       </div>);
   }
