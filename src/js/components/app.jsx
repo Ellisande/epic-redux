@@ -27,32 +27,32 @@ class App extends Component {
   }
   render(){
     return (
-    <main className='home'>
-      <section className='light-box'>
-        <div className='upper-box'>
-          <div className='icon fa fa-sticky-note-o logo'></div>
-          <div className='title'>Note & Vote</div>
-          <div className='description-list'>
-            <Link to='/how'>How</Link>
-            <Link to='/when'>When</Link>
-            <Link to='/safety'>Safety</Link>
+      <main className='home'>
+        <section className='light-box'>
+          <div className='upper-box'>
+            <div className='icon fa fa-sticky-note-o logo'></div>
+            <div className='title'>Note & Vote</div>
+            <div className='description-list'>
+              <Link to='/how'>How</Link>
+              <Link to='/when'>When</Link>
+              <Link to='/safety'>Safety</Link>
+            </div>
           </div>
-        </div>
-        <div className='middle-box'>
-          <form onSubmit={this.createMeeting}>
-            <input
-              className='searchMeetings'
-              placeholder='Bold Planning'
-              autoFocus
-              onChange={this.updateMeetingName}
-              onFocus={this.goToMeetings}/>
-          </form>
-        </div>
-        <div className='lower-box'>
-          {this.props.children}
-        </div>
-      </section>
-    </main>);
+          <div className='middle-box'>
+            <form onSubmit={this.createMeeting}>
+              <input
+                className='searchMeetings'
+                placeholder='Bold Planning'
+                autoFocus
+                onChange={this.updateMeetingName}
+                onFocus={this.goToMeetings}/>
+            </form>
+          </div>
+          <div className='lower-box'>
+            {this.props.children}
+          </div>
+        </section>
+      </main>);
   }
 }
 
