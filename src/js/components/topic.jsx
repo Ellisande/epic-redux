@@ -11,8 +11,8 @@ class Topic extends Component {
       <div className={`topic ${currentClass}`}>
         {showVotingTotal}
         <div className='topic-body'>
-          <div className='title'>{this.props.topic.title}</div>
-          <div className='by-line'>{this.props.topic.by}</div>
+          <div className='topic-title'>{this.props.topic.title}</div>
+          <div className='by-line'>Posted By: {this.props.topic.by}</div>
         </div>
         <div className='actions'>
           {this.props.children}

@@ -100,18 +100,18 @@ body a {
   color: $primary-color;
 }
 
-input.searchMeetings {
+input.bubble-text {
   border-radius: 20px;
   font-size: 1.5rem;
   text-align: center;
   border: 0;
-  box-shadow: -5px -5px 30px 1px $primary-color;
+  box-shadow: 0px 0px 30px 1px $primary-color;
   padding-top: 10px;
   padding-bottom: 10px;
   color: $primary-color;
 }
 
-input.searchMeetings:focus {
+input.bubble-text:focus {
   outline-style: none;
 }
 
@@ -187,6 +187,24 @@ input.searchMeetings:focus {
   display: flex;
   flex-direction: column;
   flex: 1;
+  border-radius: $box-radius;
+  box-shadow: 5px 3px 20px -2px $primary-color;
+}
+
+.submit-title {
+  background-color: $primary-color;
+  color: $off-white-primary;
+  border-radius: $box-radius $box-radius 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.submit-topic {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-image: linear-gradient( 180deg, $primary-color, $primary-color 50%, white 50%, white);
 }
 
 .meeting {
@@ -209,7 +227,7 @@ input.searchMeetings:focus {
   flex: 0 1 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .side-bar > * + * {
@@ -259,11 +277,38 @@ input.searchMeetings:focus {
   display: flex;
   flex-direction: row;
   flex: 0 1 100px;
+  color: $primary-color;
+}
+
+.topic-title {
+  color: $primary-color;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.by-line {
+  color: $light-primary;
+  font-size: 0.8rem;
 }
 
 .topic-body {
   display: flex;
   flex-direction: column;
+}
+
+.topic-list > * {
+  padding: 15px;
+}
+
+.topic-list > * + * {
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-image: linear-gradient(to right, white 0%, $off-white-primary 20%, $off-white-primary 80%, white 100%);
+  border-image-slice: 1;
+}
+
+.topic-list > *:last-child {
+  border-radius: 0 0 $box-radius $box-radius;
 }
 
 .actions {

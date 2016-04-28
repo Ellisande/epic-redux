@@ -41,7 +41,7 @@ class App extends Component {
           <div className='middle-box'>
             <form onSubmit={this.createMeeting}>
               <input
-                className='searchMeetings'
+                className='bubble-text'
                 placeholder='Bold Planning'
                 autoFocus
                 onChange={this.updateMeetingName}

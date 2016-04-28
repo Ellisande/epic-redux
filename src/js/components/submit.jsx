@@ -15,9 +15,7 @@ class Submit extends Component {
   }
   updatePostTopic(e) {
     const newTopic = _.get(e, 'target.value');
-    if (!_.isEmpty(newTopic)) {
-      this.setState({newTopic});
-    }
+    this.setState({newTopic});
   }
   post(dispatch, e) {
     e.preventDefault();
@@ -28,12 +26,11 @@ class Submit extends Component {
   }
   render() {
     const mapTopics = topic => (<Topic topic={topic} key={topic.title}/>);
-
     return (
       <div className='submit'>
-        <form action='' noValidate onSubmit={this.postTopic}>
-          <input value={this.state.newTopic} placeholder='Post a Topic' onChange={this.updatePostTopic}/>
-          <button className='post-topic' type='submit'>Speak Up!</button>
+        <div className='submit-title'><h2>Post a Topic</h2></div>
+        <form className='submit-topic' action='' noValidate onSubmit={this.postTopic}>
+          <input className='bubble-text' value={this.state.newTopic} placeholder='Speak Up' onChange={this.updatePostTopic}/>
         </form>
         <div className='topic-list'>
           {this.props.topics.map(mapTopics)}
