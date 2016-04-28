@@ -5,34 +5,41 @@ $box-radius: 20px;
 // $primary-color: rgb(255, 148, 77);
 // $light-primary: rgb(255, 220, 220);
 // $off-white-primary: rgb(255, 230, 230);
-// $secondary-color: rgba(215, 215, 255, 0.65);
+// $light-secondary-color: rgba(215, 215, 255, 0.65);
 // $lower-box-text: rgba(255, 148, 77, 0.7);
 
 // Theme 2
 // $primary-color: rgb(170, 65, 57);
 // $light-primary: rgb(212, 144, 106);
 // $off-white-primary: rgb(255, 176, 170);
-// $secondary-color: rgba(66, 122, 130, 0.65);
+// $light-secondary-color: rgba(66, 122, 130, 0.65);
 // $lower-box-text: $primary-color;
 
 //Theme 3
 // $primary-color: rgb(39, 85, 108);
 // $light-primary: rgb(110, 146, 161);
 // $off-white-primary: rgb(160, 206, 221);
-// $secondary-color: rgba(127, 130, 178, 0.85);
+// $light-secondary-color: rgba(127, 130, 178, 0.85);
 // $lower-box-text: $primary-color;
 
 //Theme 4
 $primary-color: rgb(58, 72, 204);
 $light-primary: rgb(130, 139, 228);
 $off-white-primary: rgb(160, 169, 255);
-$secondary-color: rgba(139, 83, 213, 0.45);
+$light-secondary-color: rgba(139, 83, 213, 0.45);
+$secondary-color: rgb(115, 50, 202);
+$off-white-secondary: rgb(218, 174, 255);
 $lower-box-text: $primary-color;
 
 body, .content {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+body a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .home {
@@ -46,8 +53,8 @@ body, .content {
   overflow: hidden;
   background:
     linear-gradient(
-      $secondary-color,
-      $secondary-color
+      $light-secondary-color,
+      $light-secondary-color
     ),
     url('/img/city-scape.jpg');
   background-size: cover;
@@ -80,7 +87,7 @@ body, .content {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  background: linear-gradient(180deg, $secondary-color 1%, $primary-color), $primary-color;;
+  background: linear-gradient(180deg, $light-secondary-color 1%, $primary-color), $primary-color;;
   color: $light-primary;
   height: $box-size;
 }
@@ -186,6 +193,12 @@ input.searchMeetings:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background: white;
+  padding: 20px;
+}
+
+.meeting > * + * {
+  margin-left: 30px;
 }
 
 .phase-controls {
@@ -193,7 +206,47 @@ input.searchMeetings:focus {
 }
 
 .side-bar {
-  flex: 0 1 100px;
+  flex: 0 1 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.side-bar > * + * {
+  margin-top: 15px;
+}
+
+.return {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: $box-radius;
+  background-color: $secondary-color;
+  color: $off-white-secondary;
+  padding: 10px 0 10px 0;
+}
+
+.participants {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: $box-radius;
+  box-shadow: 5px 3px 20px -2px $secondary-color;
+  color: $secondary-color;
+  padding-bottom: 5px;
+}
+
+.participants > * + * {
+  margin-top: 5px;
+}
+
+.side-header {
+  background-color: $secondary-color;
+  color: $off-white-secondary;
+  border-radius: $box-radius $box-radius 0 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 10px 0;
 }
 
 .merge {
@@ -261,7 +314,11 @@ input.searchMeetings:focus {
 
 .when-copy {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+}
+
+.when-copy > * {
+  flex: 1;
 }

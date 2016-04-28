@@ -12,7 +12,8 @@ class SideBar extends Component {
           <Link to='/'>Home</Link>
         </div>
         <div className='participants'>
-          <div className='me'>The Mighty</div>
+          <div className='side-header'>Participants</div>
+          <div className='participant'>The Mighty</div>
           {this.props.participants.map(participants)}
         </div>
       </div>
