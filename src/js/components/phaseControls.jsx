@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {changePhase} from '../actions';
 import {connect} from 'react-redux';
 import Timer from './timer';
+import Host from './host';
 
 const phases = ['submit', 'merge', 'vote', 'discuss', 'complete'];
 const getNextPhase = (currentPhase) => {
@@ -37,6 +38,7 @@ class PhaseControls extends Component {
           </div>
         </div>
         <Timer />
+        <Host />
       </div>);
   }
 }
