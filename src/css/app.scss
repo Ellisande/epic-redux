@@ -30,6 +30,22 @@ $light-secondary-color: rgba(139, 83, 213, 0.45);
 $secondary-color: rgb(115, 50, 202);
 $off-white-secondary: rgb(218, 174, 255);
 $lower-box-text: $primary-color;
+$tertiary-color: rgb(39, 159, 193);
+$light-tertiary: rgb(116, 199, 222);
+$off-white-tertiary: rgb(176, 255, 255);
+
+//Theme 5
+// $tertiary-color: rgb(58, 72, 204);
+// $light-tertiary: rgb(130, 139, 228);
+// $off-white-tertiary: rgb(160, 169, 255);
+// $light-secondary-color: rgba(139, 83, 213, 0.45);
+// $secondary-color: rgb(115, 50, 202);
+// $off-white-secondary: rgb(218, 174, 255);
+// $primary-color: rgb(39, 159, 193);
+// $light-primary: rgb(116, 199, 222);
+// $off-white-primary: rgb(176, 255, 255);
+// $lower-box-text: $primary-color;
+
 
 body, .content {
   font-family: 'Open Sans', sans-serif;
@@ -186,7 +202,7 @@ input.bubble-text:focus {
 .submit {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 5;
   border-radius: $box-radius;
   box-shadow: 5px 3px 20px -2px $primary-color;
 }
@@ -219,8 +235,84 @@ input.bubble-text:focus {
   margin-left: 30px;
 }
 
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: $box-radius $box-radius $box-radius $box-radius;
+  box-shadow: 5px 3px 20px -2px $tertiary-color;
+  color: $tertiary-color;
+  padding-bottom: 10px;
+}
+
+.timer-title {
+  width: 100%;
+  text-align: center;
+  color: $off-white-tertiary;
+  background-color: $tertiary-color;
+  border-radius: $box-radius $box-radius 0 0;
+  padding: 10px 0 10px 0;
+}
+
+.time-left {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.time-left > * + * {
+  margin-left: 5px;
+}
+
 .phase-controls {
-  flex: 0 1 100px;
+  flex: 0.5 1 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.phase-controls > * + * {
+  margin-top: 15px;
+}
+
+.phase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: $box-radius $box-radius $box-radius $box-radius;
+  box-shadow: 5px 3px 20px -2px $tertiary-color;
+  color: $tertiary-color;
+}
+
+.phase-content {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.phase-content > * + * {
+  padding-top: 5px;
+  margin-top: 5px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-image: linear-gradient(to right, white 0%, $off-white-tertiary 20%, $off-white-tertiary 80%, white 100%);
+  border-image-slice: 1;
+}
+
+.phase-current {
+  text-transform: capitalize;
+}
+
+.phase-title {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: $tertiary-color;
+  color: $off-white-tertiary;
+  border-radius: $box-radius $box-radius 0 0;
 }
 
 .side-bar {

@@ -14,10 +14,10 @@ class Timer extends Component {
     secondsString = secondsString.length === 1 ? `0${secondsString}` : secondsString;
     return (
       <div className='timer'>
-        <div className='timer-title'>Timer: </div>
+        <div className='timer-title'>Timer</div>
         <div className='time-left'>
-          {minuteString}:{secondsString}
-          <div className='play-button fa fa-play'></div>
+          <span>{minuteString}:{secondsString}</span>
+          <div className='play-button fa fa-play' />
         </div>
       </div>);
   }

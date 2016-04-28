@@ -23,9 +23,18 @@ class PhaseControls extends Component {
   render(){
     return (
       <div className='phase-controls'>
-        <div className='current-phase'>Phase: {this.props.phase}</div>
-        <div className='next-phase'>
-          <button onClick={this.nextPhase}>Next ></button>
+        <div className='phase'>
+          <div className='phase-title'>
+            Phase
+          </div>
+          <div className='phase-content'>
+            <div className='phase-current'>
+               {this.props.phase}
+            </div>
+            <div className='next-phase'>
+              <a href='#' onClick={this.nextPhase}>Next ></a>
+            </div>
+          </div>
         </div>
         <Timer />
       </div>);
