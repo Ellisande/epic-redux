@@ -7,7 +7,7 @@ class BrightBox extends Component {
   }
   render(){
     return (
-      <div className={`bright-box ${this.type}`}>
+      <div className={`bright-box ${this.type} ${this.props.className}`}>
         <div className={`bright-box-title ${this.type}`}>{this.props.title}</div>
         <div className={`bright-box-content ${this.type}`}>
           {this.props.children}

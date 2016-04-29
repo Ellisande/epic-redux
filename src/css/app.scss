@@ -217,7 +217,7 @@ input.bubble-text:focus {
   align-self: center;
 }
 
-.submit {
+.submit, .phase {
   display: flex;
   flex-direction: column;
   flex: 5;
@@ -253,86 +253,6 @@ input.bubble-text:focus {
   margin-left: 30px;
 }
 
-.host {
-  display: flex;
-  flex-direction: column;
-  border-radius: $box-radius $box-radius $box-radius $box-radius;
-  box-shadow: 5px 3px 20px -2px $tertiary-color;
-  color: $tertiary-color;
-}
-
-.host-title {
-  width: 100%;
-  text-align: center;
-  color: $off-white-tertiary;
-  background-color: $tertiary-color;
-  border-radius: $box-radius $box-radius 0 0;
-  padding: 10px 0 10px 0;
-}
-
-.host-content {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.host-content > * + * {
-  padding-top: 5px;
-  margin-top: 5px;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  border-image: linear-gradient(to right, white 0%, $off-white-tertiary 20%, $off-white-tertiary 80%, white 100%);
-  border-image-slice: 1;
-}
-
-.host-toggle {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  overflow-x: hidden;
-  max-width: 100%
-}
-
-.host-current {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-
-.timer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: $box-radius $box-radius $box-radius $box-radius;
-  box-shadow: 5px 3px 20px -2px $tertiary-color;
-  color: $tertiary-color;
-  padding-bottom: 10px;
-}
-
-.timer-title {
-  width: 100%;
-  text-align: center;
-  color: $off-white-tertiary;
-  background-color: $tertiary-color;
-  border-radius: $box-radius $box-radius 0 0;
-  padding: 10px 0 10px 0;
-}
-
-.time-left {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.time-left > * + * {
-  margin-left: 5px;
-}
-
 .phase-controls {
   flex: 0.5 1 100px;
   display: flex;
@@ -342,44 +262,6 @@ input.bubble-text:focus {
 
 .phase-controls > * + * {
   margin-top: 15px;
-}
-
-.phase {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: $box-radius $box-radius $box-radius $box-radius;
-  box-shadow: 5px 3px 20px -2px $tertiary-color;
-  color: $tertiary-color;
-}
-
-.phase-content {
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
-.phase-content > * + * {
-  padding-top: 5px;
-  margin-top: 5px;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  border-image: linear-gradient(to right, white 0%, $off-white-tertiary 20%, $off-white-tertiary 80%, white 100%);
-  border-image-slice: 1;
-}
-
-.phase-current {
-  text-transform: capitalize;
-}
-
-.phase-title {
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-  background-color: $tertiary-color;
-  color: $off-white-tertiary;
-  border-radius: $box-radius $box-radius 0 0;
 }
 
 .side-bar {
@@ -401,20 +283,6 @@ input.bubble-text:focus {
   background-color: $secondary-color;
   color: $off-white-secondary;
   padding: 10px 0 10px 0;
-}
-
-.participants {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: $box-radius;
-  box-shadow: 5px 3px 20px -2px $secondary-color;
-  color: $secondary-color;
-  padding-bottom: 5px;
-}
-
-.participants > * + * {
-  margin-top: 5px;
 }
 
 .side-header {
