@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
+import BrightBox from './brightBox';
 
 class Timer extends Component {
   constructor(props){
@@ -13,13 +14,12 @@ class Timer extends Component {
     let secondsString = momentTimer.seconds().toString();
     secondsString = secondsString.length === 1 ? `0${secondsString}` : secondsString;
     return (
-      <div className='timer'>
-        <div className='timer-title'>Timer</div>
-        <div className='time-left'>
+      <BrightBox title='Timer' type='tertiary'>
+        <div className='aaa'>
           <span>{minuteString}:{secondsString}</span>
           <div className='play-button fa fa-play' />
         </div>
-      </div>);
+      </BrightBox>);
   }
 }
 

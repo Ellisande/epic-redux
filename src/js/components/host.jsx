@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import BrightBox from './brightBox';
 
 class Host extends Component {
   constructor(props){
@@ -20,21 +21,18 @@ class Host extends Component {
       display: this.state.isHost ? 'flex' : 'none'
     };
     return (
-      <div className='host'>
-        <div className='host-title'>Host</div>
-        <div className='host-content'>
-          <div className='host-toggle'>
-            <label>Host</label>
-            <div className='toggle-wrapper'>
-              <input type='checkbox' className='toggle' checked={this.state.isHost}/>
-              <label onClick={this.toggleHost} />
-            </div>
-          </div>
-          <div className='host-current' style={hostStyle}>
-            <span>You are a host.</span>
-          </div>
-        </div>
-      </div>);
+      <BrightBox title='Host' type='tertiary'>
+       <div className='host-toggle'>
+         <label>Host</label>
+         <div className='toggle-wrapper'>
+           <input type='checkbox' className='toggle' checked={this.state.isHost}/>
+           <label onClick={this.toggleHost} />
+         </div>
+       </div>
+       <div className='host-current' style={hostStyle}>
+         <span>You are a host.</span>
+       </div>
+      </BrightBox>);
   }
 }
 

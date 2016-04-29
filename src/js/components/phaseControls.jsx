@@ -3,6 +3,7 @@ import {changePhase} from '../actions';
 import {connect} from 'react-redux';
 import Timer from './timer';
 import Host from './host';
+import BrightBox from './brightBox';
 
 const phases = ['submit', 'merge', 'vote', 'discuss', 'complete'];
 const getNextPhase = (currentPhase) => {
@@ -24,19 +25,14 @@ class PhaseControls extends Component {
   render(){
     return (
       <div className='phase-controls'>
-        <div className='phase'>
-          <div className='phase-title'>
-            Phase
+        <BrightBox title='Phase' type='tertiary'>
+          <div className='phase-current'>
+             {this.props.phase}
           </div>
-          <div className='phase-content'>
-            <div className='phase-current'>
-               {this.props.phase}
-            </div>
-            <div className='next-phase'>
-              <a href='#' onClick={this.nextPhase}>Next ></a>
-            </div>
+          <div className='next-phase'>
+            <a href='#' onClick={this.nextPhase}>Next ></a>
           </div>
-        </div>
+        </BrightBox>
         <Timer />
         <Host />
       </div>);
