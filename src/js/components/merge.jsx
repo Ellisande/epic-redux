@@ -19,9 +19,9 @@ class Merge extends Component {
         <button className='delete' onClick={this.deleteTopic.bind(this, topic.title)}>X</button>
       </Topic>);
     return (
-    <BrightBox title={mergeTitle} type='primary' className='phase'>
-      {this.props.topics.map(mapTopics)}
-    </BrightBox>);
+      <BrightBox title={mergeTitle} type='primary' className='phase'>
+        {this.props.topics.map(mapTopics)}
+      </BrightBox>);
   }
 }
 
