@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import BrightBox from './brightBox';
 
 class SideBar extends Component {
   render() {
@@ -11,11 +12,10 @@ class SideBar extends Component {
         <div className='return'>
           <Link to='/'>Home</Link>
         </div>
-        <div className='participants'>
-          <div className='side-header'>Participants</div>
+        <BrightBox title='Participants' type='secondary'>
           <div className='participant'>The Mighty</div>
           {this.props.participants.map(participants)}
-        </div>
+        </BrightBox>
       </div>
     );
   }

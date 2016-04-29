@@ -591,3 +591,81 @@ input.toggle:checked + label:after {
   align-items: center;
   overflow-x: hidden;
 }
+
+.bright-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: $box-radius;
+}
+
+.bright-box-title {
+  border-radius: $box-radius $box-radius 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px 0 10px 0;
+}
+
+.bright-box-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.bright-box-content > * {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.bright-box-content > * + * {
+  padding-top: 5px;
+  margin-top: 5px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+}
+
+.bright-box.primary {
+  box-shadow: 5px 3px 20px -2px $primary-color;
+  color: $primary-color;
+}
+
+.bright-box-title.primary {
+  background-color: $primary-color;
+  color: $off-white-primary;
+}
+
+.bright-box-content.primary > * + * {
+  border-image: linear-gradient(to right, white 0%, $off-white-primary 20%, $off-white-primary 80%, white 100%);
+  border-image-slice: 1;
+}
+
+.bright-box.secondary {
+  box-shadow: 5px 3px 20px -2px $secondary-color;
+  color: $secondary-color;
+}
+
+.bright-box-title.secondary {
+  background-color: $secondary-color;
+  color: $off-white-secondary;
+}
+
+.bright-box-content.secondary > * + * {
+  border-image: linear-gradient(to right, white 0%, $off-white-secondary 20%, $off-white-secondary 80%, white 100%);
+  border-image-slice: 1;
+}
+
+.bright-box.tertiary {
+  box-shadow: 5px 3px 20px -2px $tertiary-color;
+  color: $tertiary-color;
+}
+
+.bright-box-title.tertiary {
+  background-color: $tertiary-color;
+  color: $off-white-tertiary;
+}
+
+.bright-box-content.tertiary > * + * {
+  border-image: linear-gradient(to right, white 0%, $off-white-tertiary 20%, $off-white-tertiary 80%, white 100%);
+  border-image-slice: 1;
+}
