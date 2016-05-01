@@ -16,12 +16,12 @@ class Merge extends Component {
     const mergeTitle = (<h2>Merge</h2>);
     const mapTopics = (topic) => (
       <Topic topic={topic} key={topic.title}>
-        <button className='delete' onClick={this.deleteTopic.bind(this, topic.title)}>X</button>
+        <a href='#' className='delete' onClick={this.deleteTopic.bind(this, topic.title)}>X</a>
       </Topic>);
     return (
-    <BrightBox title={mergeTitle} type='primary' className='phase'>
-      {this.props.topics.map(mapTopics)}
-    </BrightBox>);
+      <BrightBox title={mergeTitle} type='primary' className='merge'>
+        {this.props.topics.map(mapTopics)}
+      </BrightBox>);
   }
 }
 

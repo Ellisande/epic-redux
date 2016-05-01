@@ -14,7 +14,7 @@ class Topic extends Component {
           <div className='topic-title'>{this.props.topic.title}</div>
           <div className='by-line'>Posted By: {this.props.topic.by}</div>
         </div>
-        <div className='actions'>
+        <div className='topic-actions'>
           {this.props.children}
         </div>
       </div>
