@@ -52,6 +52,7 @@ $box-radius: 20px;
 //Theme 6
 $primary-color: rgb(58, 72, 204);
 $primary-transparent: rgba(58, 72, 204, 0);
+$primary-half-transparent: rgba(58, 72, 204, 0.5);
 $light-primary: rgb(130, 139, 228);
 $off-white-primary: rgb(160, 169, 255);
 $light-secondary-color: rgba(170, 124, 227, 0.45);
@@ -134,7 +135,7 @@ body a {
   color: $primary-color;
 }
 
-input.bubble-text {
+input.bubble-text, .bubble-text {
   border-radius: 20px;
   font-size: 1.5rem;
   text-align: center;
@@ -143,6 +144,9 @@ input.bubble-text {
   padding-top: 10px;
   padding-bottom: 10px;
   color: $primary-color;
+  min-width: 50%;
+  background-color: white;
+  transition: all 0.1s ease-in-out;
 }
 
 input.bubble-text:focus {
@@ -260,15 +264,34 @@ input.bubble-text:focus {
   justify-content: flex-start;
 }
 
-.vote-title {
+.vote-title, .discuss-title {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.vote-title > h2 {
+.vote-title > h2, .discuss-title > h2 {
   margin-bottom: 0;
+}
+
+.discuss-help {
+  margin-bottom: 0;
+  color: $off-white-primary
+}
+
+.discuss-middle {
+  display: flex;
+  flex-direction: column;
+}
+
+.discuss .topic {
+  transition: all 0.1s ease-in-out;
+}
+
+.next {
+  color: $tertiary-color;
+  font-size: 2rem;
 }
 
 .phase-controls > * + * {
@@ -315,7 +338,6 @@ input.bubble-text:focus {
 }
 
 .topic-title {
-  color: $primary-color;
   font-weight: bold;
   font-size: 1.3rem;
 }
@@ -385,7 +407,20 @@ input.bubble-text:focus {
 }
 
 .current {
-  color: blue;
+  background-image: linear-gradient(90deg, $primary-transparent 0%, $primary-half-transparent 97%, $primary-transparent 100%);
+  transition: all 0.1s ease-in;
+}
+
+.current-preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.current-actions {
+  color: $tertiary-color;
 }
 
 .how, .when {
@@ -531,11 +566,11 @@ input.toggle:checked + label:after {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding-bottom: 10px;
 }
 
 .bright-box-content > * + * {
   padding-top: 10px;
-  margin-top: 10px;
   border-width: 1px 0 0 0;
   border-style: solid;
 }
@@ -583,4 +618,14 @@ input.toggle:checked + label:after {
 .bright-box-content.tertiary > * + * {
   border-image: linear-gradient(to right, white 0%, $off-white-tertiary 20%, $off-white-tertiary 80%, white 100%);
   border-image-slice: 1;
+}
+
+.bright-box-bubble {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.bright-box-bubble.primary {
+  background-image: linear-gradient( 180deg, $primary-color, $primary-color 50%, white 50%, white);
 }
