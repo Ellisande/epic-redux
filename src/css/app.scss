@@ -265,6 +265,17 @@ input.bubble-text:focus {
   justify-content: flex-start;
 }
 
+.vote-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.vote-title > h2 {
+  margin-bottom: 0;
+}
+
 .phase-controls > * + * {
   margin-top: 15px;
 }
@@ -312,6 +323,30 @@ input.bubble-text:focus {
   color: $primary-color;
   font-weight: bold;
   font-size: 1.3rem;
+}
+
+.topic-total-votes {
+  color: $light-primary;
+  font-weight: bold;
+  font-size: 3rem;
+  flex: 1;
+  max-width: 10%;
+}
+
+.topic-votes {
+  display: flex;
+  flex-direction: row;
+  color: $tertiary-color;
+  justify-content: space-around;
+  max-width: 30%;
+}
+
+.vote-icon {
+  font-size: 2.5rem;
+}
+
+.vote-icon:hover {
+  color: $light-tertiary;
 }
 
 .by-line {
