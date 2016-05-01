@@ -289,6 +289,24 @@ input.bubble-text:focus {
   transition: all 0.1s ease-in-out;
 }
 
+.just-kidding {
+  display: flex;
+  flex-direction: column;
+}
+
+.oops {
+  color: $tertiary-color;
+  font-size: 1.3rem;
+}
+
+.oops:hover {
+  color: $light-tertiary;
+}
+
+.oops > * + * {
+  margin-left: 5px;
+}
+
 .next {
   color: $tertiary-color;
   font-size: 2rem;
