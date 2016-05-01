@@ -5,14 +5,14 @@ class TopicVotes extends Component {
     super(props);
   }
   render(){
-    const noVoteMarkup = (<button onClick={this.props.downVote}>-1</button>);
-    const noVote = this.props.hasMyVote ? noVoteMarkup : undefined;
-    const yesVoteMarkup = (<button onClick={this.props.upVote}>+1</button>);
-    const yesVote = this.props.remainingVotes > 0 ? yesVoteMarkup : undefined;
+    const noVoteStyle = this.props.hasMyVote ? {visibility: 'visible'} : {visibility: 'hidden'};
+    const noVoteMarkup = (<a href='#' onClick={this.props.downVote} className='vote-icon fa fa-minus-circle' style={noVoteStyle} />);
+    const yesVoteStyle = this.props.remainingVotes > 0 ? {visibility: 'visible'} : {visibility: 'hidden'};
+    const yesVoteMarkup = (<a href='#' onClick={this.props.upVote} className='vote-icon fa fa-plus-circle' style={yesVoteStyle} />);
     return (
       <div className='topic-votes'>
-        {yesVote}
-        {noVote}
+        {yesVoteMarkup}
+        {noVoteMarkup}
       </div>);
   }
 }
