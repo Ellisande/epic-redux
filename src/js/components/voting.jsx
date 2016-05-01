@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Topic from './topic';
 import TopicVotes from './topicVote';
+import BrightBox from './brightBox';
 import {upVote, downVote} from '../actions';
 import _ from 'lodash';
 
@@ -25,13 +26,16 @@ class Voting extends Component {
         <TopicVotes hasMyVote={hasMyVote(topic)} remainingVotes={this.props.remainingVotes} upVote={this.upVote.bind(this, topic)} downVote={this.downVote.bind(this, topic)}/>
       </Topic>
     );
+    const title = (
+      <div className='vote-title'>
+        <h2>Vote</h2>
+        <div className='votes-remaining'>{this.props.remainingVotes} votes remaining</div>
+      </div>
+    );
     return (
-      <div className='voting'>
-        <div className='dashboard'>
-          You have {this.props.remainingVotes} remaining.
-        </div>
+      <BrightBox type='primary' title={title} className='phase'>
         {this.props.topics.map(mapTopics)}
-      </div>);
+      </BrightBox>);
   }
 }
 
