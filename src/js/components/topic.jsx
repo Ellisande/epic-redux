@@ -5,7 +5,7 @@ class Topic extends Component {
     super(props);
   }
   render(){
-    const showVotingTotal = this.props.showVotes ? (<div className='vote-total'>{this.props.topic.votes.length}</div>) : undefined;
+    const showVotingTotal = this.props.showVotes ? (<div className='topic-total-votes'>{this.props.topic.votes.length}</div>) : undefined;
     const currentClass = this.props.topic.current ? 'current' : '';
     return (
       <div className={`topic ${currentClass}`}>
