@@ -3,6 +3,7 @@ import {changePhase} from '../actions';
 import {connect} from 'react-redux';
 import Timer from './timer';
 import Host from './host';
+import Lock from './lock';
 import BrightBox from './brightBox';
 
 const phases = ['submit', 'merge', 'vote', 'discuss', 'complete'];
@@ -37,6 +38,7 @@ class PhaseControls extends Component {
         </BrightBox>
         <Timer />
         <Host />
+        <Lock />
       </div>);
   }
 }

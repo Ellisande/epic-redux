@@ -72,6 +72,20 @@ const phase = (currentPhase = 'submit', action) => {
   return currentPhase;
 };
 
+const locked = (isLocked = false, action) => {
+  if(action.type === 'SET_LOCKED'){
+    return action.locked;
+  }
+  return isLocked;
+};
+
+const newHosts = (allowNewHosts = true, action) => {
+  if(action.type === 'SET_NEW_HOSTS'){
+    return action.newHosts;
+  }
+  return allowNewHosts;
+};
+
 let reducers = combineReducers({
   meetings,
   participants,
@@ -81,7 +95,9 @@ let reducers = combineReducers({
   timer: (timer = 350000) => timer,
   phaseVotes: (phaseVotes = []) => phaseVotes,
   topics,
-  host
+  host,
+  locked,
+  newHosts
 });
 
 let store = createStore(reducers);

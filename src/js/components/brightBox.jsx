@@ -13,7 +13,7 @@ class BrightBox extends Component {
       </form>);
     const showBubble = this.props.bubble ? bubbleMarkup : undefined;
     return (
-      <div className={`bright-box ${this.type} ${this.props.className}`}>
+      <div className={`bright-box ${this.type} ${this.props.className}`} style={this.props.style}>
         <div className={`bright-box-title ${this.type}`}>{this.props.title}</div>
         {showBubble}
         <div className={`bright-box-content ${this.type}`}>
