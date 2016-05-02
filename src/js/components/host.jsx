@@ -13,8 +13,9 @@ class Host extends Component {
   }
   render(){
     const hostStyle = this.props.host ? {} : {display: 'none'};
+    const allowHostStyle = this.props.newHosts || this.props.host ? {} : {display: 'none'};
     return (
-      <BrightBox title='Host' type='tertiary'>
+      <BrightBox title='Host' type='tertiary' style={allowHostStyle}>
        <div className='host-toggle'>
          <label>Host</label>
          <div className='toggle-wrapper'>
@@ -31,7 +32,8 @@ class Host extends Component {
 
 const selector = state => {
   return {
-    host: state.host
+    host: state.host,
+    newHosts: state.newHosts
   };
 };
 export default connect(selector)(Host);
