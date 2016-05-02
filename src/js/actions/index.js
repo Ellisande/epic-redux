@@ -50,4 +50,11 @@ const setCurrentTopic = (topic) => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic};
+const setHost = (isHost) => {
+  return {
+    type: 'SET_HOST',
+    isHost
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic, setHost};

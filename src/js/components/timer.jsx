@@ -13,11 +13,12 @@ class Timer extends Component {
     minuteString = minuteString.length === 1 ? `0${minuteString}` : minuteString;
     let secondsString = momentTimer.seconds().toString();
     secondsString = secondsString.length === 1 ? `0${secondsString}` : secondsString;
+    const controlStyle = this.props.host ? {} : {display: 'none'};
     return (
       <BrightBox title='Timer' type='tertiary'>
         <div className='aaa'>
           <span>{minuteString}:{secondsString}</span>
-          <div className='play-button fa fa-play' />
+          <div className='play-button fa fa-play' style={controlStyle}/>
         </div>
       </BrightBox>);
   }

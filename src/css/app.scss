@@ -298,6 +298,10 @@ input.bubble-text:focus {
   margin-top: 15px;
 }
 
+.phase-current {
+  text-transform: capitalize;
+}
+
 .side-bar {
   flex: 0 1 200px;
   display: flex;
