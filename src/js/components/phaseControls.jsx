@@ -23,13 +23,15 @@ class PhaseControls extends Component {
     return dispatch(changePhase(nextPhase));
   }
   render(){
+    const showNext = this.props.phase !== 'complete' && this.props.host;
+    const nextStyle = showNext ? {} : {display: 'none'};
     return (
       <div className='phase-controls'>
         <BrightBox title='Phase' type='tertiary'>
           <div className='phase-current'>
              {this.props.phase}
           </div>
-          <div className='next-phase'>
+          <div className='next-phase' style={nextStyle}>
             <a href='#' onClick={this.nextPhase}>Next ></a>
           </div>
         </BrightBox>
