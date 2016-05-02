@@ -23,7 +23,7 @@ gulp.task('serve', function() {
   app.get('/*', (req, res) => res.sendFile(`${process.cwd()}/assets/index.html`));
 
   app.listen(4000, function () {
-    console.log('Example app listening on port 3000!');
+    console.log('Example app listening on port 4000!');
   });
 });
 

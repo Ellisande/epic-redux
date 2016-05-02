@@ -18,7 +18,7 @@ class Complete extends Component {
           This meeting is now over. There is nothing left to see here. Move along.
         </div>
         <div className='oops'>
-          Didn't mean to end the meeting? <a href='#' onClick={this.goBack}>Go Back</a>
+          'Didn\'t mean to end the meeting?' <a href='#' onClick={this.goBack}>Go Back</a>
         </div>
       </div>);
   }

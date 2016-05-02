@@ -375,10 +375,13 @@ input.bubble-text:focus {
   flex: 1 1 50px;
   display: flex;
   flex-direction: column;
+  padding-left: 30px;
 }
 
 .topic-actions {
   flex: 1;
+  text-align: right;
+  padding-right: 30px;
 }
 
 .topic-list > * {
