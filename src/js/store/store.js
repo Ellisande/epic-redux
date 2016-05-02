@@ -19,7 +19,7 @@ const meetings = (existingMeetings = [{
 };
 
 const participants = () => {
-  return [{name: 'Mayor McCheese'}];
+  return [{name: 'Mayor McCheese', host: true}];
 };
 
 const topics = (existingTopics = [], action) => {
@@ -58,7 +58,12 @@ const topics = (existingTopics = [], action) => {
   return existingTopics;
 };
 
-const host = () => true;
+const host = (isHost = false, action) => {
+  if(action.type === 'SET_HOST'){
+    return action.isHost;
+  }
+  return isHost;
+};
 
 const phase = (currentPhase = 'submit', action) => {
   if(action.type === 'CHANGE_PHASE'){
