@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {changePhase} from '../actions';
 import {connect} from 'react-redux';
+import BrightBox from './brightBox';
 
 class Complete extends Component {
   constructor(props){
@@ -12,15 +13,20 @@ class Complete extends Component {
     return this.props.dispatch(changePhase('discuss'));
   }
   render(){
+    const title = (<h2>The End</h2>);
     return (
-      <div className='complete'>
-        <div className='description'>
+      <BrightBox type='primary' title={title} className='phase'>
+        <div className='the-end'>
           This meeting is now over. There is nothing left to see here. Move along.
         </div>
-        <div className='oops'>
-          'Didn\'t mean to end the meeting?' <a href='#' onClick={this.goBack}>Go Back</a>
+        <div className='just-kidding'>
+          <a href='#' className='oops' onClick={this.goBack}>
+            <i className='fa fa-angle-left' />
+            <span>Go Back</span>
+          </a>
         </div>
-      </div>);
+      </BrightBox>
+    );
   }
 }
 
