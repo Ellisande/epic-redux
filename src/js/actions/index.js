@@ -50,4 +50,25 @@ const setCurrentTopic = (topic) => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic};
+const setHost = (isHost) => {
+  return {
+    type: 'SET_HOST',
+    isHost
+  };
+};
+
+const setLocked = locked => {
+  return {
+    type: 'SET_LOCKED',
+    locked
+  };
+};
+
+const setNewHosts = newHosts => {
+  return {
+    type: 'SET_NEW_HOSTS',
+    newHosts
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic, setHost, setLocked, setNewHosts};

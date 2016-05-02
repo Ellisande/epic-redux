@@ -19,7 +19,7 @@ const meetings = (existingMeetings = [{
 };
 
 const participants = () => {
-  return [{name: 'Mayor McCheese'}];
+  return [{name: 'Mayor McCheese', host: true}];
 };
 
 const topics = (existingTopics = [], action) => {
@@ -58,13 +58,32 @@ const topics = (existingTopics = [], action) => {
   return existingTopics;
 };
 
-const host = () => true;
+const host = (isHost = false, action) => {
+  if(action.type === 'SET_HOST'){
+    return action.isHost;
+  }
+  return isHost;
+};
 
 const phase = (currentPhase = 'submit', action) => {
   if(action.type === 'CHANGE_PHASE'){
     return action.phase;
   }
   return currentPhase;
+};
+
+const locked = (isLocked = false, action) => {
+  if(action.type === 'SET_LOCKED'){
+    return action.locked;
+  }
+  return isLocked;
+};
+
+const newHosts = (allowNewHosts = true, action) => {
+  if(action.type === 'SET_NEW_HOSTS'){
+    return action.newHosts;
+  }
+  return allowNewHosts;
 };
 
 let reducers = combineReducers({
@@ -76,7 +95,9 @@ let reducers = combineReducers({
   timer: (timer = 350000) => timer,
   phaseVotes: (phaseVotes = []) => phaseVotes,
   topics,
-  host
+  host,
+  locked,
+  newHosts
 });
 
 let store = createStore(reducers);

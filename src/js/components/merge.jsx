@@ -16,7 +16,8 @@ class Merge extends Component {
     const mergeTitle = (<h2>Merge</h2>);
     const mapTopics = (topic) => (
       <Topic topic={topic} key={topic.title}>
-        <a href='#' className='delete' onClick={this.deleteTopic.bind(this, topic.title)}>X</a>
+        <a href='#' className='delete' onClick={this.deleteTopic.bind(this, topic.title)}><i className="fa fa-trash-o" aria-hidden="true"></i>
+</a>
       </Topic>);
     return (
       <BrightBox title={mergeTitle} type='primary' className='merge'>

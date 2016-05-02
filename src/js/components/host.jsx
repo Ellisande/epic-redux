@@ -1,31 +1,25 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {setHost} from '../actions';
 import BrightBox from './brightBox';
 
 class Host extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      isHost: false
-    };
     this.toggleHost = this.toggleHost.bind(this);
   }
   toggleHost(){
-    if(this.state.isHost){
-      return this.setState({isHost: false});
-    }
-    return this.setState({isHost: true});
+    this.props.dispatch(setHost(!this.props.host));
   }
   render(){
-    const hostStyle = {
-      display: this.state.isHost ? 'flex' : 'none'
-    };
+    const hostStyle = this.props.host ? {} : {display: 'none'};
+    const allowHostStyle = this.props.newHosts || this.props.host ? {} : {display: 'none'};
     return (
-      <BrightBox title='Host' type='tertiary'>
+      <BrightBox title='Host' type='tertiary' style={allowHostStyle}>
        <div className='host-toggle'>
          <label>Host</label>
          <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.state.isHost}/>
+           <input type='checkbox' className='toggle' checked={this.props.host}/>
            <label onClick={this.toggleHost} />
          </div>
        </div>
@@ -36,4 +30,10 @@ class Host extends Component {
   }
 }
 
-export default connect(i=>i)(Host);
+const selector = state => {
+  return {
+    host: state.host,
+    newHosts: state.newHosts
+  };
+};
+export default connect(selector)(Host);
