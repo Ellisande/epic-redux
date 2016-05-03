@@ -24,14 +24,14 @@ class Lock extends Component {
        <div className='lock-toggle'>
          <label>Lock Room</label>
          <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.locked}/>
+           <input type='checkbox' className='toggle' checked={this.props.locked} readOnly/>
            <label onClick={this.toggleLocked} />
          </div>
        </div>
        <div className='new-host-toggle'>
          <label>Allow Hosts</label>
          <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.newHosts}/>
+           <input type='checkbox' className='toggle' checked={this.props.newHosts} readOnly/>
            <label onClick={this.toggleNewHosts} />
          </div>
        </div>
