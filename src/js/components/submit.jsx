@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import Topic from './topic';
 import {connect} from 'react-redux';
 import {postTopic} from '../actions';
+import {dispatch} from '../services/socket';
 import _ from 'lodash';
 
 class Submit extends Component {
   constructor(props) {
     super(props);
-    this.postTopic = this.post.bind(this, props.dispatch);
+    this.postTopic = this.post.bind(this);
     this.updatePostTopic = this.updatePostTopic.bind(this);
     this.state = {
       newTopic: undefined
@@ -17,7 +18,7 @@ class Submit extends Component {
     const newTopic = _.get(e, 'target.value');
     this.setState({newTopic});
   }
-  post(dispatch, e) {
+  post(e) {
     e.preventDefault();
     if (!_.isEmpty(this.state.newTopic)) {
       dispatch(postTopic(this.state.newTopic, 'Mayor McCheese'));

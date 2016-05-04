@@ -20,7 +20,8 @@
     "UIkit": true,
     "chai": true,
     "inject": true,
-    "Plaid": true
+    "Plaid": true,
+    "Primus": true
   },
   "parser": "babel-eslint",
   "plugins": [

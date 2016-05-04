@@ -102,4 +102,6 @@ let reducers = combineReducers({
 
 let store = createStore(reducers);
 
+const createNewStore = createStore.bind(this, reducers);
+export {createNewStore as createStore};
 export default store;
