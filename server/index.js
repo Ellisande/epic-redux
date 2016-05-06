@@ -85,6 +85,6 @@ primus.on('connection', function (spark) {
 app.get(/^(?!primus).+/, (req, res) => res.sendFile(`${process.cwd()}/assets/index.html`));
 
 const port = process.NODE_ENV === 'production' ? 80 : 3000;
-server.listen(port, function () {
+server.listen(80, function () {
   console.log('Example app listening on port 3000!');
 });
