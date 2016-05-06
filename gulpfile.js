@@ -1,11 +1,11 @@
 var concat = require('gulp-concat');
-var connect = require('connect');
 var del = require('del');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
 var webpack = require('gulp-webpack');
 var express = require('express');
+const babel = require('gulp-babel');
 
 var cssDestination = 'assets/css';
 var imgDestination = 'assets/img';
@@ -27,19 +27,30 @@ gulp.task('serve', function() {
   });
 });
 
+gulp.task('server', ['compile-server', 'compile-shared']);
+
+gulp.task('compile-server', ['clean'], () => {
+  return gulp.src('src/js/**/*').pipe(babel()).pipe(gulp.dest('dist/src/js'));
+});
+
+gulp.task('compile-shared', ['clean'], () => {
+  return gulp.src('server/**/*.js').pipe(babel()).pipe(gulp.dest('dist/server'));
+});
+
 // Wipe out the JavaScript, Stylesheet and Web Font destinations.
 gulp.task('clean', function(cb) {
   del([
     jsDestination + '/**/*',
     cssDestination + '/**/*',
     imgDestination + '/**/*',
-    fontDestination + '/**/*'
+    fontDestination + '/**/*',
+    'dist/*'
   ]).then(function (/*paths*/) {
     cb();
   });
 });
 
-var tasks = ['clean', 'css', 'img', 'js', 'wpreact', 'fonts'];
+var tasks = ['clean', 'css', 'img', 'wpreact', 'fonts', 'compile-shared', 'compile-server'];
 
 // Watch and rebuild JavaScript and Stylesheets.
 gulp.task('dist', tasks);
@@ -48,7 +59,8 @@ gulp.task('default', tasks.concat('serve'), function() {
   console.log('Watching development files...'); // eslint-disable-line no-console
   gulp.watch(['src/css/**/*'], ['css']);
   gulp.watch(['src/img/**/*'], ['img']);
-  gulp.watch(['src/js/**/*'], ['wpreact']);
+  gulp.watch(['src/js/**/*'], ['wpreact', 'compile-shared']);
+  gulp.watch(['server/**/*'], ['compile-server']);
 });
 
 // Build Stylesheets.
@@ -77,29 +89,10 @@ gulp.task('img', function() {
 });
 
 // Build fonts.
-gulp.task('fonts', function() {
+gulp.task('fonts', ['clean'], function() {
   return gulp.src('node_modules/font-awesome/fonts/*')
     .pipe(gulp.dest(fontDestination));
 });
-
-
-// Build JavaScript files.
-gulp.task('js', function() {
-  return gulp.src([
-    'node_modules/uikit/dist/js/uikit.min.js',
-    'node_modules/uikit/dist/js/components/tooltip.min.js',
-    'node_modules/lodash/lodash.js'
-  ])
-  .pipe(concat('all.js'))
-  .pipe(gulp.dest(jsDestination));
-});
-
-// // Build Webpack files.
-// gulp.task('wp', function() {
-//   return gulp.src([])
-//     .pipe(webpack( require('./webpack.config.js') ))
-//     .pipe(gulp.dest(jsDestination));
-// });
 
 // Build Webpack React files.
 gulp.task('wpreact', ['css'], function() {
