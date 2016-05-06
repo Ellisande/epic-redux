@@ -1,6 +1,8 @@
 import store from '../store/store.js';
 var meetingsConnection;
 var roomConnection;
+const connectionString = process.env.HOST ? `https://${process.env.HOST}:${process.env.PORT}/primus` : 'http://localhost:3000/primus'
+
 
 const dispatch = action => {
   if(!roomConnection){
@@ -27,7 +29,7 @@ const connectToRoom = roomName => {
   if (roomConnection) {
     roomConnection.destroy();
   }
-  roomConnection = new Primus(`http://localhost:3000/primus?room=${safeRoomName}`);
+  roomConnection = new Primus(`${connectionString}?room=${safeRoomName}`);
   attachEvents(roomConnection);
 };
 
@@ -35,7 +37,7 @@ const connectToMeetings = () => {
   if(meetingsConnection){
     meetingsConnection.destroy();
   }
-  meetingsConnection = Primus.connect('http://localhost:3000/primus?meetings=true');
+  meetingsConnection = Primus.connect(`${connectionString}?meetings=true`);
   attachEvents(meetingsConnection);
 };
 
