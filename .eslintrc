@@ -16,11 +16,7 @@
     "gobold/react"
   ],
   "globals": {
-    "$": true,
-    "UIkit": true,
     "chai": true,
-    "inject": true,
-    "Plaid": true,
     "Primus": true
   },
   "parser": "babel-eslint",
