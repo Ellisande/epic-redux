@@ -25,7 +25,7 @@ const attachEvents = connection => {
 const connectToRoom = roomName => {
   const safeRoomName = decodeURI(roomName);
   if (roomConnection) {
-    roomConnection.destory();
+    roomConnection.destroy();
   }
   roomConnection = new Primus(`http://localhost:3000/primus?room=${safeRoomName}`);
   attachEvents(roomConnection);
@@ -33,14 +33,21 @@ const connectToRoom = roomName => {
 
 const connectToMeetings = () => {
   if(meetingsConnection){
-    meetingsConnection.destory();
+    meetingsConnection.destroy();
   }
   meetingsConnection = Primus.connect('http://localhost:3000/primus?meetings=true');
   attachEvents(meetingsConnection);
 };
 
+const disconnectFromMeetings = () => {
+  if(meetingsConnection){
+    meetingsConnection.destroy();
+  }
+};
+
 export {
   connectToRoom,
   connectToMeetings,
+  disconnectFromMeetings,
   dispatch
 };

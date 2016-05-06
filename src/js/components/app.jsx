@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory, Link} from 'react-router';
-import {connectToMeetings} from '../services/socket';
+import {connectToMeetings, disconnectFromMeetings} from '../services/socket';
 
 class App extends Component {
   constructor(props){
@@ -14,6 +14,9 @@ class App extends Component {
   }
   componentWillMount(){
     return connectToMeetings();
+  }
+  componentWillUnmount(){
+    return disconnectFromMeetings();
   }
   createMeeting(e){
     e.preventDefault();
