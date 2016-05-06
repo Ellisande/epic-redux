@@ -65,7 +65,7 @@
     "node": "4.4.2"
   },
   "license": "Apache-2.0",
-  "main": "dist/app.js",
+  "main": "server/index.js",
   "name": "note-and-vote",
   "repository": "git@github.com:gobold/recipient-portal.git",
   "scripts": {
