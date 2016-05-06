@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import BrightBox from './brightBox';
 import {setLocked, setNewHosts} from '../actions';
 import {findUser} from '../store/utils';
+import {dispatch} from '../services/socket';
 import _ from 'lodash';
 
 class Lock extends Component {
@@ -13,11 +14,11 @@ class Lock extends Component {
   }
   toggleLocked(e){
     e.preventDefault();
-    this.props.dispatch(setLocked(!this.props.locked));
+    dispatch(setLocked(!this.props.locked));
   }
   toggleNewHosts(e){
     e.preventDefault();
-    this.props.dispatch(setNewHosts(!this.props.newHosts));
+    dispatch(setNewHosts(!this.props.newHosts));
   }
   render(){
     const boxStyle = this.props.host ? {} : {display: 'none'};

@@ -32,6 +32,12 @@ const participants = (existingParticipants = [], action) => {
     });
     return replace(existingParticipants, participantToUpdate, modifiedParticipant);
   }
+  if(action.type === 'ADD_PARTICIPANT'){
+    return [...existingParticipants, action.participant];
+  }
+  if(action.type === 'REMOVE_PARTICIPANT'){
+    return existingParticipants.filter(p => p.id !== action.participantId);
+  }
   return existingParticipants;
 };
 
@@ -48,26 +54,39 @@ const topics = (existingTopics = [], action) => {
     return existingTopics.filter(topic => topic.title !== action.id);
   }
   if(action.type === 'UP_VOTE'){
-    const currentTopic = action.topic;
-    const modifiedTopic = Object.assign({}, currentTopic, {votes: [...currentTopic.votes, action.user.name]});
+    const currentTopic = existingTopics.find(topic => topic.title === action.topic.title);
+    const modifiedTopic = Object.assign({}, currentTopic, {votes: [...currentTopic.votes, action.userId]});
     return replace(existingTopics, currentTopic, modifiedTopic);
   }
   if(action.type === 'DOWN_VOTE'){
-    const currentTopic = action.topic;
+    const currentTopic = existingTopics.find(topic => topic.title === action.topic.title);
     const existingVotes = currentTopic.votes;
-    const removalIndex = existingVotes.indexOf(action.user.name);
+    const removalIndex = existingVotes.indexOf(action.userId);
     const newVotesList = [...existingVotes.slice(0, removalIndex), ...existingVotes.slice(removalIndex + 1, existingVotes.length)];
     const modifiedTopic = Object.assign({}, currentTopic, {votes: newVotesList});
     return replace(existingTopics, currentTopic, modifiedTopic);
   }
-  if(action.type === 'SET_CURRENT_TOPIC'){
+  if(action.type === 'SET_PHASE_DISCUSS'){
+    const oldTopic = existingTopics.find(topic => topic.current);
+    let newTopics = [...existingTopics];
+    newTopics.sort( (l, r) => r.votes.length - l.votes.length);
+    if(oldTopic){
+      const modifiedOldTopic = Object.assign({}, oldTopic, {current: false});
+      newTopics = replace(existingTopics, oldTopic, modifiedOldTopic);
+    }
+    const newCurrentTopic = newTopics[0];
+    const modifiedCurrentTopic = Object.assign({}, newCurrentTopic, {current: true});
+    return replace(newTopics, newCurrentTopic, modifiedCurrentTopic);
+  }
+  if(action.type === 'NEXT_TOPIC'){
     const oldTopic = existingTopics.find(topic => topic.current);
     let newTopics = [...existingTopics];
     if(oldTopic){
       const modifiedOldTopic = Object.assign({}, oldTopic, {current: false});
       newTopics = replace(existingTopics, oldTopic, modifiedOldTopic);
     }
-    const newCurrentTopic = existingTopics.find(topic => topic === action.topic);
+    const indexOfOld = existingTopics.indexOf(oldTopic);
+    const newCurrentTopic = existingTopics[indexOfOld + 1] || oldTopic;
     const modifiedCurrentTopic = Object.assign({}, newCurrentTopic, {current: true});
     return replace(newTopics, newCurrentTopic, modifiedCurrentTopic);
   }
@@ -78,7 +97,7 @@ const phase = (currentPhase = 'submit', action) => {
   if(action.type === 'JOIN_MEETING'){
     return action.phase;
   }
-  if(action.type === 'CHANGE_PHASE'){
+  if(action.type.match(/SET_PHASE/)){
     return action.phase;
   }
   return currentPhase;

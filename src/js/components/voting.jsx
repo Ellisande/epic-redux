@@ -4,6 +4,8 @@ import Topic from './topic';
 import TopicVotes from './topicVote';
 import BrightBox from './brightBox';
 import {upVote, downVote} from '../actions';
+import {dispatch} from '../services/socket';
+import {findUser} from '../store/utils';
 import _ from 'lodash';
 
 
@@ -14,10 +16,10 @@ class Voting extends Component {
     this.downVote = this.downVote.bind(this);
   }
   upVote(topic){
-    this.props.dispatch(upVote(topic, this.props.user));
+    dispatch(upVote(topic, this.props.me));
   }
   downVote(topic){
-    this.props.dispatch(downVote(topic, this.props.user));
+    dispatch(downVote(topic, this.props.me));
   }
   render(){
     const hasMyVote = topic => topic.votes.filter(voter => voter === this.props.me).length;
@@ -40,7 +42,7 @@ class Voting extends Component {
 }
 
 const selector = state => {
-  const me = state.user.name;
+  const me = state.userId;
   const allVotes = _.map(state.topics, 'votes');
   const myVotes = allVotes.reduce((accum, votes) => [...accum, ...votes]).filter(voter => voter === me);
   const remainingVotes = 3 - (myVotes.length || 0);
