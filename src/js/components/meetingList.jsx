@@ -15,7 +15,7 @@ class MeetingList extends Component {
     };
     return (
       <div className='meeting-list'>
-        <div className='meeting-summary'>Meetings</div>
+        <div className='meeting-summary'>Meetings: </div>
         {meetings.map(meetingItem)}
       </div>
     );
