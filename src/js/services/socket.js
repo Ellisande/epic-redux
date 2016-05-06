@@ -1,8 +1,7 @@
 import store from '../store/store.js';
 var meetingsConnection;
 var roomConnection;
-console.log('fdfdfdfdfd', process.env.HOST, process.env.PORT);
-const connectionString = process.env.HOST ? `https://${process.env.HOST}:${process.env.PORT}/primus` : 'http://localhost:3000/primus';
+const connectionString = '/primus';
 
 
 const dispatch = action => {
