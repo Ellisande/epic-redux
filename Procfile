@@ -1,2 +1,1 @@
-gulp: gulp dist
-web: node 
+web: npm start
