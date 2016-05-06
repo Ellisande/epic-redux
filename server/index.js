@@ -26,12 +26,21 @@ primus.on('disconnection', function(spark){
   }
 });
 
+const createSetMeetings = roomsToMap => {
+  const roomMap = _.map(roomsToMap, room => {
+    const roomState = room.store.getState();
+    return {
+      name: roomState.roomName,
+      participants: roomState.participants.length
+    };
+  });
+  return {type: 'SET_MEETINGS', meetings: roomMap};
+};
+
 primus.on('connection', function (spark) {
   if(spark.query.meetings){
-    spark.write({type: 'SET_MEETINGS', meetings: [{
-      name: 'Bold Planning',
-      participants: 100
-    }]});
+    const setMeetings = createSetMeetings(rooms);
+    spark.write(setMeetings);
     return;
   }
   if(spark.query.room){
@@ -54,6 +63,7 @@ primus.on('connection', function (spark) {
       participant.host = true;
       rooms[roomName] = {sparks: [spark], store: createNewStore(room)};
       rooms[roomName].store.dispatch(joinMeeting(room));
+      primus.write(createSetMeetings(rooms));
     } else {
       const currentRoom = rooms[roomName];
       currentRoom.sparks = [...currentRoom.sparks, spark];
