@@ -11,7 +11,7 @@
     "redux": "^3.3.1",
     "redux-devtools": "^3.2.0",
     "validate.js": "^0.9.0"
-  }, 
+  },
   "description": "Simple program for noting and voting.",
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -62,7 +62,7 @@
     "webpack-merge": "^0.8.3"
   },
   "engines": {
-    "node": "4.4.2"
+    "node": "5.x"
   },
   "license": "Apache-2.0",
   "main": "server/index.js",
@@ -71,7 +71,7 @@
   "scripts": {
     "lint": "eslint --ext .js .",
     "test": "gulp dist",
-    "start": "npm i && gulp dist && node server/index.js"
+    "start": "gulp dist && node server/index.js"
   },
   "version": "0.0.0"
 }
