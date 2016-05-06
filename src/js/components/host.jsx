@@ -22,7 +22,7 @@ class Host extends Component {
        <div className='host-toggle'>
          <label>Host</label>
          <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.host}/>
+           <input type='checkbox' className='toggle' checked={this.props.host} readOnly/>
            <label onClick={this.toggleHost} />
          </div>
        </div>
