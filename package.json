@@ -71,7 +71,7 @@
   "scripts": {
     "lint": "eslint --ext .js .",
     "test": "gulp dist",
-    "start": "gulp dist && node server/index.js"
+    "start": "npm i && gulp dist && node server/index.js"
   },
   "version": "0.0.0"
 }
