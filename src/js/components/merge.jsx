@@ -3,6 +3,7 @@ import Topic from './topic';
 import {connect} from 'react-redux';
 import {removeTopic} from '../actions';
 import BrightBox from './brightBox';
+import {dispatch} from '../services/socket';
 
 class Merge extends Component {
   constructor(props){
@@ -10,7 +11,7 @@ class Merge extends Component {
     this.deleteTopic = this.deleteTopic.bind(this);
   }
   deleteTopic(id){
-    this.props.dispatch(removeTopic(id));
+    dispatch(removeTopic(id));
   }
   render(){
     const mergeTitle = (<h2>Merge</h2>);

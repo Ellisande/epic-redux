@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Topic from './topic';
 import BrightBox from './brightBox';
-import {setCurrentTopic} from '../actions';
+import {nextTopic} from '../actions';
+import {dispatch} from '../services/socket';
 import _ from 'lodash';
 
 class Discuss extends Component {
@@ -10,18 +11,13 @@ class Discuss extends Component {
     super(props);
     this.nextTopic = this.nextTopic.bind(this);
   }
-  componentDidMount(){
-    if(!this.props.currentTopic){
-      this.props.dispatch(setCurrentTopic(this.props.topics[0]));
-    }
-  }
   nextTopic(e){
     e.preventDefault();
     const currentTopicIndex = this.props.topics.indexOf(this.props.currentTopic);
     if(currentTopicIndex === this.props.topics.length - 1){
       return;
     }
-    return this.props.dispatch(setCurrentTopic(this.props.topics[currentTopicIndex + 1]));
+    return dispatch(nextTopic());
   }
   render(){
     const mapTopics = (topic) => {

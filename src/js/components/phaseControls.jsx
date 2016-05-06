@@ -5,6 +5,8 @@ import Timer from './timer';
 import Host from './host';
 import Lock from './lock';
 import BrightBox from './brightBox';
+import {isUserHost} from '../store/utils';
+import {dispatch} from '../services/socket';
 
 const phases = ['submit', 'merge', 'vote', 'discuss', 'complete'];
 const getNextPhase = (currentPhase) => {
@@ -17,9 +19,9 @@ const getNextPhase = (currentPhase) => {
 class PhaseControls extends Component {
   constructor(props){
     super(props);
-    this.nextPhase = this.nextPhase.bind(this, props.dispatch);
+    this.nextPhase = this.nextPhase.bind(this);
   }
-  nextPhase(dispatch){
+  nextPhase(){
     const nextPhase = getNextPhase(this.props.phase);
     return dispatch(changePhase(nextPhase));
   }
@@ -43,4 +45,10 @@ class PhaseControls extends Component {
   }
 }
 
-export default connect(i=>i)(PhaseControls);
+const selector = state => {
+  return {
+    host: isUserHost(state),
+    phase: state.phase
+  };
+};
+export default connect(selector)(PhaseControls);

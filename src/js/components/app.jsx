@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createMeeting} from '../actions';
 import { browserHistory, Link} from 'react-router';
 import {connectToMeetings} from '../services/socket';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.createMeeting = this.createMeeting.bind(this, props.dispatch);
+    this.createMeeting = this.createMeeting.bind(this);
     this.updateMeetingName = this.updateMeetingName.bind(this);
     this.state = {
       newMeetingName: undefined
@@ -16,10 +15,9 @@ class App extends Component {
   componentWillMount(){
     return connectToMeetings();
   }
-  createMeeting(dispatch, e){
+  createMeeting(e){
     e.preventDefault();
-    dispatch(createMeeting(this.state.newMeetingName));
-    // return browserHistory.push(`/meeting/${this.state.newMeetingName}`);
+    return browserHistory.push(`/meeting/${this.state.newMeetingName}`);
   }
   updateMeetingName(e){
     const newMeetingName = e.target.value;

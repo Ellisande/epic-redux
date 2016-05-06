@@ -15,7 +15,7 @@ const postTopic = (topic, userName) => {
 
 const changePhase = (nextPhase = 'submit') => {
   return {
-    type: 'CHANGE_PHASE',
+    type: `SET_PHASE_${nextPhase.toUpperCase()}`,
     phase: nextPhase
   };
 };
@@ -27,26 +27,25 @@ const removeTopic = topicId => {
   };
 };
 
-const upVote = (topic, user) => {
+const upVote = (topic, userId) => {
   return {
     type: 'UP_VOTE',
     topic,
-    user
+    userId
   };
 };
 
-const downVote = (topic, user) => {
+const downVote = (topic, userId) => {
   return {
     type: 'DOWN_VOTE',
     topic,
-    user
+    userId
   };
 };
 
-const setCurrentTopic = (topic) => {
+const nextTopic = () => {
   return {
-    type: 'SET_CURRENT_TOPIC',
-    topic
+    type: 'NEXT_TOPIC'
   };
 };
 
@@ -86,4 +85,18 @@ const joinMeeting = (meeting) => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic, setHost, setLocked, setNewHosts, joinMeeting};
+const addParticipant = participant => {
+  return {
+    type: 'ADD_PARTICIPANT',
+    participant
+  };
+};
+
+const removeParticipant = participantId => {
+  return {
+    type: 'REMOVE_PARTICIPANT',
+    participantId
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant};

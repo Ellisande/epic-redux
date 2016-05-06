@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {changePhase} from '../actions';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
+import {dispatch} from '../services/socket';
 
 class Complete extends Component {
   constructor(props){
@@ -10,7 +11,7 @@ class Complete extends Component {
   }
   goBack(e){
     e.preventDefault();
-    return this.props.dispatch(changePhase('discuss'));
+    return dispatch(changePhase('discuss'));
   }
   render(){
     const title = (<h2>The End</h2>);
