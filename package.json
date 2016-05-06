@@ -11,7 +11,7 @@
     "redux": "^3.3.1",
     "redux-devtools": "^3.2.0",
     "validate.js": "^0.9.0"
-  },
+  }, 
   "description": "Simple program for noting and voting.",
   "devDependencies": {
     "babel-cli": "^6.5.1",
