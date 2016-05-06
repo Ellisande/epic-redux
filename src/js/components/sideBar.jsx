@@ -17,7 +17,6 @@ class SideBar extends Component {
           {this.props.hosts.map(mapParticipants)}
         </BrightBox>
         <BrightBox title='Participants' type='secondary'>
-          <div className='participant'>The Mighty</div>
           {this.props.participants.map(mapParticipants)}
         </BrightBox>
       </div>

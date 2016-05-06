@@ -8,10 +8,7 @@ const replace = (array, oldItem, newItem) => {
   return [...array.slice(0, itemIndex), newItem, ...array.slice(itemIndex + 1, array.length)];
 };
 
-const meetings = (existingMeetings = [{
-  name: 'abcde',
-  participants: 0
-}], action) => {
+const meetings = (existingMeetings = [], action) => {
   if(action.type === 'CREATE_MEETING'){
     return [...existingMeetings, {name: action.name, participants: 0}];
   };
