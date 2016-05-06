@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
 import {setLocked, setNewHosts} from '../actions';
+import {findUser} from '../store/utils';
+import _ from 'lodash';
 
 class Lock extends Component {
   constructor(props){
@@ -24,14 +26,14 @@ class Lock extends Component {
        <div className='lock-toggle'>
          <label>Lock Room</label>
          <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.locked}/>
+           <input type='checkbox' className='toggle' checked={this.props.locked} readOnly/>
            <label onClick={this.toggleLocked} />
          </div>
        </div>
        <div className='new-host-toggle'>
          <label>Allow Hosts</label>
          <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.newHosts}/>
+           <input type='checkbox' className='toggle' checked={this.props.newHosts} readOnly/>
            <label onClick={this.toggleNewHosts} />
          </div>
        </div>
@@ -39,4 +41,12 @@ class Lock extends Component {
   }
 }
 
-export default connect(i=>i)(Lock);
+const selector = state => {
+  const user = findUser(state);
+  return {
+    host: _.get(user, 'host', false),
+    newHosts: state.newHosts,
+    locked: state.locked
+  };
+};
+export default connect(selector)(Lock);

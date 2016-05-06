@@ -1,7 +1,9 @@
 {
   "author": "Justin Dragos <justin.dragos@gmail.com>",
   "dependencies": {
+    "engine.io": "^1.6.9",
     "lodash": "^4.10.0",
+    "primus": "^5.2.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "react-router": "^2.0.1",

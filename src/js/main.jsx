@@ -27,7 +27,7 @@ function render(){
           <Route path='when' component={When}/>
           <Route path='safety' component={Safety} />
         </Route>
-        <Route path='/meeting/:name' component={Meeting}/>
+        <Route path='/meeting/:meetingName' component={Meeting}/>
       </Router>
     </Provider>,
       content

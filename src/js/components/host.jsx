@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {setHost} from '../actions';
 import BrightBox from './brightBox';
+import _ from 'lodash';
+import {dispatch} from '../services/socket';
+import {findUser} from '../store/utils';
 
 class Host extends Component {
   constructor(props){
@@ -9,7 +12,7 @@ class Host extends Component {
     this.toggleHost = this.toggleHost.bind(this);
   }
   toggleHost(){
-    this.props.dispatch(setHost(!this.props.host));
+    dispatch(setHost(this.props.userId, !this.props.host));
   }
   render(){
     const hostStyle = this.props.host ? {} : {display: 'none'};
@@ -31,9 +34,12 @@ class Host extends Component {
 }
 
 const selector = state => {
+  const user = findUser(state);
   return {
-    host: state.host,
-    newHosts: state.newHosts
+    host: _.get(user, 'host', false),
+    userId: state.userId,
+    newHosts: state.newHosts,
+    user
   };
 };
 export default connect(selector)(Host);
