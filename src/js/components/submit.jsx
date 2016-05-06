@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {postTopic} from '../actions';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
+import {findUser} from '../store/utils';
 
 class Submit extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Submit extends Component {
   post(e) {
     e.preventDefault();
     if (!_.isEmpty(this.state.newTopic)) {
-      dispatch(postTopic(this.state.newTopic, 'Mayor McCheese'));
+      dispatch(postTopic(this.state.newTopic, this.props.user.name));
       this.setState({newTopic: undefined});
     }
   }
@@ -41,4 +42,10 @@ class Submit extends Component {
   }
 }
 
-export default connect(i => i)(Submit);
+const selector = state => {
+  return {
+    topics: state.topics,
+    user: findUser(state)
+  };
+};
+export default connect(selector)(Submit);

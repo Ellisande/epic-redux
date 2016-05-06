@@ -50,10 +50,11 @@ const setCurrentTopic = (topic) => {
   };
 };
 
-const setHost = (isHost) => {
+const setHost = (participantId, isHost) => {
   return {
     type: 'SET_HOST',
-    isHost
+    isHost,
+    id: participantId
   };
 };
 
@@ -71,4 +72,18 @@ const setNewHosts = newHosts => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic, setHost, setLocked, setNewHosts};
+const joinMeeting = (meeting) => {
+  return {
+    type: 'JOIN_MEETING',
+    user: meeting.user,
+    participants: meeting.participants,
+    topics: meeting.topics,
+    phase: meeting.phase,
+    roomName: meeting.roomName,
+    timer: meeting.timer,
+    locked: meeting.locked,
+    newHosts: meeting.newHosts
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, setCurrentTopic, setHost, setLocked, setNewHosts, joinMeeting};

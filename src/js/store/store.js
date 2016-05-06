@@ -15,14 +15,30 @@ const meetings = (existingMeetings = [{
   if(action.type === 'CREATE_MEETING'){
     return [...existingMeetings, {name: action.name, participants: 0}];
   };
+  if(action.type === 'SET_MEETINGS'){
+    return action.meetings;
+  }
   return existingMeetings;
 };
 
-const participants = () => {
-  return [{name: 'Mayor McCheese', host: true}];
+const participants = (existingParticipants = [], action) => {
+  if(action.type === 'JOIN_MEETING'){
+    return action.participants;
+  }
+  if(action.type === 'SET_HOST'){
+    const participantToUpdate = existingParticipants.find(participant => participant.id = action.id);
+    const modifiedParticipant = Object.assign({}, participantToUpdate, {
+      host: action.isHost
+    });
+    return replace(existingParticipants, participantToUpdate, modifiedParticipant);
+  }
+  return existingParticipants;
 };
 
 const topics = (existingTopics = [], action) => {
+  if(action.type === 'JOIN_MEETING'){
+    return action.topics;
+  }
   if(action.type === 'POST_TOPIC'){
     const {title, by} = action;
     const votes = [];
@@ -58,14 +74,10 @@ const topics = (existingTopics = [], action) => {
   return existingTopics;
 };
 
-const host = (isHost = false, action) => {
-  if(action.type === 'SET_HOST'){
-    return action.isHost;
-  }
-  return isHost;
-};
-
 const phase = (currentPhase = 'submit', action) => {
+  if(action.type === 'JOIN_MEETING'){
+    return action.phase;
+  }
   if(action.type === 'CHANGE_PHASE'){
     return action.phase;
   }
@@ -73,6 +85,9 @@ const phase = (currentPhase = 'submit', action) => {
 };
 
 const locked = (isLocked = false, action) => {
+  if(action.type === 'JOIN_MEETING'){
+    return action.locked;
+  }
   if(action.type === 'SET_LOCKED'){
     return action.locked;
   }
@@ -80,22 +95,31 @@ const locked = (isLocked = false, action) => {
 };
 
 const newHosts = (allowNewHosts = true, action) => {
+  if(action.type === 'JOIN_MEETING'){
+    return action.newHosts;
+  }
   if(action.type === 'SET_NEW_HOSTS'){
     return action.newHosts;
   }
   return allowNewHosts;
 };
 
+const userReducer = (userId = '', action) => {
+  if(action.type === 'JOIN_MEETING'){
+    return action.userId || userId;
+  }
+  return userId;
+};
+
 let reducers = combineReducers({
   meetings,
   participants,
-  user: (user = {name: 'Justin'}) => user,
+  userId: userReducer,
   phase,
   roomName: (roomName = 'default') => roomName,
   timer: (timer = 350000) => timer,
   phaseVotes: (phaseVotes = []) => phaseVotes,
   topics,
-  host,
   locked,
   newHosts
 });

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createMeeting} from '../actions';
 import { browserHistory, Link} from 'react-router';
+import {connectToMeetings} from '../services/socket';
 
 class App extends Component {
   constructor(props){
@@ -11,6 +12,9 @@ class App extends Component {
     this.state = {
       newMeetingName: undefined
     };
+  }
+  componentWillMount(){
+    return connectToMeetings();
   }
   createMeeting(dispatch, e){
     e.preventDefault();
