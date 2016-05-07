@@ -55,7 +55,8 @@ $primary-transparent: rgba(58, 72, 204, 0);
 $primary-half-transparent: rgba(58, 72, 204, 0.5);
 $light-primary: rgb(130, 139, 228);
 $off-white-primary: rgb(160, 169, 255);
-$light-secondary-color: rgba(170, 124, 227, 0.45);
+$light-secondary-color: rgb(170, 124, 227);
+$light-secondary-tint: rgba(170, 124, 227, 0.45);
 $secondary-color: rgb(94, 15, 193);
 $secondary-transparent: rgba(94, 15, 193, 0);
 $off-white-secondary: rgb(230, 184, 255);
@@ -88,8 +89,8 @@ body a {
   overflow: hidden;
   background:
     linear-gradient(
-      $light-secondary-color,
-      $light-secondary-color
+      $light-secondary-tint,
+      $light-secondary-tint
     ),
     url('/img/city-scape.jpg');
   background-size: cover;
@@ -122,7 +123,7 @@ body a {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  background: linear-gradient(180deg, $light-secondary-color 1%, $primary-color), $primary-color;;
+  background: linear-gradient(180deg, $light-secondary-tint 1%, $primary-color), $primary-color;;
   color: $light-primary;
   height: $box-size;
 }
@@ -329,6 +330,19 @@ input.bubble-text:focus {
 
 .side-bar > * + * {
   margin-top: 15px;
+}
+
+.user.participant {
+  display: flex;
+  flex-direction: column;;
+  color: $secondary-color;
+}
+
+.user.participant > div:first-child {
+  color: $light-secondary-color;
+  font-variant: small-caps;
+  font-weight: bold;
+  text-align: center;
 }
 
 .return {
