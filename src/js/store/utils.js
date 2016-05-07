@@ -7,4 +7,9 @@ const isUserHost = ({participants, userId}) => {
   return user ? user.host : false;
 };
 
-export {findUser, isUserHost};
+const replace = (array, oldItem, newItem) => {
+  const itemIndex = array.indexOf(oldItem);
+  return [...array.slice(0, itemIndex), newItem, ...array.slice(itemIndex + 1, array.length)];
+};
+
+export {findUser, isUserHost, replace};
