@@ -15,7 +15,7 @@ class Timer extends Component {
     secondsString = secondsString.length === 1 ? `0${secondsString}` : secondsString;
     const controlStyle = this.props.host ? {} : {display: 'none'};
     return (
-      <BrightBox title='Timer' type='tertiary'>
+      <BrightBox title='Timer' type='tertiary' style={{display: 'none'}}>
         <div className='aaa'>
           <span>{minuteString}:{secondsString}</span>
           <div className='play-button fa fa-play' style={controlStyle}/>
