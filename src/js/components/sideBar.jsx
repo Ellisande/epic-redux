@@ -18,11 +18,11 @@ class SideBar extends Component {
         <div className='return'>
           <Link to='/'>Home</Link>
         </div>
-        <BrightBox title='Hosts' type='secondary'>
+        <BrightBox title='Hosts' type='secondary' emptyState='No Current Hosts'>
           {this.props.user.host ? userMarkup : undefined}
           {this.props.hosts.map(mapParticipants)}
         </BrightBox>
-        <BrightBox title='Participants' type='secondary'>
+        <BrightBox title='Participants' type='secondary' emptyState='No Regular Participants'>
           {!this.props.user.host ? userMarkup : undefined}
           {this.props.participants.map(mapParticipants)}
         </BrightBox>
