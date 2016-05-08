@@ -21,7 +21,8 @@ class Lock extends Component {
     dispatch(setNewHosts(!this.props.newHosts));
   }
   render(){
-    const boxStyle = this.props.host ? {} : {display: 'none'};
+    // const boxStyle = this.props.host ? {} : {display: 'none'};
+    const boxStyle = {display: 'none'};
     return (
       <BrightBox title='Room' type='tertiary' style={boxStyle}>
        <div className='lock-toggle'>
