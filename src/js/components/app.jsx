@@ -47,7 +47,7 @@ class App extends Component {
             <form onSubmit={this.createMeeting}>
               <input
                 className='bubble-text'
-                placeholder='Bold Planning'
+                placeholder='Meeting Name'
                 autoFocus
                 onChange={this.updateMeetingName}
                 onFocus={this.goToMeetings}/>
