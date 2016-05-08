@@ -11,6 +11,8 @@ var cssDestination = 'assets/css';
 var imgDestination = 'assets/img';
 var jsDestination = 'assets/js';
 var fontDestination = 'assets/fonts';
+const serverDestination = 'dist/server';
+const sharedDestination = 'dist/src';
 
 // Serve up app.
 gulp.task('serve', function() {
@@ -27,30 +29,22 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('server', ['compile-server', 'compile-shared']);
-
-gulp.task('compile-server', ['clean'], () => {
+gulp.task('compile-shared', ['clean-shared'], () => {
   return gulp.src('src/js/**/*').pipe(babel()).pipe(gulp.dest('dist/src/js'));
 });
 
-gulp.task('compile-shared', ['clean'], () => {
+gulp.task('compile-server', ['clean-server'], () => {
   return gulp.src('server/**/*.js').pipe(babel()).pipe(gulp.dest('dist/server'));
 });
 
-// Wipe out the JavaScript, Stylesheet and Web Font destinations.
-gulp.task('clean', function(cb) {
-  del([
-    jsDestination + '/**/*',
-    cssDestination + '/**/*',
-    imgDestination + '/**/*',
-    fontDestination + '/**/*',
-    'dist/*'
-  ]).then(function (/*paths*/) {
-    cb();
-  });
-});
+gulp.task('clean-css', () => del(`${cssDestination}/**/*`));
+gulp.task('clean-js', () => del(`${jsDestination}/**/*`));
+gulp.task('clean-img', () => del(`${imgDestination}/**/*`));
+gulp.task('clean-fonts', () => del(`${fontDestination}/**/*`));
+gulp.task('clean-server', () => del(`${serverDestination}/**/*`));
+gulp.task('clean-shared', () => del(`${sharedDestination}/**/*`));
 
-var tasks = ['clean', 'css', 'img', 'wpreact', 'fonts', 'compile-shared', 'compile-server'];
+var tasks = ['css', 'img', 'wpreact', 'fonts', 'compile-shared', 'compile-server'];
 
 // Watch and rebuild JavaScript and Stylesheets.
 gulp.task('dist', tasks);
@@ -64,7 +58,7 @@ gulp.task('default', tasks.concat('serve'), function() {
 });
 
 // Build Stylesheets.
-gulp.task('css', function() {
+gulp.task('css', ['clean-css'], function() {
   return gulp.src([
     'node_modules/font-awesome/css/font-awesome.min.css',
     'src/css/app.scss'
@@ -81,7 +75,7 @@ gulp.task('css', function() {
 });
 
 // Copy images
-gulp.task('img', function() {
+gulp.task('img', ['clean-img'], function() {
   return gulp.src([
     'src/img/**'
   ])
@@ -89,13 +83,13 @@ gulp.task('img', function() {
 });
 
 // Build fonts.
-gulp.task('fonts', ['clean'], function() {
+gulp.task('fonts', ['clean-fonts'], function() {
   return gulp.src('node_modules/font-awesome/fonts/*')
     .pipe(gulp.dest(fontDestination));
 });
 
 // Build Webpack React files.
-gulp.task('wpreact', ['css'], function() {
+gulp.task('wpreact', ['css', 'clean-js'], function() {
   return gulp.src([])
     .pipe(webpack( require('./webpack.react.js') ))
     .pipe(gulp.dest(jsDestination));

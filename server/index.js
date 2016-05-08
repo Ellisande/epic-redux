@@ -66,6 +66,7 @@ primus.on('connection', function (spark) {
       primus.write(createSetMeetings(rooms));
     } else {
       const currentRoom = rooms[roomName];
+      currentRoom.sparks.forEach(thisSpark => thisSpark.write(addParticipant(participant)));
       currentRoom.sparks = [...currentRoom.sparks, spark];
       currentRoom.store.dispatch(addParticipant(participant));
     }
