@@ -186,6 +186,11 @@ input.bubble-text:focus {
 }
 
 
+.active {
+  color: $off-white-primary;
+  font-weight: bold;
+}
+
 .meeting-list {
   display: flex;
   flex-direction: row;
