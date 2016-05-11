@@ -10,6 +10,7 @@ import lockedReducer from './reducers/locked';
 import newHostsReducer from './reducers/newHosts';
 import userReducer from './reducers/user';
 import topicsReducer from './reducers/topics';
+import roomNameReducer from './reducers/roomName';
 
 
 let reducers = combineReducers({
@@ -17,7 +18,7 @@ let reducers = combineReducers({
   participants: participantReducer,
   userId: userReducer,
   phase: phaseReducer,
-  roomName: (roomName = 'default') => roomName,
+  roomName: roomNameReducer,
   timer: (timer = 350000) => timer,
   phaseVotes: (phaseVotes = []) => phaseVotes,
   topics: topicsReducer,
