@@ -339,6 +339,7 @@ input.bubble-text:focus {
 .user.participant {
   display: flex;
   flex-direction: column;;
+  align-items: center;
   color: $secondary-color;
 }
 
