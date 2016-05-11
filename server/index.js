@@ -8,6 +8,7 @@ const joinMeeting = require('../src/js/actions').joinMeeting;
 const addParticipant = require('../src/js/actions').addParticipant;
 const removeParticipant = require('../src/js/actions').removeParticipant;
 const _ = require('lodash');
+const determineName = require('./utils');
 
 
 app.use('/', express.static('assets'));
@@ -45,14 +46,9 @@ primus.on('connection', function (spark) {
   }
   if(spark.query.room){
     const roomName = spark.query.room;
-    const participant = {
-      name: spark.id,
-      id: spark.id,
-      host: false
-    };
     if(!rooms[roomName]){
       const room = {
-        participants: [participant],
+        participants: [],
         topics: [],
         phase: 'submit',
         roomName,
@@ -60,16 +56,23 @@ primus.on('connection', function (spark) {
         locked: false,
         newHosts: true,
       };
-      participant.host = true;
-      rooms[roomName] = {sparks: [spark], store: createNewStore(room)};
+      rooms[roomName] = {sparks: [], store: createNewStore()};
       rooms[roomName].store.dispatch(joinMeeting(room));
       primus.write(createSetMeetings(rooms));
-    } else {
-      const currentRoom = rooms[roomName];
-      currentRoom.sparks.forEach(thisSpark => thisSpark.write(addParticipant(participant)));
-      currentRoom.sparks = [...currentRoom.sparks, spark];
-      currentRoom.store.dispatch(addParticipant(participant));
     }
+    const currentRoom = rooms[roomName];
+
+    const remainingNames = currentRoom.store.getState().participants.map(p => p.name);
+
+    const participant = {
+      name: determineName(remainingNames, spark.id),
+      id: spark.id,
+      host: false
+    };
+
+    currentRoom.sparks.forEach(thisSpark => thisSpark.write(addParticipant(participant)));
+    currentRoom.sparks = [...currentRoom.sparks, spark];
+    currentRoom.store.dispatch(addParticipant(participant));
 
     const currentStore = rooms[roomName].store;
     spark.write(joinMeeting(currentStore.getState()));
