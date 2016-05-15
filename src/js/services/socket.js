@@ -2,6 +2,7 @@ import store from '../store/store.js';
 var meetingsConnection;
 var roomConnection;
 const connectionString = '/primus';
+import {browserHistory} from 'react-router';
 
 
 const dispatch = action => {
@@ -19,6 +20,9 @@ const attachEvents = connection => {
           action.userId = id;
         });
       }
+      if(action.type === 'DELETE_MEETING'){
+        browserHistory.push('/');
+      }
       return store.dispatch(action);
     }
   });
@@ -26,17 +30,17 @@ const attachEvents = connection => {
 
 const connectToRoom = roomName => {
   const safeRoomName = decodeURI(roomName);
-  if (roomConnection) {
-    roomConnection.destroy();
-  }
   roomConnection = new Primus(`${connectionString}?room=${safeRoomName}`);
   attachEvents(roomConnection);
 };
 
-const connectToMeetings = () => {
-  if(meetingsConnection){
-    meetingsConnection.destroy();
+const disconnectFromRoom = () => {
+  if(roomConnection){
+    roomConnection.destroy();
   }
+};
+
+const connectToMeetings = () => {
   meetingsConnection = Primus.connect(`${connectionString}?meetings=true`);
   attachEvents(meetingsConnection);
 };
@@ -51,5 +55,6 @@ export {
   connectToRoom,
   connectToMeetings,
   disconnectFromMeetings,
-  dispatch
+  dispatch,
+  disconnectFromRoom
 };
