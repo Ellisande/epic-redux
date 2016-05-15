@@ -3,6 +3,7 @@ var meetingsConnection;
 var roomConnection;
 const connectionString = '/primus';
 import {browserHistory} from 'react-router';
+import {deleteMeeting} from '../actions';
 
 
 const dispatch = action => {
@@ -35,6 +36,7 @@ const connectToRoom = roomName => {
 };
 
 const disconnectFromRoom = () => {
+  store.dispatch(deleteMeeting());
   if(roomConnection){
     roomConnection.destroy();
   }
