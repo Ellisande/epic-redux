@@ -74,5 +74,5 @@
     "test": "npm run lint",
     "start": "gulp dist && node dist/server/index.js"
   },
-  "version": "0.0.0"
+  "version": "1.0.0"
 }
