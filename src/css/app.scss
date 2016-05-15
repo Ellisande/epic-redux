@@ -294,9 +294,29 @@ input.bubble-text:focus {
   transition: all 0.1s ease-in-out;
 }
 
-.just-kidding {
-  display: flex;
-  flex-direction: column;
+.complete-actions {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 200px;
+};
+
+.complete-actions > * {
+  flex: 1;
+  max-width: 30%;
+}
+
+.go-back {
+  background-color: $primary-color;
+  border-radius: 20px;
+  box-shadow: 2px 2px 1 $off-white-primary;
+  color: white;
+  font-size: 4rem;
+}
+
+.go-back > * + * {
+  margin-left: 5px;
 }
 
 .oops {
@@ -350,14 +370,38 @@ input.bubble-text:focus {
   text-align: center;
 }
 
-.return {
+.button {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   border-radius: $box-radius;
+  padding: 10px 0 10px 0;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.button > * + * {
+  margin-left: 5px;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button.secondary {
   background-color: $secondary-color;
   color: $off-white-secondary;
-  padding: 10px 0 10px 0;
+}
+
+.button.primary {
+  background-color: $primary-color;
+  color: $off-white-primary;
+}
+
+.button.tertiary {
+  background-color: $tertiary-color;
+  color: $off-white-tertiary;
 }
 
 .side-header {
