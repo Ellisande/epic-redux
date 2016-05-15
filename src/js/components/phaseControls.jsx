@@ -28,11 +28,12 @@ class PhaseControls extends Component {
   render(){
     const showNext = this.props.phase !== 'complete' && this.props.host;
     const nextStyle = showNext ? {} : {display: 'none'};
+    const text = this.props.lockedOut ? 'Locked' : this.props.phase;
     return (
       <div className='phase-controls'>
         <BrightBox title='Phase' type='tertiary'>
           <div className='phase-current'>
-             {this.props.phase}
+             {text}
           </div>
           <div className='next-phase' style={nextStyle}>
             <a href='#' onClick={this.nextPhase}>Next ></a>
@@ -48,7 +49,8 @@ class PhaseControls extends Component {
 const selector = state => {
   return {
     host: isUserHost(state),
-    phase: state.phase
+    phase: state.phase,
+    lockedOut: state.lockedOut
   };
 };
 export default connect(selector)(PhaseControls);

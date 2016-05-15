@@ -5,7 +5,7 @@ const isEmpty = children => {
   if(_.isEmpty(children)){
     return true;
   }
-  return children.every && !children.every(_.isEmpty);
+  return children.every && children.every(_.isEmpty);
 };
 
 class BrightBox extends Component {
@@ -26,7 +26,7 @@ class BrightBox extends Component {
         <div className={`bright-box-title ${this.type}`}>{this.props.title}</div>
         {showBubble}
         <div className={`bright-box-content ${this.type}`}>
-          {isEmpty(this.props.children) ? this.props.children : emptyState}
+          {!isEmpty(this.props.children) ? this.props.children : emptyState}
         </div>
       </div>);
   }

@@ -17,8 +17,10 @@ class Host extends Component {
   render(){
     const hostStyle = this.props.host ? {} : {display: 'none'};
     const allowHostStyle = this.props.newHosts || this.props.host ? {} : {display: 'none'};
+    const hideWhenLocked = this.props.lockedOut ? {display: 'none'} : {};
+    const show = Object.assign({}, allowHostStyle, hideWhenLocked);
     return (
-      <BrightBox title='Host' type='tertiary' style={allowHostStyle}>
+      <BrightBox title='Host' type='tertiary' style={show}>
        <div className='host-toggle'>
          <label>Host</label>
          <div className='toggle-wrapper'>
@@ -39,7 +41,8 @@ const selector = state => {
     host: _.get(user, 'host', false),
     userId: state.userId,
     newHosts: state.newHosts,
-    user
+    user,
+    lockedOut: state.lockedOut
   };
 };
 export default connect(selector)(Host);

@@ -3,7 +3,7 @@ import {createServer} from 'http';
 const app = express();
 const server = createServer(app);
 import PrimusServer from 'primus';
-import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting} from '../src/js/actions';
+import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut} from '../src/js/actions';
 import _ from 'lodash';
 import determineName from './utils';
 import Room from './room';
@@ -55,6 +55,9 @@ primus.on('connection', function (spark) {
       meetingsRoom.dispatchAndSend(createMeeting(roomName));
     }
     const currentRoom = rooms[roomName];
+    if(currentRoom.store.getState().locked){
+      return spark.write(lockedOut(true));
+    }
 
     const remainingNames = currentRoom.store.getState().participants.map(p => p.name);
 

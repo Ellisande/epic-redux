@@ -7,6 +7,7 @@ import Merge from './merge';
 import Voting from './voting';
 import Discuss from './discuss';
 import Complete from './complete';
+import Knocking from './knocking';
 import {connectToRoom, disconnectFromRoom} from '../services/socket';
 
 class Meeting extends Component {
@@ -24,15 +25,23 @@ class Meeting extends Component {
       discuss: (<Discuss />),
       complete: (<Complete />)
     };
+    const lockedOut = this.props.lockedOut ? (<Knocking />) : undefined;
     const currentPhase = phaseMap[this.props.phase];
     return (
       <div className='meeting'>
         <SideBar participants={this.props.participants} />
-        {currentPhase}
+        {lockedOut || currentPhase}
         <PhaseControls />
       </div>
     );
   }
 }
 
-export default connect(i=>i)(Meeting);
+const selector = state => {
+  return {
+    lockedOut: state.lockedOut,
+    phase: state.phase,
+    participants: state.participants
+  };
+};
+export default connect(selector)(Meeting);
