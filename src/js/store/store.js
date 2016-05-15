@@ -25,7 +25,8 @@ let reducers = combineReducers({
   topics: topicsReducer,
   locked: lockedReducer,
   newHosts: newHostsReducer,
-  lockedOut: lockedOutReducer
+  lockedOut: lockedOutReducer,
+  allowKnocking: (allowKnocking = true) => allowKnocking
 });
 
 let store = createStore(reducers);
