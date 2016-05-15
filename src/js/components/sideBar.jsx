@@ -15,16 +15,17 @@ class SideBar extends Component {
     const mapParticipants = participant => (
       <div className='participant' key={participant.name}>{participant.name}</div>
     );
+    const show = !this.props.lockedOut ? undefined : {display: 'none'};
     return (
       <div className='side-bar'>
         <BrightButton type='secondary' icon='fa-home' onClick={goHome}>
           Home
         </BrightButton>
-        <BrightBox title='Hosts' type='secondary' emptyState='No Current Hosts'>
+        <BrightBox title='Hosts' type='secondary' emptyState='No Current Hosts' style={show}>
           {this.props.user.host ? userMarkup : undefined}
           {this.props.hosts.map(mapParticipants)}
         </BrightBox>
-        <BrightBox title='Participants' type='secondary' emptyState='No Regular Participants'>
+        <BrightBox title='Participants' type='secondary' emptyState='No Regular Participants' style={show}>
           {!this.props.user.host ? userMarkup : undefined}
           {this.props.participants.map(mapParticipants)}
         </BrightBox>
@@ -41,7 +42,8 @@ const selector = state => {
   return {
     hosts,
     participants,
-    user
+    user,
+    lockedOut: state.lockedOut
   };
 };
 export default connect(selector)(SideBar);

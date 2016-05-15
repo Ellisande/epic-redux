@@ -21,8 +21,7 @@ class Lock extends Component {
     dispatch(setNewHosts(!this.props.newHosts));
   }
   render(){
-    // const boxStyle = this.props.host ? {} : {display: 'none'};
-    const boxStyle = {display: 'none'};
+    const boxStyle = this.props.host ? {} : {display: 'none'};
     return (
       <BrightBox title='Room' type='tertiary' style={boxStyle}>
        <div className='lock-toggle'>
@@ -32,7 +31,7 @@ class Lock extends Component {
            <label onClick={this.toggleLocked} />
          </div>
        </div>
-       <div className='new-host-toggle'>
+       <div className='new-host-toggle' style={{display: 'none'}}>
          <label>Allow Hosts</label>
          <div className='toggle-wrapper'>
            <input type='checkbox' className='toggle' checked={this.props.newHosts} readOnly/>
