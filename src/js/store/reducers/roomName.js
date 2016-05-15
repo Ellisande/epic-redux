@@ -5,7 +5,9 @@ const joinMeeting = new ActionHandler('JOIN_MEETING', (roomName, action) => {
   return action.roomName;
 });
 
-const actions = [joinMeeting, deleteMeeting];
+const setRoomName = new ActionHandler('SET_ROOM_NAME', (roomName, action) => action.roomName);
+
+const actions = [joinMeeting, deleteMeeting, setRoomName];
 
 const RoomNameReducer = (roomName = initialValue, action) => {
   const newRoomName = handleActions(actions, roomName, action);

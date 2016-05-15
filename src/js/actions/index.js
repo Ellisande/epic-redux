@@ -154,6 +154,13 @@ const disableKnocking = () => {
   };
 };
 
+const setRoomName = roomName => {
+  return {
+    type: 'SET_ROOM_NAME',
+    roomName
+  };
+};
+
 export {
   allowKnocking,
   disableKnocking,
@@ -177,4 +184,6 @@ export {
   shrinkMeeting,
   growMeeting,
   lockedOut,
-  approveKnocker};
+  approveKnocker,
+  setRoomName
+};
