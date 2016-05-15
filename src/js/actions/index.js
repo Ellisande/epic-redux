@@ -99,4 +99,25 @@ const removeParticipant = participantId => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant};
+const deleteMeeting = (meetingName) => {
+  return {
+    type: 'DELETE_MEETING',
+    name: meetingName
+  };
+};
+
+const shrinkMeeting = (meetingName) => {
+  return {
+    type: 'SHRINK_MEETING',
+    name: meetingName
+  };
+};
+
+const growMeeting = meetingName => {
+  return {
+    type: 'GROW_MEETING',
+    name: meetingName
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant, deleteMeeting, shrinkMeeting, growMeeting};

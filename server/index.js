@@ -1,15 +1,12 @@
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var PrimusServer = require('primus');
-// const store = require('../src/js/store/store').default;
-const createNewStore = require('../src/js/store/store').createStore;
-const joinMeeting = require('../src/js/actions').joinMeeting;
-const addParticipant = require('../src/js/actions').addParticipant;
-const removeParticipant = require('../src/js/actions').removeParticipant;
-const _ = require('lodash');
-const determineName = require('./utils');
-
+import express from 'express';
+import {createServer} from 'http';
+const app = express();
+const server = createServer(app);
+import PrimusServer from 'primus';
+import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting} from '../src/js/actions';
+import _ from 'lodash';
+import determineName from './utils';
+import Room from './room';
 
 app.use('/', express.static('assets'));
 
@@ -17,30 +14,27 @@ var primus = new PrimusServer(server, {
   transformer: 'engine.io',
 });
 
-const rooms = {};
+let meetingsRoom = new Room();
+let rooms = {};
 
 primus.on('disconnection', function(spark){
-  const roomForUser = _.find(rooms, room => room.store.getState().participants.find(p => p.id === spark.id));
-  if(roomForUser){
-    roomForUser.store.dispatch(removeParticipant(spark.id));
-    roomForUser.sparks.forEach(thisSpark => thisSpark.write(removeParticipant(spark.id)));
+  if(spark.query.room) {
+    const roomForUser = _.find(rooms, room => room.store.getState().participants.find(p => p.id === spark.id));
+    if(roomForUser){
+      roomForUser.dispatchAndSend(removeParticipant(spark.id));
+      roomForUser.removeSpark(spark);
+      meetingsRoom.dispatchAndSend(shrinkMeeting(roomForUser.store.getState().roomName));
+    }
+  }
+  if(spark.query.meetings){
+    meetingsRoom.removeSpark(spark);
   }
 });
 
-const createSetMeetings = roomsToMap => {
-  const roomMap = _.map(roomsToMap, room => {
-    const roomState = room.store.getState();
-    return {
-      name: roomState.roomName,
-      participants: roomState.participants.length
-    };
-  });
-  return {type: 'SET_MEETINGS', meetings: roomMap};
-};
-
 primus.on('connection', function (spark) {
   if(spark.query.meetings){
-    const setMeetings = createSetMeetings(rooms);
+    meetingsRoom.addSpark(spark);
+    const setMeetings = {type: 'SET_MEETINGS', meetings: meetingsRoom.store.getState().meetings};
     spark.write(setMeetings);
     return;
   }
@@ -56,9 +50,9 @@ primus.on('connection', function (spark) {
         locked: false,
         newHosts: true,
       };
-      rooms[roomName] = {sparks: [], store: createNewStore()};
+      rooms[roomName] = new Room();
       rooms[roomName].store.dispatch(joinMeeting(room));
-      primus.write(createSetMeetings(rooms));
+      meetingsRoom.dispatchAndSend(createMeeting(roomName));
     }
     const currentRoom = rooms[roomName];
 
@@ -70,21 +64,21 @@ primus.on('connection', function (spark) {
       host: false
     };
 
-    currentRoom.sparks.forEach(thisSpark => thisSpark.write(addParticipant(participant)));
-    currentRoom.sparks = [...currentRoom.sparks, spark];
-    currentRoom.store.dispatch(addParticipant(participant));
+    meetingsRoom.dispatchAndSend(growMeeting(roomName));
+    currentRoom.addSpark(spark);
+    currentRoom.dispatchAndSend(addParticipant(participant));
 
-    const currentStore = rooms[roomName].store;
+    const currentStore = currentRoom.store;
     spark.write(joinMeeting(currentStore.getState()));
-    // Join meeting
-    // spark.write('JOIN_MEETING')
     spark.on('data', action => {
-      currentStore.dispatch(action);
-      rooms[roomName].sparks.forEach(thisSpark => thisSpark.write(action));
+      currentRoom.dispatchAndSend(action);
+      if(action.type === 'DELETE_MEETING'){
+        delete rooms[roomName];
+        meetingsRoom.dispatchAndSend(deleteMeeting(roomName));
+      }
     });
   }
 });
-
 
 app.get(/^(?!primus).+/, (req, res) => res.sendFile(`${process.cwd()}/assets/index.html`));
 

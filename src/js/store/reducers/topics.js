@@ -27,6 +27,9 @@ const downVote = new ActionHandler('DOWN_VOTE', (topics, action) => {
 });
 
 const discussPhase = new ActionHandler('SET_PHASE_DISCUSS', topics => {
+  if(topics.length === 0){
+    return topics;
+  }
   const oldTopic = topics.find(topic => topic.current);
   let newTopics = [...topics];
   newTopics.sort( (l, r) => r.votes.length - l.votes.length);

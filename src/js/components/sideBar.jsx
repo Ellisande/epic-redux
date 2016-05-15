@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {browserHistory} from 'react-router';
 import BrightBox from './brightBox';
+import BrightButton from './brightButton';
 import {connect} from 'react-redux';
 import {findUser} from '../store/utils';
 
 class SideBar extends Component {
   render() {
+    const goHome = () => browserHistory.push('/');
     const userMarkup = (<div className='participant user'>
       <div className='you-are'>You are:</div>
       <div>{this.props.user.name}</div>
@@ -15,9 +17,9 @@ class SideBar extends Component {
     );
     return (
       <div className='side-bar'>
-        <div className='return'>
-          <Link to='/'>Home</Link>
-        </div>
+        <BrightButton type='secondary' icon='fa-home' onClick={goHome}>
+          Home
+        </BrightButton>
         <BrightBox title='Hosts' type='secondary' emptyState='No Current Hosts'>
           {this.props.user.host ? userMarkup : undefined}
           {this.props.hosts.map(mapParticipants)}

@@ -44,7 +44,7 @@ class Voting extends Component {
 const selector = state => {
   const me = state.userId;
   const allVotes = _.map(state.topics, 'votes');
-  const myVotes = allVotes.reduce((accum, votes) => [...accum, ...votes]).filter(voter => voter === me);
+  const myVotes = allVotes.reduce((accum, votes) => [...accum, ...votes], []).filter(voter => voter === me);
   const remainingVotes = 3 - (myVotes.length || 0);
   return Object.assign({}, state, {allVotes, myVotes, remainingVotes, me});
 };
