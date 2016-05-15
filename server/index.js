@@ -3,7 +3,7 @@ import {createServer} from 'http';
 const app = express();
 const server = createServer(app);
 import PrimusServer from 'primus';
-import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut} from '../src/js/actions';
+import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking} from '../src/js/actions';
 import _ from 'lodash';
 import determineName from './utils';
 import Room from './room';
@@ -55,7 +55,10 @@ primus.on('connection', function (spark) {
       meetingsRoom.dispatchAndSend(createMeeting(roomName));
     }
     const currentRoom = rooms[roomName];
-    if(currentRoom.store.getState().locked){
+    const currentStore = currentRoom.store;
+    if(currentStore.getState().locked){
+      const allowKnockingAction = currentStore.getState().allowKnocking ? allowKnocking() : disableKnocking();
+      spark.write(allowKnockingAction);
       return spark.write(lockedOut(true));
     }
 
@@ -71,7 +74,6 @@ primus.on('connection', function (spark) {
     currentRoom.addSpark(spark);
     currentRoom.dispatchAndSend(addParticipant(participant));
 
-    const currentStore = currentRoom.store;
     spark.write(joinMeeting(currentStore.getState()));
     spark.on('data', action => {
       currentRoom.dispatchAndSend(action);
