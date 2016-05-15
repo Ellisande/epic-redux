@@ -137,7 +137,7 @@ const addKnocker = (id, message) => {
 
 const approveKnocker = id => {
   return {
-    type: 'ALLOW_KNOCKER',
+    type: 'APPROVE_KNOCKER',
     id
   };
 };
