@@ -1,6 +1,7 @@
 import {ActionHandler, handleActions} from '../actionHandler';
 import {replace} from '../utils';
-
+const initialValue = [];
+const deleteMeeting = new ActionHandler('DELETE_MEETING', () => initialValue);
 const joinMeeting = new ActionHandler('JOIN_MEETING', (topics, action) => action.topics);
 
 const postTopic = new ActionHandler('POST_TOPIC', (topics, action) => {
@@ -55,10 +56,11 @@ const nextTopic = new ActionHandler('NEXT_TOPIC', topics => {
   return replace(newTopics, newCurrentTopic, modifiedCurrentTopic);
 });
 
-const actions = [joinMeeting, postTopic, removeTpoic, upVote, downVote, discussPhase, nextTopic];
+const actions = [joinMeeting, postTopic, removeTpoic, upVote, downVote, discussPhase, nextTopic, deleteMeeting];
 
-const topicReducer = (topics = [], action) => {
+const topicReducer = (topics = initialValue, action) => {
   const newTopics = handleActions(actions, topics, action);
+  topics.forEach(topic => Object.freeze(topic));
   Object.freeze(newTopics);
   return newTopics;
 };
