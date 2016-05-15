@@ -120,4 +120,11 @@ const growMeeting = meetingName => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant, deleteMeeting, shrinkMeeting, growMeeting};
+const lockedOut = (isLockedOut) => {
+  return {
+    type: 'LOCKED_OUT',
+    lockedOut: isLockedOut
+  };
+};
+
+export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant, deleteMeeting, shrinkMeeting, growMeeting, lockedOut};
