@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {changePhase} from '../actions';
+import {changePhase, deleteMeeting} from '../actions';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
 import {dispatch} from '../services/socket';
@@ -13,6 +13,9 @@ class Complete extends Component {
     e.preventDefault();
     return dispatch(changePhase('discuss'));
   }
+  deleteMeeting(){
+    return dispatch(deleteMeeting());
+  }
   render(){
     const title = (<h2>The End</h2>);
     return (
@@ -24,6 +27,12 @@ class Complete extends Component {
           <a href='#' className='oops' onClick={this.goBack}>
             <i className='fa fa-angle-left' />
             <span>Go Back</span>
+          </a>
+        </div>
+        <div className='kill-it'>
+          <a href='#' onClick={this.deleteMeeting}>
+            <i className='fa fa-ban' />
+            <span>Delete Meeting</span>
           </a>
         </div>
       </BrightBox>
