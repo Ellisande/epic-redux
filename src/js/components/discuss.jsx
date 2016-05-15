@@ -13,20 +13,13 @@ class Discuss extends Component {
   }
   nextTopic(e){
     e.preventDefault();
-    const currentTopicIndex = this.props.topics.indexOf(this.props.currentTopic);
-    if(currentTopicIndex === this.props.topics.length - 1){
-      return;
-    }
     return dispatch(nextTopic());
   }
   render(){
     const mapTopics = (topic) => {
-      // const showNext = topic.current ? (<div className='next'><a href='#' onClick={this.nextTopic}>Next</a><i className='fa fa-arrow-down' /></div>) : undefined;
-      const showNext = undefined;
       return (
-        <Topic topic={topic} showVotes={true} key={topic.title}>
-          {showNext}
-        </Topic>);
+        <Topic topic={topic} showVotes={true} key={topic.title} />
+      );
     };
     const title = (
       <div className='discuss-title'>
