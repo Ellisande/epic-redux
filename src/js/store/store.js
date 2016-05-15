@@ -12,6 +12,8 @@ import userReducer from './reducers/user';
 import topicsReducer from './reducers/topics';
 import roomNameReducer from './reducers/roomName';
 import lockedOutReducer from './reducers/lockedOut';
+import allowKnockingReducer from './reducers/allowKnocking';
+import knockersReducer from './reducers/knockers';
 
 
 let reducers = combineReducers({
@@ -26,7 +28,8 @@ let reducers = combineReducers({
   locked: lockedReducer,
   newHosts: newHostsReducer,
   lockedOut: lockedOutReducer,
-  allowKnocking: (allowKnocking = true) => allowKnocking
+  allowKnocking: allowKnockingReducer,
+  knockers: knockersReducer
 });
 
 let store = createStore(reducers);

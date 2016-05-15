@@ -16,7 +16,7 @@ const actions = [addKnocker, rejectKnocker, approveKnocker];
 
 const KnockerReducer = (knockers = [], action) => {
   const newKnockers = handleActions(actions, knockers, action);
-  newKnockers.each(knocker => Object.freeze(knocker));
+  newKnockers.forEach(knocker => Object.freeze(knocker));
   Object.freeze(newKnockers);
   return newKnockers;
 };

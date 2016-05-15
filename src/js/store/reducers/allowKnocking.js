@@ -7,6 +7,7 @@ const actions = [enableKnocking, disableKnocking];
 
 const AllowKnockingReducer = (allowKnocking = true, action) => {
   const newAllowKnocking = handleActions(actions, allowKnocking, action);
+  console.log(newAllowKnocking);
   Object.freeze(newAllowKnocking);
   return newAllowKnocking;
 };
