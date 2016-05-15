@@ -42,12 +42,16 @@ class App extends Component {
       <main className='home'>
         <section className='light-box'>
           <div className='upper-box'>
-            <div className='icon fa fa-sticky-note-o logo'></div>
+            <div className='logo'>
+              <i className='fa fa-sticky-note-o note-logo' />
+              <i className='fa fa-check vote-logo' />
+            </div>
             <div className='title'>Note & Vote</div>
             <div className='description-list'>
               <Link to='/how' className={isActive('how')} onClick={this.setActive.bind(this, 'how')}>How</Link>
               <Link to='/when' className={isActive('when')} onClick={this.setActive.bind(this, 'when')}>When</Link>
               <Link to='/safety' className={isActive('safety')} onClick={this.setActive.bind(this, 'safety')}>Safety</Link>
+              <Link to='/new' className={`${isActive('new')} new`} onClick={this.setActive.bind(this, 'new')}>Lock & Knock</Link>
             </div>
           </div>
           <div className='middle-box'>

@@ -9,6 +9,7 @@ import MeetingList from './components/meetingList';
 import How from './components/how';
 import When from './components/when';
 import Safety from './components/safety';
+import WhatsNew from './components/whatsNew';
 import store from './store/store';
 import {Provider} from 'react-redux';
 injectTap();
@@ -26,6 +27,7 @@ function render(){
           <Route path='how' component={How}/>
           <Route path='when' component={When}/>
           <Route path='safety' component={Safety} />
+          <Route path='new' component={WhatsNew} />
         </Route>
         <Route path='/meeting/:meetingName' component={Meeting}/>
       </Router>
