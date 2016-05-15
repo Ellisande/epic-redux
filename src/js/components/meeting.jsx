@@ -7,11 +7,14 @@ import Merge from './merge';
 import Voting from './voting';
 import Discuss from './discuss';
 import Complete from './complete';
-import {connectToRoom} from '../services/socket';
+import {connectToRoom, disconnectFromRoom} from '../services/socket';
 
 class Meeting extends Component {
   componentWillMount(){
     return connectToRoom(this.props.params.meetingName);
+  }
+  componentWillUnmount(){
+    return disconnectFromRoom();
   }
   render(){
     const phaseMap = {
