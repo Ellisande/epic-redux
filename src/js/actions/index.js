@@ -127,4 +127,61 @@ const lockedOut = (isLockedOut) => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant, deleteMeeting, shrinkMeeting, growMeeting, lockedOut};
+const addKnocker = (id, message) => {
+  return {
+    type: 'ADD_KNOCKER',
+    id,
+    message
+  };
+};
+
+const approveKnocker = id => {
+  return {
+    type: 'ALLOW_KNOCKER',
+    id
+  };
+};
+
+const rejectKnocker = id => {
+  return {
+    type: 'REJECT_KNOCKER',
+    id
+  };
+};
+
+const allowKnocking = () => {
+  return {
+    type: 'ALLOW_KNOCKING'
+  };
+};
+
+const disableKnocking = () => {
+  return {
+    type: 'DISABLE_KNOCKING'
+  };
+};
+
+export {
+  allowKnocking,
+  disableKnocking,
+  approveKnocker,
+  rejectKnocker,
+  addKnocker,
+  createMeeting,
+  postTopic,
+  changePhase,
+  removeTopic,
+  upVote,
+  downVote,
+  nextTopic,
+  setHost,
+  setLocked,
+  setNewHosts,
+  joinMeeting,
+  addParticipant,
+  removeParticipant,
+  deleteMeeting,
+  shrinkMeeting,
+  growMeeting,
+  lockedOut,
+  approveKnocker};
