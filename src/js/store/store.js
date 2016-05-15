@@ -11,6 +11,7 @@ import newHostsReducer from './reducers/newHosts';
 import userReducer from './reducers/user';
 import topicsReducer from './reducers/topics';
 import roomNameReducer from './reducers/roomName';
+import lockedOutReducer from './reducers/lockedOut';
 
 
 let reducers = combineReducers({
@@ -23,7 +24,8 @@ let reducers = combineReducers({
   phaseVotes: (phaseVotes = []) => phaseVotes,
   topics: topicsReducer,
   locked: lockedReducer,
-  newHosts: newHostsReducer
+  newHosts: newHostsReducer,
+  lockedOut: lockedOutReducer
 });
 
 let store = createStore(reducers);
