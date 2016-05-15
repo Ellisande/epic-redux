@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
+import {addKnocker} from '../actions';
+import {dispatch} from '../services/socket';
 
 class Knocking extends Component {
   constructor(props){
@@ -19,6 +21,7 @@ class Knocking extends Component {
   knock(e){
     e.preventDefault();
     const newState = Object.assign({}, this.state, {knocked: true, knockMessage: ''});
+    dispatch(addKnocker(null, this.state.knockMessage));
     this.setState(newState);
   }
   render(){

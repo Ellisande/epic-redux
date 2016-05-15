@@ -56,6 +56,22 @@ primus.on('connection', function (spark) {
     }
     const currentRoom = rooms[roomName];
     const currentStore = currentRoom.store;
+
+    const attachEvents = sparkToAttach => {
+      sparkToAttach.on('data', action => {
+        //This stuff should move to middleware.
+        if(action.type === 'ADD_KNOCKER'){
+          action.id = spark.id;
+        }
+        currentRoom.dispatchAndSend(action);
+        if(action.type === 'DELETE_MEETING'){
+          delete rooms[roomName];
+          meetingsRoom.dispatchAndSend(deleteMeeting(roomName));
+        }
+      });
+    };
+    //Probably not how we want to handle this.
+    attachEvents(spark);
     if(currentStore.getState().locked){
       const allowKnockingAction = currentStore.getState().allowKnocking ? allowKnocking() : disableKnocking();
       spark.write(allowKnockingAction);
@@ -75,13 +91,6 @@ primus.on('connection', function (spark) {
     currentRoom.dispatchAndSend(addParticipant(participant));
 
     spark.write(joinMeeting(currentStore.getState()));
-    spark.on('data', action => {
-      currentRoom.dispatchAndSend(action);
-      if(action.type === 'DELETE_MEETING'){
-        delete rooms[roomName];
-        meetingsRoom.dispatchAndSend(deleteMeeting(roomName));
-      }
-    });
   }
 });
 
