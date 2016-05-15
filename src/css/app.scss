@@ -183,6 +183,16 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
 .logo {
   font-size: 5rem;
   color: $off-white-primary;
+  position: relative;
+}
+
+.vote-logo {
+  position: absolute;
+  left: 36%;
+  top: 27%;
+  color: $tertiary-color;
+  // text-shadow: 1px 1px 6px $tertiary-color;
+  font-size: 4.5rem;
 }
 
 
@@ -780,6 +790,18 @@ input.toggle:checked + label:after {
 .bright-box-bubble.primary {
   background-image: linear-gradient( 180deg, $primary-color, $primary-color 50%, white 50%, white);
 }
+
+.new:after {
+  content: 'new';
+  color: $tertiary-color;
+  vertical-align: super;
+  font-size: 0.6rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  z-index: 5;
+}
+
+
 
 //Animations
 @keyframes bounce {
