@@ -71,7 +71,7 @@
   "repository": "git@github.com:gobold/recipient-portal.git",
   "scripts": {
     "lint": "eslint --ext .js .",
-    "test": "gulp dist",
+    "test": "npm run lint",
     "start": "gulp dist && node dist/server/index.js"
   },
   "version": "0.0.0"
