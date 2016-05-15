@@ -72,17 +72,10 @@ const setNewHosts = newHosts => {
 };
 
 const joinMeeting = (meeting) => {
-  return {
-    type: 'JOIN_MEETING',
-    user: meeting.user,
-    participants: meeting.participants,
-    topics: meeting.topics,
-    phase: meeting.phase,
-    roomName: meeting.roomName,
-    timer: meeting.timer,
-    locked: meeting.locked,
-    newHosts: meeting.newHosts
+  const action = {
+    type: 'JOIN_MEETING'
   };
+  return Object.assign({}, action, meeting);
 };
 
 const addParticipant = participant => {
