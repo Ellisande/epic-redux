@@ -32,7 +32,7 @@ class PhaseControls extends Component {
     const text = this.props.lockedOut ? 'Locked' : this.props.phase;
     return (
       <div className='phase-controls'>
-        <Knockers />
+        <Knockers style={this.props.host ? {} : {display: 'none'}}/>
         <BrightBox title='Phase' type='tertiary'>
           <div className='phase-current'>
              {text}
