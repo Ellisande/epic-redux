@@ -32,7 +32,10 @@ let reducers = combineReducers({
   knockers: knockersReducer
 });
 
-let store = createStore(reducers);
+const attachDevTools = () => {
+  return window.devToolsExtension ? window.devToolsExtension() : undefined;
+};
+let store = createStore(reducers, {}, process.title === 'browser' ? attachDevTools() : undefined);
 
 const createNewStore = createStore.bind(this, reducers);
 export {createNewStore as createStore};
