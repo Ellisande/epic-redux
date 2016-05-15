@@ -19,6 +19,7 @@ let rooms = {};
 
 const addUserToMeeting = (spark, room) => {
   const {roomName} = room.store.getState();
+  console.log(roomName);
   const remainingNames = room.store.getState().participants.map(p => p.name);
 
   const participant = {
@@ -58,17 +59,7 @@ primus.on('connection', function (spark) {
   if(spark.query.room){
     const roomName = spark.query.room;
     if(!rooms[roomName]){
-      const room = {
-        participants: [],
-        topics: [],
-        phase: 'submit',
-        roomName,
-        timer: 38000,
-        locked: false,
-        newHosts: true,
-      };
       rooms[roomName] = new Room();
-      rooms[roomName].store.dispatch(joinMeeting(room));
       meetingsRoom.dispatchAndSend(createMeeting(roomName));
     }
     const currentRoom = rooms[roomName];
@@ -107,19 +98,6 @@ primus.on('connection', function (spark) {
     }
 
     addUserToMeeting(spark, currentRoom);
-    // const remainingNames = currentRoom.store.getState().participants.map(p => p.name);
-    //
-    // const participant = {
-    //   name: determineName(remainingNames, spark.id),
-    //   id: spark.id,
-    //   host: false
-    // };
-    //
-    // meetingsRoom.dispatchAndSend(growMeeting(roomName));
-    // currentRoom.addSpark(spark);
-    // currentRoom.dispatchAndSend(addParticipant(participant));
-    //
-    // spark.write(joinMeeting(currentStore.getState()));
   }
 });
 
