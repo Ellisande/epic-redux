@@ -7,7 +7,7 @@ class BrightButton extends Component {
   }
   render(){
     return (
-      <div className={`button ${this.type} ${this.props.className}`} onClick={this.props.onClick}>
+      <div className={`button ${this.type} ${this.props.className || ''}`} onClick={this.props.onClick}>
         <i className={`fa ${this.props.icon}`} />
         <span>{this.props.children}</span>
       </div>);

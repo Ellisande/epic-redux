@@ -1,6 +1,9 @@
 import {ActionHandler, handleActions} from '../actionHandler';
 import {replace} from '../utils';
 
+const initialValue = [];
+const deleteMeeting = new ActionHandler('DELETE_MEETING', () => initialValue);
+
 const joinMeeting = new ActionHandler('JOIN_MEETING', (participants, action) => {
   return action.participants;
 });
@@ -21,9 +24,9 @@ const removeParticipant = new ActionHandler('REMOVE_PARTICIPANT', (participants,
   return participants.filter(p => p.id !== action.participantId);
 });
 
-const actions = [joinMeeting, setHost, addParticipant, removeParticipant];
+const actions = [joinMeeting, setHost, addParticipant, removeParticipant, deleteMeeting];
 
-const participantReducer = (participants = [], action) => {
+const participantReducer = (participants = initialValue, action) => {
   const newParticipants = handleActions(actions, participants, action);
   newParticipants.forEach(Object.freeze);
   Object.freeze(newParticipants);

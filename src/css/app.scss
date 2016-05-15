@@ -149,7 +149,7 @@ input.bubble-text, .bubble-text {
   transition: all 0.1s ease-in-out;
 }
 
-input.bubble-text:focus {
+input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
   outline-style: none;
 }
 
@@ -183,6 +183,16 @@ input.bubble-text:focus {
 .logo {
   font-size: 5rem;
   color: $off-white-primary;
+  position: relative;
+}
+
+.vote-logo {
+  position: absolute;
+  left: 36%;
+  top: 27%;
+  color: $tertiary-color;
+  // text-shadow: 1px 1px 6px $tertiary-color;
+  font-size: 4.5rem;
 }
 
 
@@ -307,6 +317,15 @@ input.bubble-text:focus {
   max-width: 30%;
 }
 
+.locked {
+  text-align: center;
+  min-height: 50vh;
+}
+
+.locked .bright-box-content {
+  margin-top: 10px;
+}
+
 .go-back {
   background-color: $primary-color;
   border-radius: 20px;
@@ -368,6 +387,60 @@ input.bubble-text:focus {
   font-variant: small-caps;
   font-weight: bold;
   text-align: center;
+}
+
+input.knock-text {
+  border-radius: 0;
+  border: 0;
+  background-color: inherit;
+  box-shadow: 0;
+  flex: 1;
+  font-size: 1.5rem;
+  color: $primary-color;
+}
+.knock-button {
+  border: 0;
+  background-color: inherit;
+  color: $tertiary-color;
+  cursor: pointer;
+  border-radius: 0 $box-radius $box-radius 0;
+}
+
+.knock-form {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.knock-actions {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.knockers {
+  animation-name: bounce;
+  animation-duration: 2s;
+}
+
+.knockers .bright-box-content > * , .knocker {
+  display: flex;
+  flex-direction: column;
+}
+
+.knock-actions > * {
+  flex: 1 1 100%;
+}
+
+.knock-message {
+  text-align: center;
+}
+
+.disabled {
+  font-weight: bold;
+  color: $tertiary-color;
 }
 
 .button {
@@ -711,9 +784,31 @@ input.toggle:checked + label:after {
 .bright-box-bubble {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .bright-box-bubble.primary {
   background-image: linear-gradient( 180deg, $primary-color, $primary-color 50%, white 50%, white);
+}
+
+.new:after {
+  content: 'new';
+  color: $tertiary-color;
+  vertical-align: super;
+  font-size: 0.6rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  z-index: 5;
+}
+
+
+
+//Animations
+@keyframes bounce {
+    0%   {transform: translate(2px, 0)}
+    20%  {transform: translate(-4px, 0)}
+    40%  {transform: translate(4px, 0)}
+    60%  {transform: translate(-4px, 0)}
+    80%  {transform: translate(4px, 0)}
+    100% {transform: translate(-2px, 0)}
 }

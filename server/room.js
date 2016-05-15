@@ -1,9 +1,10 @@
 import {createStore} from '../src/js/store/store';
 
 class Room {
-  constructor(){
+  constructor(roomName){
     this.sparks = [];
-    this.store = createStore();
+    this.store = createStore({roomName: roomName});
+    this.roomName = roomName;
   }
   send(action){
     this.sparks.forEach(spark => spark.write(action));

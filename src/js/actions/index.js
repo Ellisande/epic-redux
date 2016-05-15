@@ -72,17 +72,10 @@ const setNewHosts = newHosts => {
 };
 
 const joinMeeting = (meeting) => {
-  return {
-    type: 'JOIN_MEETING',
-    user: meeting.user,
-    participants: meeting.participants,
-    topics: meeting.topics,
-    phase: meeting.phase,
-    roomName: meeting.roomName,
-    timer: meeting.timer,
-    locked: meeting.locked,
-    newHosts: meeting.newHosts
+  const action = {
+    type: 'JOIN_MEETING'
   };
+  return Object.assign({}, action, meeting);
 };
 
 const addParticipant = participant => {
@@ -127,4 +120,70 @@ const lockedOut = (isLockedOut) => {
   };
 };
 
-export {createMeeting, postTopic, changePhase, removeTopic, upVote, downVote, nextTopic, setHost, setLocked, setNewHosts, joinMeeting, addParticipant, removeParticipant, deleteMeeting, shrinkMeeting, growMeeting, lockedOut};
+const addKnocker = (id, message) => {
+  return {
+    type: 'ADD_KNOCKER',
+    id,
+    message
+  };
+};
+
+const approveKnocker = id => {
+  return {
+    type: 'APPROVE_KNOCKER',
+    id
+  };
+};
+
+const rejectKnocker = id => {
+  return {
+    type: 'REJECT_KNOCKER',
+    id
+  };
+};
+
+const allowKnocking = () => {
+  return {
+    type: 'ALLOW_KNOCKING'
+  };
+};
+
+const disableKnocking = () => {
+  return {
+    type: 'DISABLE_KNOCKING'
+  };
+};
+
+const setRoomName = roomName => {
+  return {
+    type: 'SET_ROOM_NAME',
+    roomName
+  };
+};
+
+export {
+  allowKnocking,
+  disableKnocking,
+  approveKnocker,
+  rejectKnocker,
+  addKnocker,
+  createMeeting,
+  postTopic,
+  changePhase,
+  removeTopic,
+  upVote,
+  downVote,
+  nextTopic,
+  setHost,
+  setLocked,
+  setNewHosts,
+  joinMeeting,
+  addParticipant,
+  removeParticipant,
+  deleteMeeting,
+  shrinkMeeting,
+  growMeeting,
+  lockedOut,
+  approveKnocker,
+  setRoomName
+};

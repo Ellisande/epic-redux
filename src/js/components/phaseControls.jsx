@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Timer from './timer';
 import Host from './host';
 import Lock from './lock';
+import Knockers from './knockers';
 import BrightBox from './brightBox';
 import {isUserHost} from '../store/utils';
 import {dispatch} from '../services/socket';
@@ -31,6 +32,7 @@ class PhaseControls extends Component {
     const text = this.props.lockedOut ? 'Locked' : this.props.phase;
     return (
       <div className='phase-controls'>
+        <Knockers style={this.props.host ? {} : {display: 'none'}}/>
         <BrightBox title='Phase' type='tertiary'>
           <div className='phase-current'>
              {text}

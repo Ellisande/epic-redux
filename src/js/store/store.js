@@ -12,6 +12,8 @@ import userReducer from './reducers/user';
 import topicsReducer from './reducers/topics';
 import roomNameReducer from './reducers/roomName';
 import lockedOutReducer from './reducers/lockedOut';
+import allowKnockingReducer from './reducers/allowKnocking';
+import knockersReducer from './reducers/knockers';
 
 
 let reducers = combineReducers({
@@ -25,10 +27,15 @@ let reducers = combineReducers({
   topics: topicsReducer,
   locked: lockedReducer,
   newHosts: newHostsReducer,
-  lockedOut: lockedOutReducer
+  lockedOut: lockedOutReducer,
+  allowKnocking: allowKnockingReducer,
+  knockers: knockersReducer
 });
 
-let store = createStore(reducers);
+const attachDevTools = () => {
+  return window.devToolsExtension ? window.devToolsExtension() : undefined;
+};
+let store = createStore(reducers, {}, process.title === 'browser' ? attachDevTools() : undefined);
 
 const createNewStore = createStore.bind(this, reducers);
 export {createNewStore as createStore};
