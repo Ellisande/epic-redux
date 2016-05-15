@@ -17,8 +17,9 @@ class Knockers extends Component {
   }
   render(){
     const showKnocking = this.props.knockers.length > 0 ? {} : {display: 'none'};
+    const knockStyle = Object.assign({}, showKnocking, this.props.style);
     const mapKnocker = knocker => (
-      <div className='knocker' key={knocker.id} style={this.props.style}>
+      <div className='knocker' key={knocker.id}>
         <div className='knock-message'>{knocker.message}</div>
         <div className='knock-actions'>
           <BrightButton type='primary' icon='fa-check' onClick={this.approveKnocker.bind(this, knocker)} />
@@ -26,7 +27,7 @@ class Knockers extends Component {
         </div>
       </div>);
     return (
-      <BrightBox type='tertiary' title='Knocking' style={showKnocking} className='knockers'>
+      <BrightBox type='tertiary' title='Knocking' style={knockStyle} className='knockers'>
           {this.props.knockers.map(mapKnocker)}
       </BrightBox>
     );
