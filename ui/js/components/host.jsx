@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {setHost} from '../actions';
+import {setHost} from '../../../shared/actions';
 import BrightBox from './brightBox';
 import _ from 'lodash';
 import {dispatch} from '../services/socket';
-import {findUser} from '../store/utils';
+import {findUser} from '../../../shared/store/utils';
 
 class Host extends Component {
   constructor(props){

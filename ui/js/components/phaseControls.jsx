@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {changePhase} from '../actions';
+import {changePhase} from '../../../shared/actions';
 import {connect} from 'react-redux';
 import Timer from './timer';
 import Host from './host';
 import Lock from './lock';
 import Knockers from './knockers';
 import BrightBox from './brightBox';
-import {isUserHost} from '../store/utils';
+import {isUserHost} from '../../../shared/store/utils';
 import {dispatch} from '../services/socket';
 
 const phases = ['submit', 'merge', 'vote', 'discuss', 'complete'];

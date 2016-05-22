@@ -12,7 +12,7 @@ var imgDestination = 'assets/img';
 var jsDestination = 'assets/js';
 var fontDestination = 'assets/fonts';
 const serverDestination = 'dist/server';
-const sharedDestination = 'dist/src';
+const sharedDestination = 'dist/shared';
 
 // Serve up app.
 gulp.task('serve', function() {
@@ -30,7 +30,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('compile-shared', ['clean-shared'], () => {
-  return gulp.src('src/js/**/*').pipe(babel()).pipe(gulp.dest('dist/src/js'));
+  return gulp.src('shared/**/*').pipe(babel()).pipe(gulp.dest('dist/shared'));
 });
 
 gulp.task('compile-server', ['clean-server'], () => {
@@ -51,9 +51,10 @@ gulp.task('dist', tasks);
 
 gulp.task('default', tasks.concat('serve'), function() {
   console.log('Watching development files...'); // eslint-disable-line no-console
-  gulp.watch(['src/css/**/*'], ['css']);
-  gulp.watch(['src/img/**/*'], ['img']);
-  gulp.watch(['src/js/**/*'], ['wpreact', 'compile-shared']);
+  gulp.watch(['ui/css/**/*'], ['css']);
+  gulp.watch(['ui/img/**/*'], ['img']);
+  gulp.watch(['ui/js/**/*'], ['wpreact']);
+  gulp.watch(['ui/shared/**/*'], ['compile-shared']);
   gulp.watch(['server/**/*'], ['compile-server']);
 });
 
@@ -61,7 +62,7 @@ gulp.task('default', tasks.concat('serve'), function() {
 gulp.task('css', ['clean-css'], function() {
   return gulp.src([
     'node_modules/font-awesome/css/font-awesome.min.css',
-    'src/css/app.scss'
+    'ui/css/app.scss'
   ])
   .pipe(sass({
     errLogToConsole: false,
@@ -77,7 +78,7 @@ gulp.task('css', ['clean-css'], function() {
 // Copy images
 gulp.task('img', ['clean-img'], function() {
   return gulp.src([
-    'src/img/**'
+    'ui/img/**'
   ])
   .pipe(gulp.dest(imgDestination));
 });

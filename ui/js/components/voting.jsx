@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import Topic from './topic';
 import TopicVotes from './topicVote';
 import BrightBox from './brightBox';
-import {upVote, downVote} from '../actions';
+import {upVote, downVote} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
-import {findUser} from '../store/utils';
 import _ from 'lodash';
 
 

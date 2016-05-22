@@ -3,7 +3,7 @@ import {createServer} from 'http';
 const app = express();
 const server = createServer(app);
 import PrimusServer from 'primus';
-import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking, setRoomName} from '../src/js/actions';
+import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking, setRoomName} from '../shared/actions';
 import _ from 'lodash';
 import determineName from './utils';
 import Room from './room';

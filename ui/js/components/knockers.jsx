@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
-import {approveKnocker, rejectKnocker} from '../actions';
+import {approveKnocker, rejectKnocker} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
 import BrightButton from './brightButton';
 

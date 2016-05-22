@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
-import {addKnocker} from '../actions';
+import {addKnocker} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
 
 class Knocking extends Component {
