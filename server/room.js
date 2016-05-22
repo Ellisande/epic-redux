@@ -1,4 +1,4 @@
-import {createStore} from '../src/js/store/store';
+import {createStore} from '../shared/store/store';
 
 class Room {
   constructor(roomName){

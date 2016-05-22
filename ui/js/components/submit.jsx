@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Topic from './topic';
 import {connect} from 'react-redux';
-import {postTopic} from '../actions';
+import {postTopic} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
-import {findUser} from '../store/utils';
+import {findUser} from '../../../shared/store/utils';
 
 class Submit extends Component {
   constructor(props) {

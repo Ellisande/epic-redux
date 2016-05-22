@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {changePhase, deleteMeeting} from '../actions';
+import {changePhase, deleteMeeting} from '../../../shared/actions';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
 import BrightButton from './brightButton';

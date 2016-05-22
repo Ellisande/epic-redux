@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
-import {setLocked, setNewHosts, allowKnocking, disableKnocking} from '../actions';
-import {findUser} from '../store/utils';
+import {setLocked, setNewHosts, allowKnocking, disableKnocking} from '../../../shared/actions';
+import {findUser} from '../../../shared/store/utils';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
 

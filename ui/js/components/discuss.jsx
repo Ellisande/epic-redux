@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Topic from './topic';
 import BrightBox from './brightBox';
-import {nextTopic} from '../actions';
+import {nextTopic} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
 

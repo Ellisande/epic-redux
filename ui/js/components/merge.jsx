@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Topic from './topic';
 import {connect} from 'react-redux';
-import {removeTopic} from '../actions';
+import {removeTopic} from '../../../shared/actions';
 import BrightBox from './brightBox';
 import {dispatch} from '../services/socket';
 

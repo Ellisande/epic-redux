@@ -10,7 +10,7 @@ import How from './components/how';
 import When from './components/when';
 import Safety from './components/safety';
 import WhatsNew from './components/whatsNew';
-import store from './store/store';
+import store from '../../shared/store/store';
 import {Provider} from 'react-redux';
 injectTap();
 function render(){

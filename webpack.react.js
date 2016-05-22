@@ -13,7 +13,7 @@ var common = {
   },
   entry: [
     // 'bootstrap-webpack!./bootstrap.config.js',
-    path.resolve(ROOT_PATH, 'src/js/main')
+    path.resolve(ROOT_PATH, 'ui/js/main')
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -31,7 +31,7 @@ var common = {
         loaders: ['style', 'css'],
       },
       {
-        test: ['src/js', 'server/lib', 'config'].map( function(item) { return path.join(__dirname, item); } ),
+        test: ['ui/js', 'server/lib', 'config'].map( function(item) { return path.join(__dirname, item); } ),
         loaders: ['babel'],
       },
       // **IMPORTANT** This is needed so that each bootstrap js file required by
@@ -93,7 +93,7 @@ module.exports = merge(common, {
         ],
 
         query: {
-          presets: ['es2015', 'stage-1', 'react']
+          presets: ['es2015', 'react']
         }
       }
     ]

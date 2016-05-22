@@ -3,7 +3,7 @@ import {browserHistory} from 'react-router';
 import BrightBox from './brightBox';
 import BrightButton from './brightButton';
 import {connect} from 'react-redux';
-import {findUser} from '../store/utils';
+import {findUser} from '../../../shared/store/utils';
 
 class SideBar extends Component {
   render() {
