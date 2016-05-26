@@ -23,7 +23,9 @@
     "chai": "^3.4.1",
     "connect": "^3.4.0",
     "css-loader": "0.x",
+    "cucumber": "^0.10.3",
     "del": "^2.0.2",
+    "engine.io-client": "^1.6.9",
     "enzyme": "^2.0.0",
     "eslint": "^2.2.0",
     "eslint-config-gobold": "*",
@@ -71,7 +73,7 @@
   "repository": "git@github.com:gobold/recipient-portal.git",
   "scripts": {
     "lint": "eslint --ext .js .",
-    "test": "npm run lint",
+    "test": "babel-node node_modules/.bin/cucumber.js test/server/features --require test/server --compile js:babel-core/register",
     "start": "gulp dist && node dist/server/index.js"
   },
   "version": "2.0.0"
