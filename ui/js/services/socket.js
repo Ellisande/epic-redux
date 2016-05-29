@@ -1,9 +1,9 @@
-import store from '../store/store.js';
+import store from '../../../shared/store/store.js';
 var meetingsConnection;
 var roomConnection;
 const connectionString = '/primus';
 import {browserHistory} from 'react-router';
-import {deleteMeeting} from '../actions';
+import {deleteMeeting} from '../../../shared/actions';
 
 
 const dispatch = action => {
