@@ -10,7 +10,6 @@ class Lock extends Component {
   constructor(props){
     super(props);
     this.toggleLocked = this.toggleLocked.bind(this);
-    this.toggleNewHosts = this.toggleNewHosts.bind(this);
     this.toggleKnock = this.toggleKnock.bind(this);
   }
   toggleLocked(e){
