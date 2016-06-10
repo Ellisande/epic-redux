@@ -17,10 +17,6 @@ class Lock extends Component {
     e.preventDefault();
     dispatch(setLocked(!this.props.locked));
   }
-  toggleNewHosts(e){
-    e.preventDefault();
-    dispatch(setNewHosts(!this.props.newHosts));
-  }
   toggleKnock(e){
     e.preventDefault();
     if(this.props.allowKnocking){
@@ -44,13 +40,6 @@ class Lock extends Component {
          <div className='toggle-wrapper'>
            <input type='checkbox' className='toggle' checked={this.props.allowKnocking} readOnly/>
            <label onClick={this.toggleKnock} />
-         </div>
-       </div>
-       <div className='new-host-toggle' style={{display: 'none'}}>
-         <label>Allow Hosts</label>
-         <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.newHosts} readOnly/>
-           <label onClick={this.toggleNewHosts} />
          </div>
        </div>
       </BrightBox>);
