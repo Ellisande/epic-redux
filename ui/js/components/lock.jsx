@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
-import {setLocked, setNewHosts, allowKnocking, disableKnocking} from '../../../shared/actions';
+import NewHosts from './newHosts';
+import {setLocked, setNewHosts, allowKnocking, disableKnocking} from '../../../shared/actions/index';
 import {findUser} from '../../../shared/store/utils';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
@@ -41,6 +42,7 @@ class Lock extends Component {
            <label onClick={this.toggleKnock} />
          </div>
        </div>
+       <NewHosts/>
       </BrightBox>);
   }
 }
