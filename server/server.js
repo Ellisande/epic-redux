@@ -1,7 +1,7 @@
 import express from 'express';
 import {createServer as createHttpServer} from 'http';
 import PrimusServer from 'primus';
-import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking, setRoomName} from '../shared/actions';
+import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking, setRoomName, setNewHosts} from '../shared/actions';
 import _ from 'lodash';
 import determineName from './utils';
 import Room from './room';
@@ -41,6 +41,11 @@ const createServer = () => {
       const roomForUser = _.find(rooms, room => room.store.getState().participants.find(p => p.id === spark.id));
       if(roomForUser){
         roomForUser.dispatchAndSend(removeParticipant(spark.id));
+        const participants = roomForUser.store.getState().participants;
+        const hasHost = participants.find(participant => participant.host);
+        if(!hasHost){
+          roomForUser.dispatchAndSend(setNewHosts(true));
+        }
         roomForUser.removeSpark(spark);
         meetingsRoom.dispatchAndSend(shrinkMeeting(roomForUser.store.getState().roomName));
       }

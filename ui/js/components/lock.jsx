@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BrightBox from './brightBox';
-import {setLocked, setNewHosts, allowKnocking, disableKnocking} from '../../../shared/actions';
+import NewHosts from './newHosts';
+import {setLocked, setNewHosts, allowKnocking, disableKnocking} from '../../../shared/actions/index';
 import {findUser} from '../../../shared/store/utils';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
@@ -10,16 +11,11 @@ class Lock extends Component {
   constructor(props){
     super(props);
     this.toggleLocked = this.toggleLocked.bind(this);
-    this.toggleNewHosts = this.toggleNewHosts.bind(this);
     this.toggleKnock = this.toggleKnock.bind(this);
   }
   toggleLocked(e){
     e.preventDefault();
     dispatch(setLocked(!this.props.locked));
-  }
-  toggleNewHosts(e){
-    e.preventDefault();
-    dispatch(setNewHosts(!this.props.newHosts));
   }
   toggleKnock(e){
     e.preventDefault();
@@ -46,13 +42,7 @@ class Lock extends Component {
            <label onClick={this.toggleKnock} />
          </div>
        </div>
-       <div className='new-host-toggle' style={{display: 'none'}}>
-         <label>Allow Hosts</label>
-         <div className='toggle-wrapper'>
-           <input type='checkbox' className='toggle' checked={this.props.newHosts} readOnly/>
-           <label onClick={this.toggleNewHosts} />
-         </div>
-       </div>
+       <NewHosts/>
       </BrightBox>);
   }
 }
