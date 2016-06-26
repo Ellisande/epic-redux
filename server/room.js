@@ -1,22 +1,26 @@
 import {createStore} from '../shared/store/store';
 import {applyMiddleware} from 'redux';
-import {rejectMiddleware, logIt} from '../shared/store/middleware';
+import {rejectMiddleware, loggingMiddleware, cleanupMiddleware} from './middleware';
 
 class Room {
-  constructor(roomName, ...middleware){
+  constructor(roomType, ...additionalMiddleware){
     this.sparks = [];
-    this.store = createStore({roomName: roomName}, applyMiddleware(...rejectMiddleware, ...middleware, logIt));
-    this.roomName = roomName;
+    this.roomType = roomType;
+    const sendActionsMiddlware = () => next => action => {
+      const result = next(action);
+      this.send(result);
+      return result;
+    };
+    const summaryMiddleware = applyMiddleware(loggingMiddleware, sendActionsMiddlware);
+    const meetingMiddleware = applyMiddleware(...rejectMiddleware, ...additionalMiddleware, loggingMiddleware, sendActionsMiddlware, ...cleanupMiddleware);
+    const middleware = roomType === 'summary' ? summaryMiddleware : meetingMiddleware;
+    this.store = createStore(middleware);
   }
   send(action){
     this.sparks.forEach(spark => spark.write(action));
   }
   dispatch(action){
     return this.store.dispatch(action);
-  }
-  dispatchAndSend(action){
-    const dispatchedAction = this.dispatch(action);
-    this.send(dispatchedAction);
   }
   addSpark(spark){
     if(!spark){

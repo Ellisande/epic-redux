@@ -1,11 +1,11 @@
 import express from 'express';
 import {createServer as createHttpServer} from 'http';
 import PrimusServer from 'primus';
-import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking, setRoomName, setNewHosts} from '../shared/actions';
+import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeting, deleteMeeting, createMeeting, lockedOut, allowKnocking, disableKnocking, setRoomName} from '../shared/actions';
 import _ from 'lodash';
 import determineName from './utils';
 import Room from './room';
-import {afterAction, beforeAction} from '../shared/store/middleware';
+import {afterActionMiddleware} from './middleware';
 
 const createServer = () => {
   const app = express();
@@ -30,9 +30,9 @@ const createServer = () => {
       host: false
     };
 
-    meetingsRoom.dispatchAndSend(growMeeting(roomName));
+    meetingsRoom.dispatch(growMeeting(roomName));
     room.addSpark(spark);
-    room.dispatchAndSend(addParticipant(participant));
+    room.dispatch(addParticipant(participant));
 
     spark.write(joinMeeting(room.store.getState()));
   };
@@ -41,14 +41,9 @@ const createServer = () => {
     if(spark.query.room) {
       const roomForUser = _.find(rooms, room => room.store.getState().participants.find(p => p.id === spark.id));
       if(roomForUser){
-        roomForUser.dispatchAndSend(removeParticipant(spark.id));
-        const participants = roomForUser.store.getState().participants;
-        const hasHost = participants.find(participant => participant.host);
-        if(!hasHost){
-          roomForUser.dispatchAndSend(setNewHosts(true));
-        }
+        roomForUser.dispatch(removeParticipant(spark.id));
         roomForUser.removeSpark(spark);
-        meetingsRoom.dispatchAndSend(shrinkMeeting(roomForUser.store.getState().roomName));
+        meetingsRoom.dispatch(shrinkMeeting(roomForUser.store.getState().roomName));
       }
     }
     if(spark.query.meetings){
@@ -65,22 +60,23 @@ const createServer = () => {
     }
     if(spark.query.room){
       const roomName = spark.query.room;
+      const deleteRoomMiddleware = afterActionMiddleware('DELETE_MEETING', (store, action) => {
+        meetingsRoom.dispatch(deleteMeeting(roomName));
+        delete rooms[roomName];
+        return action;
+      });
       if(!rooms[roomName]){
-        rooms[roomName] = new Room();
+        rooms[roomName] = new Room(undefined, deleteRoomMiddleware);
         rooms[roomName].store.dispatch(setRoomName(roomName));
-        meetingsRoom.dispatchAndSend(createMeeting(roomName));
+        meetingsRoom.dispatch(createMeeting(roomName));
       }
       const currentRoom = rooms[roomName];
       const currentStore = currentRoom.store;
 
       const attachEvents = sparkToAttach => {
         sparkToAttach.on('data', action => {
-          action.id = spark.id;
-          currentRoom.dispatchAndSend(action);
-          if(action.type === 'DELETE_MEETING'){
-            delete rooms[roomName];
-            meetingsRoom.dispatchAndSend(deleteMeeting(roomName));
-          }
+          action.userId = spark.id;
+          currentRoom.dispatch(action);
           if(action.type === 'APPROVE_KNOCKER'){
             const findSpark = primus.spark(action.id);
             if(findSpark){
