@@ -76,5 +76,5 @@
     "test": "babel-node node_modules/.bin/cucumber.js test/server/features --require test/server --compile js:babel-core/register",
     "start": "gulp dist && node dist/server/index.js"
   },
-  "version": "2.1.0"
+  "version": "2.1.1"
 }
