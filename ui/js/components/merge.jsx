@@ -34,6 +34,6 @@ const selector = state => {
   return {
     isHost: isUserHost(state),
     topics: state.topics
-  }
-}
+  };
+};
 export default connect(selector)(Merge);
