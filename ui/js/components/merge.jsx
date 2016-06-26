@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {removeTopic} from '../../../shared/actions';
 import BrightBox from './brightBox';
 import {dispatch} from '../services/socket';
+import {isUserHost} from '../../../shared/store/utils';
 
 class Merge extends Component {
   constructor(props){
@@ -14,10 +15,11 @@ class Merge extends Component {
     dispatch(removeTopic(id));
   }
   render(){
+    const showActions = this.props.isHost ? {} : {display: 'none'};
     const mergeTitle = (<h2>Merge</h2>);
     const mapTopics = (topic) => (
       <Topic topic={topic} key={topic.title}>
-        <a href='#' className='delete' onClick={this.deleteTopic.bind(this, topic.title)}>
+        <a href='#' className='delete' onClick={this.deleteTopic.bind(this, topic.title)} style={showActions}>
           <i className='fa fa-trash-o' aria-hidden='true'></i>
         </a>
       </Topic>);
@@ -28,4 +30,10 @@ class Merge extends Component {
   }
 }
 
-export default connect(i=>i)(Merge);
+const selector = state => {
+  return {
+    isHost: isUserHost(state),
+    topics: state.topics
+  }
+}
+export default connect(selector)(Merge);
