@@ -5,6 +5,7 @@ import {shrinkMeeting, joinMeeting, addParticipant, removeParticipant, growMeeti
 import _ from 'lodash';
 import determineName from './utils';
 import Room from './room';
+import {afterAction, beforeAction} from '../shared/store/middleware';
 
 const createServer = () => {
   const app = express();
@@ -74,10 +75,7 @@ const createServer = () => {
 
       const attachEvents = sparkToAttach => {
         sparkToAttach.on('data', action => {
-          //This stuff should move to middleware.
-          if(action.type === 'ADD_KNOCKER'){
-            action.id = spark.id;
-          }
+          action.id = spark.id;
           currentRoom.dispatchAndSend(action);
           if(action.type === 'DELETE_MEETING'){
             delete rooms[roomName];
