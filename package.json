@@ -3,6 +3,7 @@
   "dependencies": {
     "engine.io": "^1.6.9",
     "lodash": "^4.10.0",
+    "pino": "^2.7.2",
     "primus": "^5.2.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
