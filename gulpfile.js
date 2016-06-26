@@ -54,7 +54,7 @@ gulp.task('default', tasks.concat('serve'), function() {
   gulp.watch(['ui/css/**/*'], ['css']);
   gulp.watch(['ui/img/**/*'], ['img']);
   gulp.watch(['ui/js/**/*'], ['wpreact']);
-  gulp.watch(['ui/shared/**/*'], ['compile-shared']);
+  gulp.watch(['shared/**/*'], ['compile-shared', 'compile-server', 'wpreact']);
   gulp.watch(['server/**/*'], ['compile-server']);
 });
 
