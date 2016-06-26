@@ -5,6 +5,7 @@ import BrightBox from './brightBox';
 import {nextTopic} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
+import {isUserHost} from '../../../shared/store/utils';
 
 class Discuss extends Component {
   constructor(props){
@@ -16,6 +17,7 @@ class Discuss extends Component {
     return dispatch(nextTopic());
   }
   render(){
+    const showNextTopicButton = this.props.isHost ? {} : {display: 'none'};
     const mapTopics = (topic) => {
       return (
         <Topic topic={topic} showVotes={true} key={topic.title} />
@@ -30,7 +32,7 @@ class Discuss extends Component {
         <div className='current-title'>
           {_.get(this.props.currentTopic, 'title')}
         </div>
-        <div className='current-actions'>
+        <div className='current-actions' style={showNextTopicButton}>
           <a href='' title='Next Topic' className='fa fa-arrow-down' onClick={this.nextTopic}></a>
         </div>
       </div>);
@@ -45,6 +47,7 @@ const selector = state => {
   const sortedTopics = [...state.topics].sort( (l, r) => r.votes.length - l.votes.length);
   const currentTopic = sortedTopics.find(topic => topic.current);
   return {
+    isHost: isUserHost(state),
     topics: sortedTopics,
     currentTopic
   };

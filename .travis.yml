@@ -7,5 +7,5 @@ node_js:
   - "6.2.2"
 
 script:
-  - gulp
+  - gulp dist
   - npm test
