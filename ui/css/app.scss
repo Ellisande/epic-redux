@@ -310,7 +310,14 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
   justify-content: space-around;
   align-items: center;
   min-height: 200px;
+  flex: 1;
 };
+
+.the-end {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 15px;
+}
 
 .complete-actions > * {
   flex: 1;
