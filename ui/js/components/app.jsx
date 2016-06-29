@@ -43,8 +43,6 @@ class App extends Component {
         <section className='light-box'>
           <div className='upper-box'>
             <div className='logo'>
-              <i className='fa fa-sticky-note-o note-logo' />
-              <i className='fa fa-check vote-logo' />
             </div>
             <div className='title'>Note & Vote</div>
             <div className='description-list'>

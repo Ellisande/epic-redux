@@ -183,7 +183,14 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
 .logo {
   font-size: 5rem;
   color: $off-white-primary;
-  position: relative;
+  background: #FFF;
+  border-radius: 50%;
+  background-image: url('../img/logo2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100px;
+  height: 100px;
 }
 
 .vote-logo {
