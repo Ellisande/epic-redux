@@ -5,6 +5,14 @@ const createMeeting = (meetingName) => {
   };
 };
 
+const filterMeetings = (meetingFilter) => {
+  const filter = new RegExp(meetingFilter, 'ig');
+  return {
+    type: 'FILTER_MEETINGS',
+    filter
+  };
+};
+
 const postTopic = (topic, userName) => {
   return {
     type: 'POST_TOPIC',
@@ -168,6 +176,7 @@ export {
   rejectKnocker,
   addKnocker,
   createMeeting,
+  filterMeetings,
   postTopic,
   changePhase,
   removeTopic,

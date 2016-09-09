@@ -1,10 +1,25 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {filterMeetings} from '../../../shared/actions';
 
 class MeetingList extends Component {
+  componentWillMount(){
+    const filterAction = filterMeetings();
+    this.props.dispatch(filterAction);
+  }
   render(){
     const {meetings} = this.props;
+    const filteredMeetings = meetings.filter(meeting => {
+      const filter = this.props.meetingFilter;
+      if(filter){
+        // return meeting.name.startsWith(filter);
+        return meeting.name.match(filter);
+      }
+      else {
+        return true;
+      }
+    });
     const meetingItem = (meeting) => {
       return (
       <div className='meeting-summary' key={meeting.name}>
@@ -16,7 +31,7 @@ class MeetingList extends Component {
     return (
       <div className='meeting-list'>
         <div className='meeting-summary'>Meetings: </div>
-        {meetings.map(meetingItem)}
+        {filteredMeetings.map(meetingItem)}
       </div>
     );
   }
