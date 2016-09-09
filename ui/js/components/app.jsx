@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory, Link} from 'react-router';
 import {connectToMeetings, disconnectFromMeetings} from '../services/socket';
+import {filterMeetings} from '../../../shared/actions';
 
 class App extends Component {
   constructor(props){
@@ -26,6 +27,8 @@ class App extends Component {
   }
   updateMeetingName(e){
     const newMeetingName = e.target.value;
+    const filterAction = filterMeetings(newMeetingName);
+    this.props.dispatch(filterAction);
     const newState = Object.assign({}, this.state, {newMeetingName});
     return this.setState(newState);
   }
@@ -58,6 +61,7 @@ class App extends Component {
                 className='bubble-text'
                 placeholder='Meeting Name'
                 autoFocus
+                value={this.state.newMeetingName}
                 onChange={this.updateMeetingName}
                 onFocus={this.goToMeetings}/>
             </form>
