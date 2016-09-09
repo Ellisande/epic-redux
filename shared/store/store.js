@@ -18,6 +18,12 @@ import knockersReducer from './reducers/knockers';
 
 let reducers = combineReducers({
   meetings: meetingReducer,
+  meetingFilter: (meetingFilter = '', action) => {
+    if(action.type === 'FILTER_MEETINGS'){
+      return action.filter || '';
+    }
+    return meetingFilter;
+  },
   participants: participantReducer,
   userId: userReducer,
   phase: phaseReducer,
