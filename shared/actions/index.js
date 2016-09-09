@@ -5,6 +5,13 @@ const createMeeting = (meetingName) => {
   };
 };
 
+const filterMeetings = (meetingFilter) => {
+  return {
+    type: 'FILTER_MEETINGS',
+    filter: meetingFilter
+  };
+};
+
 const postTopic = (topic, userName) => {
   return {
     type: 'POST_TOPIC',
@@ -168,6 +175,7 @@ export {
   rejectKnocker,
   addKnocker,
   createMeeting,
+  filterMeetings,
   postTopic,
   changePhase,
   removeTopic,
