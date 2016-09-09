@@ -6,9 +6,10 @@ const createMeeting = (meetingName) => {
 };
 
 const filterMeetings = (meetingFilter) => {
+  const filter = new RegExp(meetingFilter, 'ig');
   return {
     type: 'FILTER_MEETINGS',
-    filter: meetingFilter
+    filter
   };
 };
 

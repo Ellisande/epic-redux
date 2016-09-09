@@ -13,7 +13,8 @@ class MeetingList extends Component {
     const filteredMeetings = meetings.filter(meeting => {
       const filter = this.props.meetingFilter;
       if(filter){
-        return meeting.name.startsWith(filter);
+        // return meeting.name.startsWith(filter);
+        return meeting.name.match(filter);
       }
       else {
         return true;
