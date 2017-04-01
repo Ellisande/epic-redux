@@ -51,7 +51,6 @@
     "morgan": "^1.6.1",
     "npm-update-outdated": "^0.1.6",
     "numeral": "^1.5.3",
-    "pre-commit": "^1.1.1",
     "pre-push": "^0.1.1",
     "proxyquire": "^1.7.3",
     "react-addons-test-utils": "^0.14.6",
