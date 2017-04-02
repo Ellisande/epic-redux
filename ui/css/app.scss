@@ -277,6 +277,7 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
 
 .meeting > * + * {
   margin-left: 30px;
+  min-height: 50vh;
 }
 
 .phase-controls {
