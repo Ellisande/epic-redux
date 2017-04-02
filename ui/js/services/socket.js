@@ -43,14 +43,14 @@ const disconnectFromRoom = () => {
 };
 
 const connectToMeetings = () => {
-  meetingsConnection = Primus.connect(`${connectionString}?meetings=true`);
-  attachEvents(meetingsConnection);
+  // meetingsConnection = Primus.connect(`${connectionString}?meetings=true`);
+  // attachEvents(meetingsConnection);
 };
 
 const disconnectFromMeetings = () => {
-  if(meetingsConnection){
-    meetingsConnection.destroy();
-  }
+  // if(meetingsConnection){
+  //   meetingsConnection.destroy();
+  // }
 };
 
 export {
