@@ -17,11 +17,9 @@ const createServer = () => {
     transformer: 'engine.io',
   });
 
-  let meetingsRoom = new Room();
   let rooms = {};
 
   const addUserToMeeting = (spark, room) => {
-    const {roomName} = room.store.getState();
     const remainingNames = room.store.getState().participants.map(p => p.name);
 
     const participant = {
@@ -30,7 +28,6 @@ const createServer = () => {
       host: false
     };
 
-    meetingsRoom.dispatch(growMeeting(roomName));
     room.addSpark(spark);
     room.dispatch(addParticipant(participant));
 
@@ -43,32 +40,16 @@ const createServer = () => {
       if(roomForUser){
         roomForUser.dispatch(removeParticipant(spark.id));
         roomForUser.removeSpark(spark);
-        meetingsRoom.dispatch(shrinkMeeting(roomForUser.store.getState().roomName));
       }
-    }
-    if(spark.query.meetings){
-      meetingsRoom.removeSpark(spark);
     }
   });
 
   primus.on('connection', function (spark) {
-    if(spark.query.meetings){
-      meetingsRoom.addSpark(spark);
-      const setMeetings = {type: 'SET_MEETINGS', meetings: meetingsRoom.store.getState().meetings};
-      spark.write(setMeetings);
-      return;
-    }
     if(spark.query.room){
       const roomName = spark.query.room;
-      const deleteRoomMiddleware = afterActionMiddleware('DELETE_MEETING', (store, action) => {
-        meetingsRoom.dispatch(deleteMeeting(roomName));
-        delete rooms[roomName];
-        return action;
-      });
       if(!rooms[roomName]){
-        rooms[roomName] = new Room(undefined, deleteRoomMiddleware);
+        rooms[roomName] = new Room(undefined);
         rooms[roomName].store.dispatch(setRoomName(roomName));
-        meetingsRoom.dispatch(createMeeting(roomName));
       }
       const currentRoom = rooms[roomName];
       const currentStore = currentRoom.store;
