@@ -1,5 +1,4 @@
 import store from '../../../shared/store/store.js';
-var meetingsConnection;
 var roomConnection;
 const connectionString = '/primus';
 import {browserHistory} from 'react-router';
@@ -42,21 +41,8 @@ const disconnectFromRoom = () => {
   }
 };
 
-const connectToMeetings = () => {
-  // meetingsConnection = Primus.connect(`${connectionString}?meetings=true`);
-  // attachEvents(meetingsConnection);
-};
-
-const disconnectFromMeetings = () => {
-  // if(meetingsConnection){
-  //   meetingsConnection.destroy();
-  // }
-};
-
 export {
   connectToRoom,
-  connectToMeetings,
-  disconnectFromMeetings,
   dispatch,
   disconnectFromRoom
 };
