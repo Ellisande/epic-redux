@@ -172,7 +172,6 @@ const setRoomName = roomName => {
 export {
   allowKnocking,
   disableKnocking,
-  approveKnocker,
   rejectKnocker,
   addKnocker,
   createMeeting,
