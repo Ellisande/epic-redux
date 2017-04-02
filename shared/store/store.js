@@ -14,7 +14,6 @@ let reducers = combineReducers({
   participants: participantReducer,
   userId: userReducer,
   roomName: roomNameReducer,
-  phaseVotes: (phaseVotes = []) => phaseVotes,
   topics: topicsReducer,
 });
 
