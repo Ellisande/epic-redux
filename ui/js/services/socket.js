@@ -11,14 +11,12 @@ const dispatch = action => {
 
 const attachEvents = connection => {
   connection.on('data', action => {
-    if (action.type) {
-      if(action.type === 'JOIN_CHAT'){
-        roomConnection.id(id => {
-          action.userId = id;
-        });
-      }
-      return store.dispatch(action);
+    if(action.type === 'JOIN_CHAT'){
+      roomConnection.id(id => {
+        action.userId = id;
+      });
     }
+    return store.dispatch(action);
   });
 };
 
@@ -27,9 +25,7 @@ const connectToRoom = () => {
   attachEvents(roomConnection);
 };
 
-const disconnectFromRoom = () => {
-  roomConnection && roomConnection.destroy();
-};
+const disconnectFromRoom = () => roomConnection && roomConnection.destroy();
 
 export {
   connectToRoom,
