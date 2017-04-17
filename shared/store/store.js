@@ -4,16 +4,12 @@ import {
 } from 'redux';
 
 import participantReducer from './reducers/participants';
-import meetingReducer from './reducers/meetings';
 import userReducer from './reducers/user';
 import messagesReducer from './reducers/messages';
-import roomNameReducer from './reducers/roomName';
 
 let reducers = combineReducers({
-  meetings: meetingReducer,
   participants: participantReducer,
   userId: userReducer,
-  roomName: roomNameReducer,
   messages: messagesReducer,
 });
 

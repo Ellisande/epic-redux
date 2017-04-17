@@ -13,13 +13,6 @@ const sendMessage = (text, userName) => {
   };
 };
 
-const removeMessage = messageId => {
-  return {
-    type: 'REMOVE_MESSAGE',
-    id: messageId
-  };
-};
-
 const joinMeeting = (meeting) => {
   const action = {
     type: 'JOIN_MEETING'
@@ -41,19 +34,10 @@ const removeParticipant = participantId => {
   };
 };
 
-const setRoomName = roomName => {
-  return {
-    type: 'SET_ROOM_NAME',
-    roomName
-  };
-};
-
 export {
   createMeeting,
   sendMessage,
-  removeMessage,
   joinMeeting,
   addParticipant,
   removeParticipant,
-  setRoomName
 };

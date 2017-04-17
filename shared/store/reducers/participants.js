@@ -1,19 +1,9 @@
 import {ActionHandler, handleActions} from '../actionHandler';
-import {replace} from '../utils';
 
 const initialValue = [];
-const deleteMeeting = new ActionHandler('DELETE_MEETING', () => initialValue);
 
 const joinMeeting = new ActionHandler('JOIN_MEETING', (participants, action) => {
   return action.participants;
-});
-
-const setHost = new ActionHandler('SET_HOST', (participants, action) => {
-  const participantToUpdate = participants.find(participant => participant.id === action.id);
-  const modifiedParticipant = Object.assign({}, participantToUpdate, {
-    host: action.isHost
-  });
-  return replace(participants, participantToUpdate, modifiedParticipant);
 });
 
 const addParticipant = new ActionHandler('ADD_PARTICIPANT', (participants, action) => {
@@ -24,7 +14,7 @@ const removeParticipant = new ActionHandler('REMOVE_PARTICIPANT', (participants,
   return participants.filter(p => p.id !== action.participantId);
 });
 
-const actions = [joinMeeting, setHost, addParticipant, removeParticipant, deleteMeeting];
+const actions = [joinMeeting, addParticipant, removeParticipant];
 
 const participantReducer = (participants = initialValue, action) => {
   const newParticipants = handleActions(actions, participants, action);
