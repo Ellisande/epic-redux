@@ -5,26 +5,18 @@ const createMeeting = (meetingName) => {
   };
 };
 
-const filterMeetings = (meetingFilter) => {
-  const filter = new RegExp(meetingFilter, 'ig');
+const sendMessage = (text, userName) => {
   return {
-    type: 'FILTER_MEETINGS',
-    filter
-  };
-};
-
-const postTopic = (topic, userName) => {
-  return {
-    type: 'POST_TOPIC',
-    title: topic,
+    type: 'POST_MESSAGE',
+    text,
     by: userName
   };
 };
 
-const removeTopic = topicId => {
+const removeMessage = messageId => {
   return {
-    type: 'REMOVE_TOPIC',
-    id: topicId
+    type: 'REMOVE_MESSAGE',
+    id: messageId
   };
 };
 
@@ -58,9 +50,8 @@ const setRoomName = roomName => {
 
 export {
   createMeeting,
-  filterMeetings,
-  postTopic,
-  removeTopic,
+  sendMessage,
+  removeMessage,
   joinMeeting,
   addParticipant,
   removeParticipant,
