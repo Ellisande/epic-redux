@@ -23,7 +23,7 @@ class Chat extends Component {
   post(e) {
     e.preventDefault();
     if (!_.isEmpty(this.state.newMessage)) {
-      dispatch(sendMessage(this.state.newMessage, this.props.user.name));
+      this.props.sendMessage(this.state.newMessage, this.props.user.name);
       this.setState({newMessage: undefined});
     }
   }
@@ -43,11 +43,16 @@ class Chat extends Component {
   }
 }
 
-const selector = state => {
+const mapStateToProps = state => {
   return {
     messages: state.messages,
     user: findUser(state),
     roomName: 'Epic Chat',
   };
 };
-export default connect(selector)(Chat);
+
+const mapDispatchToProps = () => ({
+  sendMessage: (newMessage, userName) => dispatch(sendMessage(newMessage, userName)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
