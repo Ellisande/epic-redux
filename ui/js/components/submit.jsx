@@ -46,7 +46,7 @@ const selector = state => {
   return {
     messages: state.messages,
     user: findUser(state),
-    roomName: state.roomName,
+    roomName: 'Epic Chat',
   };
 };
 export default connect(selector)(Submit);
