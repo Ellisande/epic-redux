@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Topic from './topic';
+import Message from './message';
 import {connect} from 'react-redux';
-import {postTopic} from '../../../shared/actions';
+import {sendMessage} from '../../../shared/actions';
 import {dispatch} from '../services/socket';
 import _ from 'lodash';
 import {findUser} from '../../../shared/store/utils';
@@ -12,31 +12,31 @@ class Submit extends Component {
     this.postTopic = this.post.bind(this);
     this.updatePostTopic = this.updatePostTopic.bind(this);
     this.state = {
-      newTopic: undefined
+      newMessage: undefined
     };
   }
   updatePostTopic(e) {
-    const newTopic = _.get(e, 'target.value');
-    this.setState({newTopic});
+    const newMessage = _.get(e, 'target.value');
+    this.setState({newMessage});
   }
   post(e) {
     e.preventDefault();
-    if (!_.isEmpty(this.state.newTopic)) {
-      dispatch(postTopic(this.state.newTopic, this.props.user.name));
-      this.setState({newTopic: undefined});
+    if (!_.isEmpty(this.state.newMessage)) {
+      dispatch(sendMessage(this.state.newMessage, this.props.user.name));
+      this.setState({newMessage: undefined});
     }
   }
   render() {
-    const mapTopics = topic => (<Topic topic={topic} key={topic.title}/>);
+    const mapMessages = message => (<Message message={message} key={message.text}/>);
     return (
       <div className='submit'>
-        <div className='submit-title'><h2>Post a Topic</h2></div>
-        <form className='submit-topic' action='' noValidate onSubmit={this.postTopic}>
-          <input className='bubble-text' value={this.state.newTopic} placeholder='Speak Up' onChange={this.updatePostTopic}/>
-        </form>
-        <div className='topic-list'>
-          {this.props.topics.map(mapTopics)}
+        <div className='submit-title'><h2>{this.props.roomName || ''}</h2></div>
+        <div className='message-list'>
+          {this.props.messages.map(mapMessages)}
         </div>
+        <form className='submit-message' action='' noValidate onSubmit={this.postTopic}>
+          <input className='bubble-text' value={this.state.newMessage} placeholder='Speak Up' onChange={this.updatePostTopic}/>
+        </form>
       </div>
     );
   }
@@ -44,8 +44,9 @@ class Submit extends Component {
 
 const selector = state => {
   return {
-    topics: state.topics,
-    user: findUser(state)
+    messages: state.messages,
+    user: findUser(state),
+    roomName: state.roomName,
   };
 };
 export default connect(selector)(Submit);
