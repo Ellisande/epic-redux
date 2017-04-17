@@ -9,11 +9,12 @@ import {findUser} from '../../../shared/store/utils';
 class Chat extends Component {
   constructor(props) {
     super(props);
-    this.postTopic = this.post.bind(this);
-    this.updatePostTopic = this.updatePostTopic.bind(this);
     this.state = {
       newMessage: undefined
     };
+
+    this.postTopic = this.post.bind(this);
+    this.updatePostTopic = this.updatePostTopic.bind(this);
   }
   updatePostTopic(e) {
     const newMessage = _.get(e, 'target.value');

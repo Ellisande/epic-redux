@@ -1,8 +1,6 @@
 import store from '../../../shared/store/store.js';
 var roomConnection;
 const connectionString = '/primus';
-import {deleteMeeting} from '../../../shared/actions';
-
 
 const dispatch = action => {
   if(!roomConnection){
@@ -24,17 +22,13 @@ const attachEvents = connection => {
   });
 };
 
-const connectToRoom = roomName => {
-  const safeRoomName = decodeURI(roomName);
-  roomConnection = new Primus(`${connectionString}?room=${safeRoomName}`);
+const connectToRoom = () => {
+  roomConnection = new Primus(`${connectionString}`);
   attachEvents(roomConnection);
 };
 
 const disconnectFromRoom = () => {
-  store.dispatch(deleteMeeting());
-  if(roomConnection){
-    roomConnection.destroy();
-  }
+  roomConnection && roomConnection.destroy();
 };
 
 export {

@@ -6,7 +6,7 @@ import {connectToRoom, disconnectFromRoom} from '../services/socket';
 
 class Meeting extends Component {
   componentWillMount(){
-    return connectToRoom(this.props.params.meetingName);
+    return connectToRoom();
   }
   componentWillUnmount(){
     return disconnectFromRoom();
