@@ -6,7 +6,7 @@ import {
 import participantReducer from './reducers/participants';
 import meetingReducer from './reducers/meetings';
 import userReducer from './reducers/user';
-import topicsReducer from './reducers/topics';
+import messagesReducer from './reducers/messages';
 import roomNameReducer from './reducers/roomName';
 
 let reducers = combineReducers({
@@ -14,7 +14,7 @@ let reducers = combineReducers({
   participants: participantReducer,
   userId: userReducer,
   roomName: roomNameReducer,
-  topics: topicsReducer,
+  messages: messagesReducer,
 });
 
 const attachDevTools = () => {
