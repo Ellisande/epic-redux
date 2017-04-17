@@ -1,1 +1,1 @@
-# note and vote
+# Epic Redux
