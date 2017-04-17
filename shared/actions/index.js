@@ -1,10 +1,3 @@
-const createMeeting = (meetingName) => {
-  return {
-    type: 'CREATE_MEETING',
-    name: meetingName
-  };
-};
-
 const sendMessage = (text, userName) => {
   return {
     type: 'POST_MESSAGE',
@@ -35,7 +28,6 @@ const removeParticipant = participantId => {
 };
 
 export {
-  createMeeting,
   sendMessage,
   joinChat,
   addParticipant,
