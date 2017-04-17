@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import SideBar from './sideBar';
 import {connect} from 'react-redux';
-import Submit from './submit';
+import Chat from './chat';
 import {connectToRoom, disconnectFromRoom} from '../services/socket';
 
 class Meeting extends Component {
@@ -15,7 +15,7 @@ class Meeting extends Component {
     return (
       <div className='meeting'>
         <SideBar participants={this.props.participants} />
-        <Submit />
+        <Chat />
       </div>
     );
   }
@@ -24,7 +24,6 @@ class Meeting extends Component {
 const selector = state => {
   return {
     participants: state.participants,
-    roomName: 'room1',
   };
 };
 export default connect(selector)(Meeting);

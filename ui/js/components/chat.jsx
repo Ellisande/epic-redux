@@ -6,7 +6,7 @@ import {dispatch} from '../services/socket';
 import _ from 'lodash';
 import {findUser} from '../../../shared/store/utils';
 
-class Submit extends Component {
+class Chat extends Component {
   constructor(props) {
     super(props);
     this.postTopic = this.post.bind(this);
@@ -29,12 +29,12 @@ class Submit extends Component {
   render() {
     const mapMessages = message => (<Message message={message} key={message.text}/>);
     return (
-      <div className='submit'>
-        <div className='submit-title'><h2>{this.props.roomName || ''}</h2></div>
+      <div className='chat'>
+        <div className='chat-title'><h2>{this.props.roomName || ''}</h2></div>
         <div className='message-list'>
           {this.props.messages.map(mapMessages)}
         </div>
-        <form className='submit-message' action='' noValidate onSubmit={this.postTopic}>
+        <form className='chat-message' action='' noValidate onSubmit={this.postTopic}>
           <input className='bubble-text' value={this.state.newMessage} placeholder='Speak Up' onChange={this.updatePostTopic}/>
         </form>
       </div>
@@ -49,4 +49,4 @@ const selector = state => {
     roomName: 'Epic Chat',
   };
 };
-export default connect(selector)(Submit);
+export default connect(selector)(Chat);

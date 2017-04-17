@@ -244,7 +244,7 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
   align-self: center;
 }
 
-.submit, .phase, .merge {
+.chat, .phase, .merge {
   display: flex;
   flex-direction: column;
   flex: 5;
@@ -252,7 +252,7 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
   box-shadow: 5px 3px 20px -2px $primary-color;
 }
 
-.submit-title {
+.chat-title {
   background-color: $primary-color;
   color: $off-white-primary;
   border-radius: $box-radius $box-radius 0 0;
@@ -261,7 +261,7 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
   justify-content: space-around;
 }
 
-.submit-message {
+.chat-message {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
