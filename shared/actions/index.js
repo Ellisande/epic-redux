@@ -13,9 +13,9 @@ const sendMessage = (text, userName) => {
   };
 };
 
-const joinMeeting = (meeting) => {
+const joinChat = (meeting) => {
   const action = {
-    type: 'JOIN_MEETING'
+    type: 'JOIN_CHAT'
   };
   return Object.assign({}, action, meeting);
 };
@@ -37,7 +37,7 @@ const removeParticipant = participantId => {
 export {
   createMeeting,
   sendMessage,
-  joinMeeting,
+  joinChat,
   addParticipant,
   removeParticipant,
 };

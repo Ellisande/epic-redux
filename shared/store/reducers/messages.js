@@ -1,14 +1,14 @@
 import {ActionHandler, handleActions} from '../actionHandler';
 const initialValue = [];
 
-const joinMeeting = new ActionHandler('JOIN_MEETING', (messages, action) => action.messages);
+const joinChat = new ActionHandler('JOIN_CHAT', (messages, action) => action.messages);
 
 const sendMessage = new ActionHandler('POST_MESSAGE', (messages, action) => {
   const {text, by} = action;
   return [...messages, {text, by}];
 });
 
-const actions = [joinMeeting, sendMessage];
+const actions = [joinChat, sendMessage];
 
 const messageReducer = (messages = initialValue, action) => {
   const newMessages = handleActions(actions, messages, action);

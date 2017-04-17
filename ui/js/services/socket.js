@@ -14,7 +14,7 @@ const dispatch = action => {
 const attachEvents = connection => {
   connection.on('data', action => {
     if (action.type) {
-      if(action.type === 'JOIN_MEETING'){
+      if(action.type === 'JOIN_CHAT'){
         roomConnection.id(id => {
           action.userId = id;
         });

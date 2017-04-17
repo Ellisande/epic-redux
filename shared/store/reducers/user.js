@@ -1,9 +1,9 @@
 import {ActionHandler, handleActions} from '../actionHandler';
 const initialValue = '';
 
-const joinMeeting = new ActionHandler('JOIN_MEETING', (userId, action) => action.userId || userId);
+const joinChat = new ActionHandler('JOIN_CHAT', (userId, action) => action.userId || userId);
 
-const actions = [joinMeeting];
+const actions = [joinChat];
 
 const userReducer = (userId = initialValue, action) => {
   const newUserId = handleActions(actions, userId, action);

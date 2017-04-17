@@ -2,7 +2,7 @@ import {ActionHandler, handleActions} from '../actionHandler';
 
 const initialValue = [];
 
-const joinMeeting = new ActionHandler('JOIN_MEETING', (participants, action) => {
+const joinChat = new ActionHandler('JOIN_CHAT', (participants, action) => {
   return action.participants;
 });
 
@@ -14,7 +14,7 @@ const removeParticipant = new ActionHandler('REMOVE_PARTICIPANT', (participants,
   return participants.filter(p => p.id !== action.participantId);
 });
 
-const actions = [joinMeeting, addParticipant, removeParticipant];
+const actions = [joinChat, addParticipant, removeParticipant];
 
 const participantReducer = (participants = initialValue, action) => {
   const newParticipants = handleActions(actions, participants, action);

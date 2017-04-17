@@ -2,7 +2,7 @@ import {createStore} from '../shared/store/store';
 import {applyMiddleware} from 'redux';
 import {loggingMiddleware} from './middleware';
 import determineName from './utils';
-import {joinMeeting, addParticipant, removeParticipant} from '../shared/actions';
+import {joinChat, addParticipant, removeParticipant} from '../shared/actions';
 
 
 class Room {
@@ -61,7 +61,7 @@ class Room {
     // Tell everyone that the person joined
     this.dispatch(addParticipant(participant));
     // Send the initial state to the new connection
-    spark.write(joinMeeting(this.getState()));
+    spark.write(joinChat(this.getState()));
   }
   // Public, remove a user from this chat
   removeUser(spark){
