@@ -22,8 +22,4 @@ function render(){
   );
 }
 
-function main(){
-  render();
-}
-
-main();
+render();
