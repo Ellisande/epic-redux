@@ -2,7 +2,7 @@
 import {browserHistory, Router, Route} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Meeting from './components/meeting';
+import ChatRoom from './components/chatRoom';
 import store from '../../shared/store/store';
 import {Provider} from 'react-redux';
 
@@ -15,7 +15,7 @@ function render(){
   ReactDOM.render(
     <Provider store={store}>
       <Router history={browserHistory}>
-        <Route path='/' component={Meeting}/>
+        <Route path='/' component={ChatRoom}/>
       </Router>
     </Provider>,
     content
