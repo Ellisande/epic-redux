@@ -23,7 +23,8 @@ class Meeting extends Component {
 
 const selector = state => {
   return {
-    participants: state.participants
+    participants: state.participants,
+    roomName: 'room1',
   };
 };
 export default connect(selector)(Meeting);

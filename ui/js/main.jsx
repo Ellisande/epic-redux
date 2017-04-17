@@ -15,7 +15,7 @@ function render(){
   ReactDOM.render(
     <Provider store={store}>
       <Router history={browserHistory}>
-        <Route path='/meeting/:meetingName' component={Meeting}/>
+        <Route path='/' component={Meeting}/>
       </Router>
     </Provider>,
     content

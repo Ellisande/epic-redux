@@ -1,7 +1,6 @@
 import store from '../../../shared/store/store.js';
 var roomConnection;
 const connectionString = '/primus';
-import {browserHistory} from 'react-router';
 import {deleteMeeting} from '../../../shared/actions';
 
 
@@ -19,9 +18,6 @@ const attachEvents = connection => {
         roomConnection.id(id => {
           action.userId = id;
         });
-      }
-      if(action.type === 'DELETE_MEETING'){
-        browserHistory.push('/');
       }
       return store.dispatch(action);
     }
