@@ -24,7 +24,7 @@ class Room {
   getState(){
     return this.store.getState();
   }
-  // Send an action to all char participants
+  // Send an action to all chat participants
   send(action){
     this.sparks.forEach(spark => spark.write(action));
   }
