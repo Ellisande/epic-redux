@@ -36,7 +36,7 @@ class Chat extends Component {
           {this.props.messages.map(mapMessages)}
         </div>
         <form className='chat-message' action='' noValidate onSubmit={this.postTopic}>
-          <input className='bubble-text' value={this.state.newMessage} placeholder='Speak Up' onChange={this.updatePostTopic}/>
+          <input className='bubble-text' value={this.state.newMessage} placeholder='Say something...' onChange={this.updatePostTopic}/>
         </form>
       </div>
     );
