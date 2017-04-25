@@ -21,15 +21,6 @@ const createServer = () => {
   });
 
   primus.on('connection', function (spark) {
-
-    // When we get data from the socket
-    // Dispatch it to the store
-    // This is the heart of everything thats going on here
-    spark.on('data', action => {
-      action.userId = spark.id;
-      chatRoom.dispatch(action);
-    });
-
     // A new user connected, add them to our chat room
     chatRoom.addUser(spark);
   });
