@@ -2,7 +2,7 @@ const initialValue = [];
 
 const messageReducer = (messages = initialValue, action) => {
   if(action.type === 'JOIN_CHAT'){
-    return action.messages;
+    return action.messages || messages;
   }
   if(action.type === 'POST_MESSAGE'){
     const {text, by} = action;
