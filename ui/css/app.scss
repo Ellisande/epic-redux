@@ -421,8 +421,9 @@ input.bubble-text:focus, input.knock-text:focus, button.knock-button:focus {
 }
 
 .by-line {
-  color: $light-primary;
-  font-size: 0.8rem;
+  color: $light-secondary-color;
+  margin-right: 5px;
+  // font-size: 0.8rem;
 }
 
 .message-body {
