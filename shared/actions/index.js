@@ -6,11 +6,11 @@ const sendMessage = (text, userName) => {
   };
 };
 
-const joinChat = (meeting) => {
+const joinChat = (chat) => {
   const action = {
     type: 'JOIN_CHAT'
   };
-  return Object.assign({}, action, meeting);
+  return Object.assign({}, action, chat);
 };
 
 const addParticipant = participant => {
