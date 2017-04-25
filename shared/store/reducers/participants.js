@@ -2,7 +2,7 @@ const initialValue = [];
 
 const participantReducer = (participants = initialValue, action) => {
   if(action.type === 'JOIN_CHAT'){
-    return action.participants;
+    return action.participants || participants;
   }
   if(action.type === 'ADD_PARTICIPANT'){
     return [...participants, action.participant];
