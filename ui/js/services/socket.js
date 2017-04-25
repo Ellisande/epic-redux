@@ -3,26 +3,15 @@ var roomConnection;
 const connectionString = '/primus';
 
 const dispatch = action => {
-  if(!roomConnection){
-    throw new Error('You cannot send events before connecting the websocket. Use connectToRoom to establish the connection');
-  }
-  roomConnection.write(action);
-};
-
-const attachEvents = connection => {
-  connection.on('data', action => {
-    if(action.type === 'JOIN_CHAT'){
-      roomConnection.id(id => {
-        action.userId = id;
-      });
-    }
-    return store.dispatch(action);
-  });
+  //I should write the action to the socket.
 };
 
 const connectToRoom = () => {
   roomConnection = new Primus(`${connectionString}`);
-  attachEvents(roomConnection);
+  roomConnection.on('data', action => {
+    //This happens when the server sends me an action on the socket
+    //I should probably do something with that action.
+  });
 };
 
 const disconnectFromRoom = () => roomConnection && roomConnection.destroy();

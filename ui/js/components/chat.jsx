@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import Message from './message';
 import {connect} from 'react-redux';
-import {sendMessage} from '../../../shared/actions';
-import {dispatch} from '../services/socket';
+import {sendMessage, joinChat} from '../../../shared/actions';
 import _ from 'lodash';
 import {findUser} from '../../../shared/store/utils';
 
@@ -15,6 +14,9 @@ class Chat extends Component {
 
     this.postTopic = this.post.bind(this);
     this.updatePostTopic = this.updatePostTopic.bind(this);
+  }
+  componentWillMount() {
+    this.props.setUserName(Math.floor(Math.random() * 10000));
   }
   updatePostTopic(e) {
     const newMessage = _.get(e, 'target.value');
@@ -51,8 +53,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = (dispatch) => ({
   sendMessage: (newMessage, userName) => dispatch(sendMessage(newMessage, userName)),
+  setUserName: userName => dispatch(joinChat({userId: userName, participants: [{ id: userName, name: userName }]})),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);
