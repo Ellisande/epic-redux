@@ -1,3 +1,4 @@
+import {applyMiddleware} from 'redux';
 import {createStore} from '../shared/store/store';
 import determineName from './utils';
 import {joinChat, addParticipant, removeParticipant} from '../shared/actions';
@@ -7,8 +8,13 @@ class Room {
   constructor(){
     // Hold our websocket connections
     this.sparks = [];
-    // this.store = ??
-    // I should define my server side store here.
+    const sendActionsMiddlware = () => next => action => {
+      console.log('Looks like we made it');
+      const result = next(action);
+      this.send(action);
+      return result;
+    };
+    this.store = createStore(applyMiddleware(sendActionsMiddlware));
   }
   getState(){
     // Get the current state of the server store
@@ -19,6 +25,7 @@ class Room {
   }
   dispatch(action){
     // Dispatch an action to the server store
+    this.store.dispatch(action);
   }
   // Not public, add a spark to the list
   addSpark(spark){
@@ -39,6 +46,14 @@ class Room {
   addUser(spark){
     // Add the socket connection to our chat room
     this.addSpark(spark);
+
+    // When we get data from the socket
+    // Dispatch it to the store
+    // This is the heart of everything thats going on here
+    spark.on('data', action => {
+      action.userId = spark.id;
+      this.dispatch(action);
+    });
     // Tell everyone that the person joined
     // Send the initial state to the new connection
   }

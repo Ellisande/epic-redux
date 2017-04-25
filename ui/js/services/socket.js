@@ -4,6 +4,7 @@ const connectionString = '/primus';
 
 const dispatch = action => {
   //I should write the action to the socket.
+  roomConnection.write(action);
 };
 
 const connectToRoom = () => {
@@ -11,6 +12,7 @@ const connectToRoom = () => {
   roomConnection.on('data', action => {
     //This happens when the server sends me an action on the socket
     //I should probably do something with that action.
+    return store.dispatch(action);
   });
 };
 

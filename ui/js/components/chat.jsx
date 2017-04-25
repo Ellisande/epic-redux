@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {sendMessage, addParticipant, joinChat} from '../../../shared/actions';
 import _ from 'lodash';
 import {findUser} from '../../../shared/store/utils';
+import {dispatch as socketDispatch} from '../services/socket';
 
 class Chat extends Component {
   constructor(props) {
@@ -58,8 +59,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  sendMessage: (newMessage, userName) => dispatch(sendMessage(newMessage, userName)),
-  addUser: userName => dispatch(addParticipant({id: userName, name: userName})),
+  sendMessage: (newMessage, userName) => socketDispatch(sendMessage(newMessage, userName)),
+  addUser: userName => socketDispatch(addParticipant({id: userName, name: userName})),
   setUserId: userId => dispatch(joinChat({userId})),
 });
 
